@@ -9,19 +9,18 @@ export interface Props extends CellPosition {
     mine: boolean;
     nearbyMines: number;
     placeMines: (cell: CellPosition) => void;
+    openCell: (cell: CellPosition) => void;
+    isOpen: boolean;
 }
 
 interface State {
-    isOpen: boolean;
+    // todo: flag and question mark should be here
 }
 
 export class Cell extends React.Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.state = {
-            isOpen: false
-        };
 
         this.handleClick = this.handleClick.bind(this);
     }
@@ -32,21 +31,19 @@ export class Cell extends React.Component <Props, State> {
             row: this.props.row,
             column: this.props.column
         });
-        this.setState({
-            isOpen: true
-        });
+        this.props.openCell(this.props);
     }
 
     render() {
-        let className = this.state.isOpen ? 'isOpen ' : 'isClosed ';
+        let className = this.props.isOpen ? 'isOpen ' : 'isClosed ';
         className += this.props.mine ? 'mine ' : 'mineless ';
         return (
             <div
-                data-nearbymines={this.props.nearbyMines}
+                data-nearbymines={!this.props.mine && this.props.nearbyMines}
                 className={className}
                 onClick={this.handleClick}
             >
-                {this.props.nearbyMines && this.state.isOpen ? this.props.nearbyMines : ''}
+                {this.props.nearbyMines && this.props.isOpen ? this.props.nearbyMines : ''}
             </div>
         );
     }

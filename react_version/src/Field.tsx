@@ -17,14 +17,60 @@ export class Field extends React.Component <Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.state = {field: [], bombsArePlaced: false};
+        this.state = {
+            field: [],
+            bombsArePlaced: false
+        };
 
         this.generateEmptyField = this.generateEmptyField.bind(this);
         this.placeMines = this.placeMines.bind(this);
+        this.openCell = this.openCell.bind(this);
     }
 
     componentDidMount() {
-        this.generateEmptyField();
+        if (this.state.field.length === 0) {
+            this.generateEmptyField();
+            return;
+        }
+    }
+
+    openCell(position: CellPosition) {
+        if (!this.state.bombsArePlaced) {
+            return;
+        }
+        let field = this.state.field;
+        let cell = field[position.row][position.column];
+        if (cell.mine) {
+            return;
+        }
+        if (cell.nearbyMines > 0) {
+            cell.isOpen = true;
+            this.setState({field});
+            return;
+        }
+        this.openEmptyCells(position);
+    }
+
+    openEmptyCells(position: CellPosition) {
+        let fieldCopy = cloneDeep(this.state.field);
+        const self = this;
+        function floodOpen(pos: CellPosition) {
+            let currentCell = fieldCopy[pos.row][pos.column];
+            currentCell.isOpen = true;
+            let adjustedCells = self.findAdjustedCells(currentCell, fieldCopy);
+            adjustedCells.forEach((adjustedCell => {
+                if (adjustedCell.mine || adjustedCell.isOpen) {
+                    return;
+                }
+                if (adjustedCell.nearbyMines > 0) {
+                    adjustedCell.isOpen = true;
+                    return;
+                }
+                floodOpen(adjustedCell);
+            }));
+        }
+        floodOpen(position);
+        this.setState({field: fieldCopy});
     }
 
     placeMines(firstClick: CellPosition): void {
@@ -36,7 +82,8 @@ export class Field extends React.Component <Props, State> {
             throw new Error('number of mines was exceeded');
         }
         let fieldCopy = cloneDeep(this.state.field);
-        const adjustedCells = this.findAdjustedCells(firstClick);
+        let nonMineZone = this.findAdjustedCells(firstClick);
+        nonMineZone.push(fieldCopy[firstClick.row][firstClick.column]);
         let oneDimensionalField = fieldCopy
             .reduce((cells: CellProps[], currentRow: CellProps[]) => {
                 return cells.concat(currentRow);
@@ -45,10 +92,10 @@ export class Field extends React.Component <Props, State> {
         while (mines > 0) {
             const mineNumber = Math.floor(Math.random() * oneDimensionalField.length);
             const mine = oneDimensionalField[mineNumber];
-            const isCellAdjusted = adjustedCells.some((adjustedCell: CellProps) => {
+            const isMineProhibited = nonMineZone.some((adjustedCell: CellProps) => {
                 return adjustedCell.column === mine.column && adjustedCell.row === mine.row;
             });
-            if (isCellAdjusted) {
+            if (isMineProhibited) {
                 continue;
             }
             fieldCopy[mine.row][mine.column].mine = true;
@@ -64,7 +111,7 @@ export class Field extends React.Component <Props, State> {
                 cell.nearbyMines = this.findAdjustedMinesNumber(position, fieldCopy);
             });
         });
-        this.setState({field: fieldCopy, bombsArePlaced: true});
+        this.setState({field: fieldCopy, bombsArePlaced: true}, () => this.openCell(firstClick));
     }
 
     render() {
@@ -80,6 +127,8 @@ export class Field extends React.Component <Props, State> {
                                 mine={cell.mine}
                                 placeMines={this.placeMines}
                                 nearbyMines={cell.nearbyMines}
+                                isOpen={cell.isOpen}
+                                openCell={this.openCell}
                             />
                         );
                     })}
@@ -99,7 +148,9 @@ export class Field extends React.Component <Props, State> {
                     row,
                     column,
                     nearbyMines: 0,
-                    placeMines: this.placeMines
+                    placeMines: this.placeMines,
+                    isOpen: false,
+                    openCell: this.openCell
                 });
             }
             field.push(currentRow);
@@ -118,8 +169,15 @@ export class Field extends React.Component <Props, State> {
             return [];
         }
         const cells = [];
-        for (let row = position.row - 1; row <= position.row + 1 && row >= 0; row++) {
-            for (let column = position.column - 1; column <= position.column + 1 && column >= 0; column++) {
+        for (let row = position.row - 1; row <= position.row + 1; row++) {
+            for (let column = position.column - 1; column <= position.column + 1; column++) {
+                if (row < 0 || column < 0) {
+                    continue;
+                }
+                if (row === position.row && column === position.column) {
+                    // don't count middle cell itself
+                    continue;
+                }
                 if (field[row] && field[row][column]) {
                     cells.push(field[row][column]);
                 }
