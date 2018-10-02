@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Minesweeper</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="newcss.css"/>
+        <script src="jQuery%202.1.4.min.js"></script>
+        <script src="knockout.js"></script>
+        <script src="newjavascript.js"></script>
+    </head>
+    <body>
+        <div id='test' data-bind="event: {mouseover: removingField, mouseout: displayingField}">
+            <p>You can choose 3 default difficulties or hit custom settings<p>
+            <div class="button beginner" data-bind="click: beginner">Beginner</div>
+            <div class="button intermediate" data-bind="click: intermediate">Intermediate</div>
+            <div class="button expert" data-bind="click: expert">Expert</div>
+            <div class="button custom" data-bind="click: custom">Custom</div>
+    <!-- for jQuery       <div class="button moveBlock">Move Please</div>-->
+           <div class='explanation beginner'>
+                <ul>
+                    <li>Width is 10 cells</li>
+                    <li>Height is 10 cells too</li>
+                    <li>Number of mines is 10</li>
+                </ul>
+            </div>
+            <div class="explanation intermediate">
+                <ul>
+                    <li>Width is 16 cells</li>
+                    <li>Height is 16 cells too</li>
+                    <li>Number of mines is 40</li>
+                </ul>
+            </div>
+            <div class="explanation expert">
+                <ul>
+                    <li>Width is 30 cells</li>
+                    <li>Height is 16 cells</li>
+                    <li>Number of mines is 100</li>
+                </ul>
+            </div>
+            <div class="explanation custom">
+                <p>Choose your own settings<p>
+            </div>
+        </div>
+        <form data-bind="submit: newGame, style: {display: displayForm() ? 'block': 'none'} ">
+        <fieldset>
+                <legend>Enter required settings for game</legend>
+                <label for="widthOfGame">Width from <span data-bind="text: minWidth"></span> to <span data-bind="text: maxWidth"></span> blocks:</label>
+                <input type="number" id='widthOfGame' data-bind="value: widthCheck, attr: {min: minWidth, max: maxWidth}" required><br>
+                <label for="heightOfGame">Height from <span data-bind="text: minHeight"></span> to <span data-bind="text: maxHeight"></span> blocks:</label>
+                <input type="number" id="heightOfGame" data-bind='value: heightCheck, attr: {min: minHeight, max: maxHeight}' required="required"><br>
+                <label for="mines">Number of mines: (less than <span data-bind="text: maxMines"></span> mines)</label>
+                <input type="number" id="mines" data-bind="value: minesCheck, attr: {min: 1, max: maxMines}"><br>
+                <button  class="button" type="submit"  >New game</button>
+        </fieldset>  
+        </form>
+        
+      
+        <div id='timer' data-bind="style: {display: displayField() ? 'block': 'none'}">
+            <ul>
+                <li>Playing time: <span data-bind="text: time"></span></li>
+                <li>Mines left: <span data-bind="text: minesLeft"></span></li>
+            </ul>
+            <div  data-bind="style: {display: displayWin() ? 'block': 'none'}">Congratulations! U make it!</div>
+            <div data-bind="style: {display: displayLose() ? 'block': 'none'}">U lose. Try again or leave.</div>
+        </div>
+        
+        
+        <div id="testContainer" data-bind="foreach: gameArray, style: {width: widthPx, height: heightPx, display: displayField() ? 'block': 'none'}">
+            <div data-bind="attr: {id: id, class: isMine ? 'mine': 'mineless',  'data-nearbyMines': adjustment},
+                            css: {isOpen: isOpen,
+                                  flag: flag,
+                                  questionMark: questionMark,
+                                  active: active
+                            }, 
+                            text: adjustment, 
+                            click: $root.openCell,
+                            event: {contextmenu: $root.flag}
+                            "></div>
+        </div>
+    </body>
+</html>
