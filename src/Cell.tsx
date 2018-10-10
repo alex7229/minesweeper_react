@@ -1,40 +1,36 @@
 import * as React from 'react';
 
-export interface CellPosition {
+export interface ICellPosition {
     row: number;
     column: number;
 }
 
-export interface Props extends CellPosition {
+export interface ICellProps extends ICellPosition {
     mine: boolean;
     nearbyMines: number;
-    placeMines: (cell: CellPosition) => void;
-    openCell: (cell: CellPosition) => void;
+    placeMines: (cell: ICellPosition) => void;
+    openCell: (cell: ICellPosition) => void;
     isOpen: boolean;
 }
 
-interface State {
-    // todo: flag and question mark should be here
-}
+export class Cell extends React.Component <ICellProps, {}> {
 
-export class Cell extends React.Component <Props, State> {
-
-    constructor(props: Props) {
+    constructor(props: ICellProps) {
         super(props);
 
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(event: React.MouseEvent<HTMLDivElement>) {
+    public handleClick(event: React.MouseEvent<HTMLDivElement>) {
         event.preventDefault();
         this.props.placeMines({
-            row: this.props.row,
-            column: this.props.column
+            column: this.props.column,row: this.props.row,
+            
         });
         this.props.openCell(this.props);
     }
 
-    render() {
+    public render() {
         let className = this.props.isOpen ? 'isOpen ' : 'isClosed ';
         className += this.props.mine ? 'mine ' : 'mineless ';
         return (

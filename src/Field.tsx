@@ -1,25 +1,29 @@
+import * as _ from 'lodash';
 import * as React from 'react';
-import { Cell, CellPosition, Props as CellProps } from './Cell';
-const cloneDeep = require('lodash/cloneDeep');
+import { Cell, ICellPosition as CellPosition, ICellProps } from './Cell';
 
-interface Props {
+
+interface IProps
+ {
     rows: number;
     columns: number;
     mines: number;
 }
 
-interface State {
-    field: CellProps[][];
+interface IState {
+    field: ICellProps[][];
     bombsArePlaced: boolean;
 }
 
-export class Field extends React.Component <Props, State> {
+export class Field extends React.Component <IProps
+, IState> {
 
-    constructor(props: Props) {
+    constructor(props: IProps
+        ) {
         super(props);
         this.state = {
-            field: [],
-            bombsArePlaced: false
+            bombsArePlaced: false,field: [],
+           
         };
 
         this.generateEmptyField = this.generateEmptyField.bind(this);
@@ -27,19 +31,19 @@ export class Field extends React.Component <Props, State> {
         this.openCell = this.openCell.bind(this);
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         if (this.state.field.length === 0) {
             this.generateEmptyField();
             return;
         }
     }
 
-    openCell(position: CellPosition) {
+    public openCell(position: CellPosition) {
         if (!this.state.bombsArePlaced) {
             return;
         }
-        let field = this.state.field;
-        let cell = field[position.row][position.column];
+        const field = this.state.field;
+        const cell = field[position.row][position.column];
         if (cell.mine) {
             return;
         }
@@ -51,13 +55,13 @@ export class Field extends React.Component <Props, State> {
         this.openEmptyCells(position);
     }
 
-    openEmptyCells(position: CellPosition) {
-        let fieldCopy = cloneDeep(this.state.field);
+    public openEmptyCells(position: CellPosition) {
+        const fieldCopy = _.cloneDeep(this.state.field);
         const self = this;
         function floodOpen(pos: CellPosition) {
-            let currentCell = fieldCopy[pos.row][pos.column];
+            const currentCell = fieldCopy[pos.row][pos.column];
             currentCell.isOpen = true;
-            let adjustedCells = self.findAdjustedCells(currentCell, fieldCopy);
+            const adjustedCells = self.findAdjustedCells(currentCell, fieldCopy);
             adjustedCells.forEach((adjustedCell => {
                 if (adjustedCell.mine || adjustedCell.isOpen) {
                     return;
@@ -73,7 +77,7 @@ export class Field extends React.Component <Props, State> {
         this.setState({field: fieldCopy});
     }
 
-    placeMines(firstClick: CellPosition): void {
+    public placeMines(firstClick: CellPosition): void {
         if (this.state.bombsArePlaced) {
             return;
         }
@@ -81,18 +85,18 @@ export class Field extends React.Component <Props, State> {
         if (this.props.mines > minesLimit) {
             throw new Error('number of mines was exceeded');
         }
-        let fieldCopy = cloneDeep(this.state.field);
-        let nonMineZone = this.findAdjustedCells(firstClick);
+        const fieldCopy = _.cloneDeep(this.state.field);
+        const nonMineZone = this.findAdjustedCells(firstClick);
         nonMineZone.push(fieldCopy[firstClick.row][firstClick.column]);
-        let oneDimensionalField = fieldCopy
-            .reduce((cells: CellProps[], currentRow: CellProps[]) => {
+        const oneDimensionalField = fieldCopy
+            .reduce((cells: ICellProps[], currentRow: ICellProps[]) => {
                 return cells.concat(currentRow);
             });
         let mines = this.props.mines;
         while (mines > 0) {
             const mineNumber = Math.floor(Math.random() * oneDimensionalField.length);
             const mine = oneDimensionalField[mineNumber];
-            const isMineProhibited = nonMineZone.some((adjustedCell: CellProps) => {
+            const isMineProhibited = nonMineZone.some((adjustedCell: ICellProps) => {
                 return adjustedCell.column === mine.column && adjustedCell.row === mine.row;
             });
             if (isMineProhibited) {
@@ -102,11 +106,11 @@ export class Field extends React.Component <Props, State> {
             oneDimensionalField.splice(mineNumber, 1);
             mines--;
         }
-        fieldCopy.forEach((row: CellProps[]) => {
-            row.forEach((cell: CellProps) => {
+        fieldCopy.forEach((row: ICellProps[]) => {
+            row.forEach((cell: ICellProps) => {
                 const position: CellPosition = {
-                    row:  cell.row,
-                    column: cell.column
+                    column: cell.column,row:  cell.row,
+                    
                 };
                 cell.nearbyMines = this.findAdjustedMinesNumber(position, fieldCopy);
             });
@@ -114,7 +118,7 @@ export class Field extends React.Component <Props, State> {
         this.setState({field: fieldCopy, bombsArePlaced: true}, () => this.openCell(firstClick));
     }
 
-    render() {
+    public render() {
         const rows = this.state.field.map((row, index) => {
             return (
                 <div className="row" key={index}>
@@ -139,18 +143,23 @@ export class Field extends React.Component <Props, State> {
     }
 
     private generateEmptyField(): void {
-        let field: CellProps[][] = [];
+        const field: ICellProps[][] = [];
         for (let row = 0; row < this.props.rows; row++) {
-            let currentRow: CellProps[] = [];
+            const currentRow: ICellProps[] = [];
             for (let column = 0; column < this.props.columns; column++) {
                 currentRow.push({
-                    mine: false,
-                    row,
                     column,
-                    nearbyMines: 0,
-                    placeMines: this.placeMines,
                     isOpen: false,
-                    openCell: this.openCell
+                    mine: false,
+                    nearbyMines: 0,
+                    openCell: this.openCell,
+                    placeMines: this.placeMines,
+                    row,
+                    
+                   
+                    
+                 
+                   
                 });
             }
             field.push(currentRow);
@@ -158,13 +167,13 @@ export class Field extends React.Component <Props, State> {
         this.setState({field});
     }
 
-    private findAdjustedMinesNumber(position: CellPosition, field: CellProps[][] = this.state.field): number {
+    private findAdjustedMinesNumber(position: CellPosition, field: ICellProps[][] = this.state.field): number {
         return this.findAdjustedCells(position, field)
-            .filter((cell: CellProps) => cell.mine)
+            .filter((cell: ICellProps) => cell.mine)
             .length;
     }
 
-    private findAdjustedCells(position: CellPosition, field: CellProps[][] = this.state.field): CellProps[] {
+    private findAdjustedCells(position: CellPosition, field: ICellProps[][] = this.state.field): ICellProps[] {
         if (!field[position.row] || !field[position.row][position.column]) {
             return [];
         }
