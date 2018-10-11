@@ -71,7 +71,6 @@ it("should change flag for question mark and decrement flags count", () => {
 });
 
 it("should remove question mark", () => {
-  debugger;
   const questionMarkCell: ICell = {
     flag: false,
     open: false,

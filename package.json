@@ -13,7 +13,7 @@
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom --colors",
+    "test": "node scripts/test.js -c config/jest/unit.js --colors --watch",
     "test:debug": "node --inspect-brk scripts/test.js --runInBand -c config/jest/unit.js",
     "eject": "react-scripts-ts eject"
   },
