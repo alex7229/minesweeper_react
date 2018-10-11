@@ -19,6 +19,8 @@ export interface IRightCLickCellAction {
   readonly type: "RIGHT_CLICK_CELL";
 }
 
+export type AnyAction = IRightCLickCellAction | IOpenCellAction;
+
 export const OPEN_CELL = "OPEN_CELL";
 export const openCell = (position: ICellPosition): IOpenCellAction => ({
   payload: position,

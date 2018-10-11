@@ -1,7 +1,21 @@
-import { ICellPosition, RIGHT_CLICK_CELL } from "../../actions";
+import { ICellPosition, OPEN_CELL, RIGHT_CLICK_CELL } from "../../actions";
 import { ICell, processRightClick } from "../../reducers/processRightClick";
 
 const position: ICellPosition = { column: 0, row: 0 };
+
+it("should not change state if action type is incorrect", () => {
+  const cell: ICell = { open: false, flag: false, questionMark: false };
+  const state = {
+    field: [[cell, cell], [cell, cell]],
+    flagsNumber: 10,
+    totalMines: 25
+  };
+  const nextState = processRightClick(state, {
+    payload: position,
+    type: OPEN_CELL
+  });
+  expect(state).toEqual(nextState);
+});
 
 it("should not mutate field if position is out of bounds", () => {
   const outOfBoundsPosition: ICellPosition = { column: 25, row: 0 };

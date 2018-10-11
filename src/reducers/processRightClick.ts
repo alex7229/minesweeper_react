@@ -1,4 +1,4 @@
-import { IRightCLickCellAction } from "../actions";
+import { AnyAction, RIGHT_CLICK_CELL } from "../actions";
 
 export interface ICell {
   readonly open: boolean;
@@ -14,10 +14,10 @@ interface IState {
   readonly totalMines: number;
 }
 
-export const processRightClick = (
-  state: IState,
-  action: IRightCLickCellAction
-): IState => {
+export const processRightClick = (state: IState, action: AnyAction): IState => {
+  if (action.type !== RIGHT_CLICK_CELL) {
+    return state;
+  }
   const { row, column } = action.payload;
   if (
     !state.field[row] ||
