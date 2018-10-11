@@ -8,29 +8,46 @@ export interface ICell {
 
 export type Field = ICell[][];
 
+interface IState {
+  readonly field: Field;
+  readonly flagsNumber: number;
+  readonly totalMines: number;
+}
+
 export const processRightClick = (
-  state: Field,
+  state: IState,
   action: IRightCLickCellAction
-) => {
+): IState => {
   const { row, column } = action.payload;
-  if (!state[row] || !state[row][column] || state[row][column].open) {
+  if (
+    !state.field[row] ||
+    !state.field[row][column] ||
+    state.field[row][column].open
+  ) {
     return state;
   }
-  return state.map((currentRow, rowIndex) => {
+  let flagsNumber = state.flagsNumber;
+  const newField = state.field.map((currentRow, rowIndex) => {
     if (rowIndex !== row) {
-      return row;
+      return currentRow;
     }
     return currentRow.map((currentCell, columnIndex) => {
       if (columnIndex !== column) {
         return currentCell;
       }
       if (currentCell.flag) {
+        flagsNumber--;
         return { ...currentCell, flag: false, questionMark: true };
       }
       if (currentCell.questionMark) {
         return { ...currentCell, questionMark: false };
       }
+      if (flagsNumber === state.totalMines) {
+        return currentCell;
+      }
+      flagsNumber++;
       return { ...currentCell, flag: true };
     });
   });
+  return { ...state, field: newField, flagsNumber };
 };
