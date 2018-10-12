@@ -1,64 +1,78 @@
 import { ICellPosition, OPEN_CELL, RIGHT_CLICK_CELL } from "../../actions";
+import { calculateFlagsCount } from "../../calculateFlagsCount";
 import { ICell, processRightClick } from "../../reducers/processRightClick";
 
-const position: ICellPosition = { column: 0, row: 0 };
+const position: ICellPosition = { column: 1, row: 1 };
+const cell: ICell = { open: false, flag: false, questionMark: false };
 
 it("should not change state if action type is incorrect", () => {
-  const cell: ICell = { open: false, flag: false, questionMark: false };
   const state = {
     field: [[cell, cell], [cell, cell]],
-    flagsNumber: 10,
     totalMines: 25
   };
-  const nextState = processRightClick(state, {
-    payload: position,
-    type: OPEN_CELL
-  });
+  const nextState = processRightClick(
+    state,
+    {
+      payload: position,
+      type: OPEN_CELL
+    },
+    jest.fn()
+  );
   expect(state).toEqual(nextState);
 });
 
 it("should not mutate field if position is out of bounds", () => {
   const outOfBoundsPosition: ICellPosition = { column: 25, row: 0 };
-  const cell: ICell = { open: false, flag: false, questionMark: false };
   const state = {
     field: [[cell, cell], [cell, cell]],
-    flagsNumber: 25,
     totalMines: 40
   };
-  const nextState = processRightClick(state, {
-    payload: outOfBoundsPosition,
-    type: RIGHT_CLICK_CELL
-  });
+  const nextState = processRightClick(
+    state,
+    {
+      payload: outOfBoundsPosition,
+      type: RIGHT_CLICK_CELL
+    },
+    jest.fn()
+  );
   expect(nextState).toEqual({ ...state, field: [[cell, cell], [cell, cell]] });
 });
 
 it("should not change cell if it is already open", () => {
-  const cell: ICell = { open: true, flag: false, questionMark: false };
+  const openedCell: ICell = { open: true, flag: false, questionMark: false };
   const state = {
-    field: [[cell]],
-    flagsNumber: 10,
+    field: [[cell, cell], [cell, openedCell]],
     totalMines: 20
   };
-  const nextState = processRightClick(state, {
-    payload: position,
-    type: RIGHT_CLICK_CELL
-  });
-  expect(nextState.field).toEqual([[cell]]);
+  const nextState = processRightClick(
+    state,
+    {
+      payload: position,
+      type: RIGHT_CLICK_CELL
+    },
+    jest.fn()
+  );
+  expect(nextState.field).toEqual([[cell, cell], [cell, openedCell]]);
 });
 
-it("should set up flag first and increment flags count", () => {
-  const cell: ICell = { open: false, flag: false, questionMark: false };
+it("should set up flag", () => {
   const flagCell: ICell = { open: false, flag: true, questionMark: false };
   const state = {
-    field: [[cell]],
-    flagsNumber: 10,
+    field: [[cell, cell], [cell, cell]],
     totalMines: 20
   };
-  const nextState = processRightClick(state, {
-    payload: position,
-    type: RIGHT_CLICK_CELL
+  const nextState = processRightClick(
+    state,
+    {
+      payload: position,
+      type: RIGHT_CLICK_CELL
+    },
+    calculateFlagsCount
+  );
+  expect(nextState).toEqual({
+    ...state,
+    field: [[cell, cell], [cell, flagCell]]
   });
-  expect(nextState).toEqual({ ...state, field: [[flagCell]], flagsNumber: 11 });
 });
 
 it("should change flag for question mark and decrement flags count", () => {
@@ -69,18 +83,20 @@ it("should change flag for question mark and decrement flags count", () => {
     questionMark: true
   };
   const state = {
-    field: [[flagCell]],
-    flagsNumber: 10,
+    field: [[cell, cell], [cell, flagCell]],
     totalMines: 20
   };
-  const nextState = processRightClick(state, {
-    payload: position,
-    type: RIGHT_CLICK_CELL
-  });
+  const nextState = processRightClick(
+    state,
+    {
+      payload: position,
+      type: RIGHT_CLICK_CELL
+    },
+    calculateFlagsCount
+  );
   expect(nextState).toEqual({
     ...state,
-    field: [[questionMarkCell]],
-    flagsNumber: 9
+    field: [[cell, cell], [cell, questionMarkCell]]
   });
 });
 
@@ -90,29 +106,35 @@ it("should remove question mark", () => {
     open: false,
     questionMark: true
   };
-  const emptyCell: ICell = { open: false, flag: false, questionMark: false };
   const state = {
-    field: [[questionMarkCell]],
-    flagsNumber: 10,
+    field: [[cell, cell], [cell, questionMarkCell]],
+
     totalMines: 20
   };
-  const nextState = processRightClick(state, {
-    payload: position,
-    type: RIGHT_CLICK_CELL
-  });
-  expect(nextState).toEqual({ ...state, field: [[emptyCell]] });
+  const nextState = processRightClick(
+    state,
+    {
+      payload: position,
+      type: RIGHT_CLICK_CELL
+    },
+    calculateFlagsCount
+  );
+  expect(nextState).toEqual({ ...state, field: [[cell, cell], [cell, cell]] });
 });
 
 it("should not set flag if amount of flags equals to amount of mines", () => {
-  const cell: ICell = { open: false, flag: false, questionMark: false };
+  const flagCell: ICell = { open: false, flag: true, questionMark: false };
   const state = {
-    field: [[cell]],
-    flagsNumber: 10,
-    totalMines: 10
+    field: [[cell, flagCell], [cell, cell]],
+    totalMines: 1
   };
-  const nextState = processRightClick(state, {
-    payload: position,
-    type: RIGHT_CLICK_CELL
-  });
+  const nextState = processRightClick(
+    state,
+    {
+      payload: position,
+      type: RIGHT_CLICK_CELL
+    },
+    calculateFlagsCount
+  );
   expect(nextState).toEqual(state);
 });

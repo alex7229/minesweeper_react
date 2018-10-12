@@ -1,4 +1,5 @@
 import { AnyAction, RIGHT_CLICK_CELL } from "../actions";
+import { CalculateFlagsCount } from "../calculateFlagsCount";
 
 export interface ICell {
   readonly open: boolean;
@@ -6,15 +7,25 @@ export interface ICell {
   readonly questionMark: boolean;
 }
 
-export type Field = ICell[][];
+export type Row = ReadonlyArray<ICell>;
+export type Field = ReadonlyArray<Row>;
 
 interface IState {
   readonly field: Field;
-  readonly flagsNumber: number;
   readonly totalMines: number;
 }
 
-export const processRightClick = (state: IState, action: AnyAction): IState => {
+type ProcessRightClick = (
+  state: IState,
+  action: AnyAction,
+  calculateFlagsCount: CalculateFlagsCount
+) => IState;
+
+export const processRightClick: ProcessRightClick = (
+  state,
+  action,
+  calculateFlagsCount
+) => {
   if (action.type !== RIGHT_CLICK_CELL) {
     return state;
   }
@@ -26,7 +37,13 @@ export const processRightClick = (state: IState, action: AnyAction): IState => {
   ) {
     return state;
   }
-  let flagsNumber = state.flagsNumber;
+  const flagsCount = calculateFlagsCount(state.field);
+  const shouldPlaceFlag =
+    state.field[row][column].flag === false &&
+    state.field[row][column].questionMark === false;
+  if (flagsCount === state.totalMines && shouldPlaceFlag) {
+    return state;
+  }
   const newField = state.field.map((currentRow, rowIndex) => {
     if (rowIndex !== row) {
       return currentRow;
@@ -36,18 +53,13 @@ export const processRightClick = (state: IState, action: AnyAction): IState => {
         return currentCell;
       }
       if (currentCell.flag) {
-        flagsNumber--;
         return { ...currentCell, flag: false, questionMark: true };
       }
       if (currentCell.questionMark) {
         return { ...currentCell, questionMark: false };
       }
-      if (flagsNumber === state.totalMines) {
-        return currentCell;
-      }
-      flagsNumber++;
       return { ...currentCell, flag: true };
     });
   });
-  return { ...state, field: newField, flagsNumber };
+  return { ...state, field: newField };
 };
