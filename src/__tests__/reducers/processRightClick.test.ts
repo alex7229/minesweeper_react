@@ -3,7 +3,19 @@ import { calculateFlagsCount } from "../../calculateFlagsCount";
 import { ICell, processRightClick } from "../../reducers/processRightClick";
 
 const position: ICellPosition = { column: 1, row: 1 };
-const cell: ICell = { open: false, flag: false, questionMark: false };
+const cell: ICell = {
+  flag: false,
+  isMine: false,
+  minesAround: 0,
+  open: false,
+  questionMark: false
+};
+const openedCell: ICell = { ...cell, open: true };
+const flagCell: ICell = { ...cell, flag: true };
+const questionMarkCell: ICell = {
+  ...cell,
+  questionMark: true
+};
 
 it("should not change state if action type is incorrect", () => {
   const state = {
@@ -39,7 +51,6 @@ it("should not mutate field if position is out of bounds", () => {
 });
 
 it("should not change cell if it is already open", () => {
-  const openedCell: ICell = { open: true, flag: false, questionMark: false };
   const state = {
     field: [[cell, cell], [cell, openedCell]],
     totalMines: 20
@@ -56,7 +67,6 @@ it("should not change cell if it is already open", () => {
 });
 
 it("should set up flag", () => {
-  const flagCell: ICell = { open: false, flag: true, questionMark: false };
   const state = {
     field: [[cell, cell], [cell, cell]],
     totalMines: 20
@@ -76,12 +86,6 @@ it("should set up flag", () => {
 });
 
 it("should change flag for question mark and decrement flags count", () => {
-  const flagCell: ICell = { open: false, flag: true, questionMark: false };
-  const questionMarkCell: ICell = {
-    flag: false,
-    open: false,
-    questionMark: true
-  };
   const state = {
     field: [[cell, cell], [cell, flagCell]],
     totalMines: 20
@@ -101,11 +105,6 @@ it("should change flag for question mark and decrement flags count", () => {
 });
 
 it("should remove question mark", () => {
-  const questionMarkCell: ICell = {
-    flag: false,
-    open: false,
-    questionMark: true
-  };
   const state = {
     field: [[cell, cell], [cell, questionMarkCell]],
 
@@ -123,7 +122,6 @@ it("should remove question mark", () => {
 });
 
 it("should not set flag if amount of flags equals to amount of mines", () => {
-  const flagCell: ICell = { open: false, flag: true, questionMark: false };
   const state = {
     field: [[cell, flagCell], [cell, cell]],
     totalMines: 1

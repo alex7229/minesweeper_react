@@ -2,8 +2,10 @@ import { AnyAction, RIGHT_CLICK_CELL } from "../actions";
 import { CalculateFlagsCount } from "../calculateFlagsCount";
 
 export interface ICell {
-  readonly open: boolean;
   readonly flag: boolean;
+  readonly isMine: boolean;
+  readonly minesAround: number;
+  readonly open: boolean;
   readonly questionMark: boolean;
 }
 
