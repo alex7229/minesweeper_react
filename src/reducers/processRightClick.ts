@@ -2,11 +2,13 @@ import { AnyAction, RIGHT_CLICK_CELL } from "../actions";
 import { CalculateFlagsCount } from "../calculateFlagsCount";
 
 export interface ICell {
-  readonly flag: boolean;
-  readonly isMine: boolean;
-  readonly minesAround: number;
+  readonly column: number;
+  readonly row: number;
   readonly open: boolean;
+  readonly isMine: boolean;
+  readonly flag: boolean;
   readonly questionMark: boolean;
+  readonly minesAround: number;
 }
 
 export type Row = ReadonlyArray<ICell>;
