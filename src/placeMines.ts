@@ -8,9 +8,8 @@ export type PlaceMines = (
 ) => Field;
 
 export const placeMines: PlaceMines = (field, mines) => {
-  const positions = _.orderBy(mines, ["row", "column"], ["asc", "asc"]);
   const fieldCopy = _.cloneDeep(field);
-  for (const position of positions) {
+  for (const position of mines) {
     // @ts-ignore
     fieldCopy[position.row][position.column].isMine = true;
   }
