@@ -8,6 +8,7 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts-ts": "3.1.0",
+    "seedrandom": "^2.4.4",
     "tslint": "^5.11.0",
     "typescript": "^3.1.2"
   },
@@ -19,6 +20,7 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "@types/seedrandom": "^2.4.27",
     "@types/jest": "^23.3.2",
     "@types/lodash": "^4.14.105",
     "@types/node": "^10.11.3",

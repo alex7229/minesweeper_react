@@ -4,6 +4,8 @@ import { ICell, processRightClick } from "../../reducers/processRightClick";
 
 const position: ICellPosition = { column: 1, row: 1 };
 const cell: ICell = {
+  row: 0,
+  column: 0,
   flag: false,
   isMine: false,
   minesAround: 0,

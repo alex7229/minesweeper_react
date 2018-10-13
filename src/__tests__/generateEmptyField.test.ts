@@ -11,20 +11,6 @@ const cell: ICell = {
   isMine: false
 };
 
-it("should throw if width of height is not positive or bigger than 1000", () => {
-  expect(() => generateEmptyField(-2, 32)).toThrow();
-  expect(() => generateEmptyField(3, -32)).toThrow();
-  expect(() => generateEmptyField(3, 1005)).toThrow();
-  expect(() => generateEmptyField(2016, 4)).toThrow();
-  expect(() => generateEmptyField(0, 1005)).toThrow();
-  expect(() => generateEmptyField(2016, 0)).toThrow();
-});
-
-it("should round values if neccessary", () => {
-  expect(() => generateEmptyField(1.5, 52)).not.toThrow();
-  expect(() => generateEmptyField(23, 1.33)).not.toThrow();
-});
-
 it("should generate 1 by 1 field", () => {
   expect(generateEmptyField(1, 1)).toEqual([[cell]]);
 });
