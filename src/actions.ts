@@ -19,7 +19,18 @@ export interface IRightCLickCellAction {
   readonly type: "RIGHT_CLICK_CELL";
 }
 
-export type AnyAction = IRightCLickCellAction | IOpenCellAction;
+export interface IGameOptionPayload {
+  type: "width" | "height" | "mines";
+  value: number;
+}
+
+export interface IChangeGameOptionsAction {
+  readonly payload: {
+    type: "width" | "height" | "mines";
+    value: number;
+  };
+  readonly type: "CHANGE_GAME_OPTIONS";
+}
 
 export const OPEN_CELL = "OPEN_CELL";
 export const openCell = (position: ICellPosition): IOpenCellAction => ({
@@ -40,20 +51,13 @@ export const startGame = () => ({
   type: START_GAME
 });
 
-export const CHANGE_WIDTH_OPTION = "CHANGE_WIDTH_OPTION";
-export const changeWidthOption = (width: number) => ({
-  type: CHANGE_WIDTH_OPTION,
-  payload: width
+export const CHANGE_GAME_OPTIONS = "CHANGE_GAME_OPTIONS";
+export const changeGameOption = (payload: IGameOptionPayload) => ({
+  type: CHANGE_GAME_OPTIONS,
+  payload
 });
 
-export const CHANGE_HEIGHT_OPTION = "CHANGE_HEIGHT_OPTION";
-export const changeHeightOption = (width: number) => ({
-  type: CHANGE_HEIGHT_OPTION,
-  payload: width
-});
-
-export const CHANGE_MINES_OPTION = "CHANGE_MINES_OPTION";
-export const changeMinesOption = (width: number) => ({
-  type: CHANGE_MINES_OPTION,
-  payload: width
-});
+export type AnyAction =
+  | IRightCLickCellAction
+  | IOpenCellAction
+  | IChangeGameOptionsAction;

@@ -1,10 +1,6 @@
 import {
-  CHANGE_HEIGHT_OPTION,
-  CHANGE_MINES_OPTION,
-  CHANGE_WIDTH_OPTION,
-  changeHeightOption,
-  changeMinesOption,
-  changeWidthOption,
+  CHANGE_GAME_OPTIONS,
+  changeGameOption,
   ICellPosition,
   OPEN_CELL,
   openCell,
@@ -33,23 +29,9 @@ it("should create start game action", () => {
   });
 });
 
-it("should create change width option action", () => {
-  expect(changeWidthOption(23)).toEqual({
-    type: CHANGE_WIDTH_OPTION,
-    payload: 23
-  });
-});
-
-it("should create change height option action", () => {
-  expect(changeHeightOption(23)).toEqual({
-    type: CHANGE_HEIGHT_OPTION,
-    payload: 23
-  });
-});
-
-it("should create change mines option action", () => {
-  expect(changeMinesOption(23)).toEqual({
-    type: CHANGE_MINES_OPTION,
-    payload: 23
+it("should create change game options action", () => {
+  expect(changeGameOption({ type: "width", value: 55 })).toEqual({
+    type: CHANGE_GAME_OPTIONS,
+    payload: { type: "width", value: 55 }
   });
 });

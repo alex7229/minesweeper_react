@@ -1,14 +1,12 @@
-export type ValidateGameOptions = (
-  width: number,
-  height: number,
-  mines: number
-) => boolean;
+import { IGameOptionsState } from "../reducers/gameOptions";
 
-export const validateGameOptions: ValidateGameOptions = (
-  width,
+export type ValidateGameOptions = (options: IGameOptionsState) => boolean;
+
+export const validateGameOptions: ValidateGameOptions = ({
   height,
+  width,
   mines
-) => {
+}) => {
   if (
     width !== Math.floor(width) ||
     height !== Math.floor(height) ||

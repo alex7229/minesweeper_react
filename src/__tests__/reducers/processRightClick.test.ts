@@ -1,5 +1,5 @@
 import { ICellPosition, OPEN_CELL, RIGHT_CLICK_CELL } from "../../actions";
-import { calculateFlagsCount } from "../../calculateFlagsCount";
+import { calculateFlagsCount } from "../../misc/calculateFlagsCount";
 import { ICell, processRightClick } from "../../reducers/processRightClick";
 
 const position: ICellPosition = { column: 1, row: 1 };
