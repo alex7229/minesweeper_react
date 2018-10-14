@@ -36,7 +36,24 @@ export const rightClickCell = (
 });
 
 export const START_GAME = "START_GAME";
-export const startGame = (gameOptions: IGameOptions) => ({
-  payload: gameOptions,
+export const startGame = () => ({
   type: START_GAME
+});
+
+export const CHANGE_WIDTH_OPTION = "CHANGE_WIDTH_OPTION";
+export const changeWidthOption = (width: number) => ({
+  type: CHANGE_WIDTH_OPTION,
+  payload: width
+});
+
+export const CHANGE_HEIGHT_OPTION = "CHANGE_HEIGHT_OPTION";
+export const changeHeightOption = (width: number) => ({
+  type: CHANGE_HEIGHT_OPTION,
+  payload: width
+});
+
+export const CHANGE_MINES_OPTION = "CHANGE_MINES_OPTION";
+export const changeMinesOption = (width: number) => ({
+  type: CHANGE_MINES_OPTION,
+  payload: width
 });

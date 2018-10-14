@@ -1,5 +1,5 @@
+import { Field } from "../reducers/processRightClick";
 import { FindCellsAround } from "./findCellsAround";
-import { Field } from "./reducers/processRightClick";
 
 export type RecalculateMinesAround = (
   field: Field,

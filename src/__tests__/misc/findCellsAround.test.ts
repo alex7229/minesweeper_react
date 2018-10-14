@@ -1,7 +1,7 @@
-import { ICellPosition } from "../Cell";
-import { findCellsAround } from "../findCellsAround";
-import { generateEmptyField } from "../generateEmptyField";
-import { ICell, Row } from "../reducers/processRightClick";
+import { ICellPosition } from "../../Cell";
+import { findCellsAround } from "../../misc/findCellsAround";
+import { generateEmptyField } from "../../misc/generateEmptyField";
+import { ICell, Row } from "../../reducers/processRightClick";
 
 const cell: ICell = {
   column: 0,

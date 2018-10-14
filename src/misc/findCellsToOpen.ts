@@ -1,6 +1,6 @@
-import { ICellPosition } from "./actions";
+import { ICellPosition } from "../actions";
+import { Field, Row } from "../reducers/processRightClick";
 import { FindCellsAround } from "./findCellsAround";
-import { Field, Row } from "./reducers/processRightClick";
 
 export type FindCellsToOpen = (
   field: Field,

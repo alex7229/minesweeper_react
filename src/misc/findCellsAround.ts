@@ -1,5 +1,5 @@
-import { ICellPosition } from "./Cell";
-import { Field, ICell, Row } from "./reducers/processRightClick";
+import { ICellPosition } from "../actions";
+import { Field, ICell, Row } from "../reducers/processRightClick";
 
 export type FindCellsAround = (field: Field, position: ICellPosition) => Row;
 

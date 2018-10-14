@@ -1,6 +1,6 @@
-import { ICellPosition } from "../actions";
-import { openCells } from "../openCells";
-import { ICell } from "../reducers/processRightClick";
+import { ICellPosition } from "../../actions";
+import { openCells } from "../../misc/openCells";
+import { ICell } from "../../reducers/processRightClick";
 
 const defaultPosition: ICellPosition = { row: 1, column: 1 };
 const emptyCell: ICell = {

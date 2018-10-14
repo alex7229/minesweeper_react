@@ -1,6 +1,6 @@
 import * as seedRandom from "seedrandom";
-import { generateEmptyField } from "../generateEmptyField";
-import { generateMines } from "../generateMines";
+import { generateEmptyField } from "../../misc/generateEmptyField";
+import { generateMines } from "../../misc/generateMines";
 
 it("should generate mines for 60 by 60 field consistently", () => {
   const seed = "mis";

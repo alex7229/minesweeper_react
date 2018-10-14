@@ -1,4 +1,4 @@
-import { validateGameOptions } from "../validateGameOptions";
+import { validateGameOptions } from "../../misc/validateGameOptions";
 
 it("should not validate if any param is not integer", () => {
   expect(validateGameOptions(6, 6, 2.23)).toBe(false);
