@@ -1,5 +1,5 @@
 import { AnyAction, RIGHT_CLICK_CELL } from "../actions";
-import { CalculateFlagsCount } from "../application/logic/calculateFlagsCount";
+import { CalculateCells } from "../application/logic/calculateCells";
 
 export interface ICell {
   readonly column: number;
@@ -14,22 +14,20 @@ export interface ICell {
 export type Row = ReadonlyArray<ICell>;
 export type Field = ReadonlyArray<Row>;
 
-// todo: remove total mines from state (derive it from field)
 export interface IRightClickState {
   readonly field: Field;
-  readonly totalMines: number;
 }
 
 type RightClickReducer = (
   state: IRightClickState,
   action: AnyAction,
-  calculateFlagsCount: CalculateFlagsCount
+  calculateCells: CalculateCells
 ) => IRightClickState;
 
 export const rightClickReducer: RightClickReducer = (
   state,
   action,
-  calculateFlagsCount
+  calculateCells
 ) => {
   if (action.type !== RIGHT_CLICK_CELL) {
     return state;
@@ -42,11 +40,12 @@ export const rightClickReducer: RightClickReducer = (
   ) {
     return state;
   }
-  const flagsCount = calculateFlagsCount(state.field);
+  const flagsCount = calculateCells(state.field, "flag");
+  const totalMines = calculateCells(state.field, "mine");
   const shouldPlaceFlag =
     state.field[row][column].flag === false &&
     state.field[row][column].questionMark === false;
-  if (flagsCount === state.totalMines && shouldPlaceFlag) {
+  if (flagsCount === totalMines && shouldPlaceFlag) {
     return state;
   }
   const newField = state.field.map((currentRow, rowIndex) => {

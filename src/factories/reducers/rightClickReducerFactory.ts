@@ -1,5 +1,5 @@
 import { AnyAction } from "../../actions";
-import { calculateFlagsCount } from "../../application/logic/calculateFlagsCount";
+import { calculateCells } from "../../application/logic/calculateCells";
 import {
   IRightClickState,
   rightClickReducer
@@ -13,4 +13,4 @@ export type RightClickReducerFactory = (
 export const rightClickReducerFactory: RightClickReducerFactory = (
   state,
   action
-) => rightClickReducer(state, action, calculateFlagsCount);
+) => rightClickReducer(state, action, calculateCells);
