@@ -1,4 +1,4 @@
-import { Field } from "../../reducers/rightClickReducer";
+import { Field } from "../reducers/rightClickReducer";
 
 export type FlagAllMines = (field: Field) => Field;
 

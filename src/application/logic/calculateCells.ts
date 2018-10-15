@@ -1,4 +1,4 @@
-import { Field } from "../../reducers/rightClickReducer";
+import { Field } from "../reducers/rightClickReducer";
 
 export type CalculateCells = (field: Field, type: "flag" | "mine") => number;
 

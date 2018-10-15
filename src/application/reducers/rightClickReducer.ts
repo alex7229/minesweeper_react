@@ -1,5 +1,5 @@
 import { AnyAction, RIGHT_CLICK_CELL } from "../actions";
-import { CalculateCells } from "../application/logic/calculateCells";
+import { CalculateCells } from "../logic/calculateCells";
 
 export interface ICell {
   readonly column: number;

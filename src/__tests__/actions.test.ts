@@ -8,7 +8,7 @@ import {
   rightClickCell,
   START_GAME,
   startGame
-} from "../actions";
+} from "../application/actions";
 
 const position: ICellPosition = { column: 2, row: 4 };
 

@@ -1,5 +1,5 @@
-import { ICellPosition } from "../../actions";
-import { IGameOptionsState } from "../../reducers/gameOptionsReducer";
+import { ICellPosition } from "../actions";
+import { IGameOptionsState } from "../reducers/gameOptionsReducer";
 
 type RNG = () => number;
 type SeedRandom = (seed: string) => RNG;

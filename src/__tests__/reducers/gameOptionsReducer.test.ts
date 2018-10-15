@@ -3,11 +3,11 @@ import {
   IChangeGameOptionsAction,
   IRightCLickCellAction,
   RIGHT_CLICK_CELL
-} from "../../actions";
+} from "../../application/actions";
 import {
   gameOptionsReducer,
   IGameOptionsState
-} from "../../reducers/gameOptionsReducer";
+} from "../../application/reducers/gameOptionsReducer";
 
 const defaultState: IGameOptionsState = {
   width: 22,

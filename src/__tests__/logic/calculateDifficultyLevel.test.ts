@@ -1,10 +1,10 @@
-import { ICellPosition } from "../../../actions";
-import { calculateDifficultyLevel } from "../../../application/logic/calculateDifficultyLevel";
-import { generateEmptyField } from "../../../application/logic/generateEmptyField";
-import { openCells } from "../../../application/logic/openCells";
-import { placeMines } from "../../../application/logic/placeMines";
-import { findCellsToOpenFactory } from "../../../factories/logic/findCellsToOpenFactory";
-import { recalculateMinesAroundFactory } from "../../../factories/logic/recalculateMinesAroundFactory";
+import { ICellPosition } from "../../application/actions";
+import { calculateDifficultyLevel } from "../../application/logic/calculateDifficultyLevel";
+import { generateEmptyField } from "../../application/logic/generateEmptyField";
+import { openCells } from "../../application/logic/openCells";
+import { placeMines } from "../../application/logic/placeMines";
+import { findCellsToOpenFactory } from "../../factories/logic/findCellsToOpenFactory";
+import { recalculateMinesAroundFactory } from "../../factories/logic/recalculateMinesAroundFactory";
 
 it("should return 1 for empty board", () => {
   const field = generateEmptyField(5, 5);

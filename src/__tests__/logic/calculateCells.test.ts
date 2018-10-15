@@ -1,9 +1,9 @@
-import { calculateCells } from "../../../application/logic/calculateCells";
-import { generateEmptyField } from "../../../application/logic/generateEmptyField";
-import { placeMines } from "../../../application/logic/placeMines";
-import { generateMinesFactory } from "../../../factories/logic/generateMinesFactory";
-import { recalculateMinesAroundFactory } from "../../../factories/logic/recalculateMinesAroundFactory";
-import { Field, ICell } from "../../../reducers/rightClickReducer";
+import { calculateCells } from "../../application/logic/calculateCells";
+import { generateEmptyField } from "../../application/logic/generateEmptyField";
+import { placeMines } from "../../application/logic/placeMines";
+import { Field, ICell } from "../../application/reducers/rightClickReducer";
+import { generateMinesFactory } from "../../factories/logic/generateMinesFactory";
+import { recalculateMinesAroundFactory } from "../../factories/logic/recalculateMinesAroundFactory";
 
 it("should return correct flags number", () => {
   const cell = {

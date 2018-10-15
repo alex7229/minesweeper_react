@@ -1,4 +1,4 @@
-import { Field, ICell } from "../../reducers/rightClickReducer";
+import { Field, ICell } from "../reducers/rightClickReducer";
 
 export type GenerateEmptyField = (width: number, height: number) => Field;
 

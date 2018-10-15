@@ -1,6 +1,6 @@
-import { ICellPosition, OPEN_CELL, RIGHT_CLICK_CELL } from "../../actions";
+import { ICellPosition, OPEN_CELL, RIGHT_CLICK_CELL } from "../../application/actions";
 import { calculateCells } from "../../application/logic/calculateCells";
-import { ICell, rightClickReducer } from "../../reducers/rightClickReducer";
+import { ICell, rightClickReducer } from "../../application/reducers/rightClickReducer";
 
 const position: ICellPosition = { column: 1, row: 1 };
 const cell: ICell = {

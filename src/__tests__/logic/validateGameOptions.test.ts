@@ -1,5 +1,5 @@
-import { validateGameOptions } from "../../../application/logic/validateGameOptions";
-import { IGameOptionsState } from "../../../reducers/gameOptionsReducer";
+import { validateGameOptions } from "../../application/logic/validateGameOptions";
+import { IGameOptionsState } from "../../application/reducers/gameOptionsReducer";
 
 it("should not validate if any param is not integer", () => {
   expect(validateGameOptions({ width: 6, height: 6, mines: 2.23 })).toBe(false);

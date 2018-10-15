@@ -1,6 +1,6 @@
-import { ICellPosition } from "../../../actions";
-import { generateEmptyField } from "../../../application/logic/generateEmptyField";
-import { placeMines } from "../../../application/logic/placeMines";
+import { ICellPosition } from "../../application/actions";
+import { generateEmptyField } from "../../application/logic/generateEmptyField";
+import { placeMines } from "../../application/logic/placeMines";
 
 it("should place mines properly", () => {
   const field = generateEmptyField(4, 4);

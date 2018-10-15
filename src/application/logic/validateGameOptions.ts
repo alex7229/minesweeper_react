@@ -1,4 +1,4 @@
-import { IGameOptionsState } from "../../reducers/gameOptionsReducer";
+import { IGameOptionsState } from "../reducers/gameOptionsReducer";
 
 export type ValidateGameOptions = (options: IGameOptionsState) => boolean;
 

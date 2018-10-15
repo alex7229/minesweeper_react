@@ -1,5 +1,5 @@
-import { openAllMines } from "../../../application/logic/openAllMines";
-import { Field, ICell } from "../../../reducers/rightClickReducer";
+import { openAllMines } from "../../application/logic/openAllMines";
+import { Field, ICell } from "../../application/reducers/rightClickReducer";
 
 it("should open all mines", () => {
   const emptyCell: ICell = {

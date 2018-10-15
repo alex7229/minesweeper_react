@@ -1,9 +1,9 @@
-import { AnyAction } from "../../actions";
+import { AnyAction } from "../../application/actions";
 import { calculateCells } from "../../application/logic/calculateCells";
 import {
   IRightClickState,
   rightClickReducer
-} from "../../reducers/rightClickReducer";
+} from "../../application/reducers/rightClickReducer";
 
 export type RightClickReducerFactory = (
   state: IRightClickState,
