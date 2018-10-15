@@ -1,5 +1,5 @@
 import { ICellPosition } from "../actions";
-import { Field, Row } from "../reducers/rightClickReducer";
+import { Field, Row } from "../reducers/toggleCellReducer";
 import { FindCellsAround } from "./findCellsAround";
 
 export type FindCellsToOpen = (

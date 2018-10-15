@@ -1,5 +1,5 @@
 import { ICellPosition } from "../actions";
-import { Field } from "../reducers/rightClickReducer";
+import { Field } from "../reducers/toggleCellReducer";
 
 export type OpenCells = (
   field: Field,

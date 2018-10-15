@@ -1,4 +1,4 @@
-import { AnyAction, RIGHT_CLICK_CELL } from "../actions";
+import { AnyAction, TOGGLE_CELL } from "../actions";
 import { CalculateCells } from "../logic/calculateCells";
 
 export interface ICell {
@@ -14,22 +14,22 @@ export interface ICell {
 export type Row = ReadonlyArray<ICell>;
 export type Field = ReadonlyArray<Row>;
 
-export interface IRightClickState {
+export interface IToggleCellState {
   readonly field: Field;
 }
 
-type RightClickReducer = (
-  state: IRightClickState,
+type ToggleCellReducer = (
+  state: IToggleCellState,
   action: AnyAction,
   calculateCells: CalculateCells
-) => IRightClickState;
+) => IToggleCellState;
 
-export const rightClickReducer: RightClickReducer = (
+export const toggleCellReducer: ToggleCellReducer = (
   state,
   action,
   calculateCells
 ) => {
-  if (action.type !== RIGHT_CLICK_CELL) {
+  if (action.type !== TOGGLE_CELL) {
     return state;
   }
   const { row, column } = action.payload;

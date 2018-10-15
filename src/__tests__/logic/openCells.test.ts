@@ -1,6 +1,6 @@
 import { ICellPosition } from "../../application/actions";
 import { openCells } from "../../application/logic/openCells";
-import { ICell } from "../../application/reducers/rightClickReducer";
+import { ICell } from "../../application/reducers/toggleCellReducer";
 
 const defaultPosition: ICellPosition = { row: 1, column: 1 };
 const emptyCell: ICell = {

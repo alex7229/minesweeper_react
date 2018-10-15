@@ -14,9 +14,9 @@ export interface IOpenCellAction {
   readonly type: "OPEN_CELL";
 }
 
-export interface IRightCLickCellAction {
+export interface IToggleCellAction {
   readonly payload: ICellPosition;
-  readonly type: "RIGHT_CLICK_CELL";
+  readonly type: "TOGGLE_CELL";
 }
 
 export interface IGameOptionPayload {
@@ -38,12 +38,10 @@ export const openCell = (position: ICellPosition): IOpenCellAction => ({
   type: OPEN_CELL
 });
 
-export const RIGHT_CLICK_CELL = "RIGHT_CLICK_CELL";
-export const rightClickCell = (
-  position: ICellPosition
-): IRightCLickCellAction => ({
+export const TOGGLE_CELL = "TOGGLE_CELL";
+export const toggleCell = (position: ICellPosition): IToggleCellAction => ({
   payload: position,
-  type: RIGHT_CLICK_CELL
+  type: TOGGLE_CELL
 });
 
 export const START_GAME = "START_GAME";
@@ -58,6 +56,6 @@ export const changeGameOption = (payload: IGameOptionPayload) => ({
 });
 
 export type AnyAction =
-  | IRightCLickCellAction
+  | IToggleCellAction
   | IOpenCellAction
   | IChangeGameOptionsAction;

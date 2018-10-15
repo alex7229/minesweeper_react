@@ -5,7 +5,7 @@ import { findCellsToOpen } from "../../application/logic/findCellsToOpen";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
 import { placeMines } from "../../application/logic/placeMines";
 import { recalculateMinesAroundFactory } from "../../factories/logic/recalculateMinesAroundFactory";
-import { Field, ICell } from "../../application/reducers/rightClickReducer";
+import { Field, ICell } from "../../application/reducers/toggleCellReducer";
 
 const emptyCell: ICell = {
   column: 0,

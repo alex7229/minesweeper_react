@@ -1,6 +1,13 @@
-import { ICellPosition, OPEN_CELL, RIGHT_CLICK_CELL } from "../../application/actions";
+import {
+  ICellPosition,
+  OPEN_CELL,
+  TOGGLE_CELL
+} from "../../application/actions";
 import { calculateCells } from "../../application/logic/calculateCells";
-import { ICell, rightClickReducer } from "../../application/reducers/rightClickReducer";
+import {
+  ICell,
+  toggleCellReducer
+} from "../../application/reducers/toggleCellReducer";
 
 const position: ICellPosition = { column: 1, row: 1 };
 const cell: ICell = {
@@ -24,7 +31,7 @@ it("should not change state if action type is incorrect", () => {
   const state = {
     field: [[cell, cell], [cell, cell]]
   };
-  const nextState = rightClickReducer(
+  const nextState = toggleCellReducer(
     state,
     {
       payload: position,
@@ -40,11 +47,11 @@ it("should not mutate field if position is out of bounds", () => {
   const state = {
     field: [[cell, cell], [cell, cell]]
   };
-  const nextState = rightClickReducer(
+  const nextState = toggleCellReducer(
     state,
     {
       payload: outOfBoundsPosition,
-      type: RIGHT_CLICK_CELL
+      type: TOGGLE_CELL
     },
     jest.fn()
   );
@@ -55,11 +62,11 @@ it("should not change cell if it is already open", () => {
   const state = {
     field: [[cell, cell], [cell, openedCell]]
   };
-  const nextState = rightClickReducer(
+  const nextState = toggleCellReducer(
     state,
     {
       payload: position,
-      type: RIGHT_CLICK_CELL
+      type: TOGGLE_CELL
     },
     jest.fn()
   );
@@ -70,11 +77,11 @@ it("should set up flag", () => {
   const state = {
     field: [[cell, cell], [mine, cell]]
   };
-  const nextState = rightClickReducer(
+  const nextState = toggleCellReducer(
     state,
     {
       payload: position,
-      type: RIGHT_CLICK_CELL
+      type: TOGGLE_CELL
     },
     calculateCells
   );
@@ -85,11 +92,11 @@ it("should change flag for question mark and decrement flags count", () => {
   const state = {
     field: [[cell, cell], [cell, flagCell]]
   };
-  const nextState = rightClickReducer(
+  const nextState = toggleCellReducer(
     state,
     {
       payload: position,
-      type: RIGHT_CLICK_CELL
+      type: TOGGLE_CELL
     },
     calculateCells
   );
@@ -103,11 +110,11 @@ it("should remove question mark", () => {
   const state = {
     field: [[cell, cell], [cell, questionMarkCell]]
   };
-  const nextState = rightClickReducer(
+  const nextState = toggleCellReducer(
     state,
     {
       payload: position,
-      type: RIGHT_CLICK_CELL
+      type: TOGGLE_CELL
     },
     calculateCells
   );
@@ -118,11 +125,11 @@ it("should not set flag if amount of flags equals to amount of mines", () => {
   const state = {
     field: [[cell, flagCell], [mine, cell]]
   };
-  const nextState = rightClickReducer(
+  const nextState = toggleCellReducer(
     state,
     {
       payload: position,
-      type: RIGHT_CLICK_CELL
+      type: TOGGLE_CELL
     },
     calculateCells
   );

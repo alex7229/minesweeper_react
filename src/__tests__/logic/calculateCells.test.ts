@@ -1,7 +1,7 @@
 import { calculateCells } from "../../application/logic/calculateCells";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
 import { placeMines } from "../../application/logic/placeMines";
-import { Field, ICell } from "../../application/reducers/rightClickReducer";
+import { Field, ICell } from "../../application/reducers/toggleCellReducer";
 import { generateMinesFactory } from "../../factories/logic/generateMinesFactory";
 import { recalculateMinesAroundFactory } from "../../factories/logic/recalculateMinesAroundFactory";
 

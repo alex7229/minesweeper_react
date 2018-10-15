@@ -1,7 +1,7 @@
 import { ICellPosition } from "../../application/actions";
 import { findCellsAround } from "../../application/logic/findCellsAround";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
-import { ICell, Row } from "../../application/reducers/rightClickReducer";
+import { ICell, Row } from "../../application/reducers/toggleCellReducer";
 
 const cell: ICell = {
   column: 0,

@@ -1,8 +1,8 @@
 import {
   CHANGE_GAME_OPTIONS,
   IChangeGameOptionsAction,
-  IRightCLickCellAction,
-  RIGHT_CLICK_CELL
+  IToggleCellAction,
+  TOGGLE_CELL
 } from "../../application/actions";
 import {
   gameOptionsReducer,
@@ -17,8 +17,8 @@ const defaultState: IGameOptionsState = {
 
 it("should not change width if action is not change width", () => {
   const validate = jest.fn().mockReturnValue(true);
-  const action: IRightCLickCellAction = {
-    type: RIGHT_CLICK_CELL,
+  const action: IToggleCellAction = {
+    type: TOGGLE_CELL,
     payload: { row: 12, column: 44 }
   };
   expect(gameOptionsReducer(defaultState, action, validate)).toEqual(

@@ -1,4 +1,4 @@
-import { Field } from "../reducers/rightClickReducer";
+import { Field } from "../reducers/toggleCellReducer";
 
 export type IsWinCondition = (field: Field) => boolean;
 

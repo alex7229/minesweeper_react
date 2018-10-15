@@ -1,5 +1,5 @@
 import { flagAllMines } from "../../application/logic/flagAllMines";
-import { Field, ICell } from "../../application/reducers/rightClickReducer";
+import { Field, ICell } from "../../application/reducers/toggleCellReducer";
 
 it("should remove all extra flags and place them on mines", () => {
   const emptyCell: ICell = {

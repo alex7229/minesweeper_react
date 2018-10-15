@@ -4,10 +4,10 @@ import {
   ICellPosition,
   OPEN_CELL,
   openCell,
-  RIGHT_CLICK_CELL,
-  rightClickCell,
   START_GAME,
-  startGame
+  startGame,
+  TOGGLE_CELL,
+  toggleCell
 } from "../application/actions";
 
 const position: ICellPosition = { column: 2, row: 4 };
@@ -17,9 +17,9 @@ it("should create open cell action", () => {
 });
 
 it("should create right click action", () => {
-  expect(rightClickCell(position)).toEqual({
+  expect(toggleCell(position)).toEqual({
     payload: position,
-    type: RIGHT_CLICK_CELL
+    type: TOGGLE_CELL
   });
 });
 
