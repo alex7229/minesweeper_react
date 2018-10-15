@@ -1,11 +1,11 @@
-import { findCellsAround } from "../../misc/findCellsAround";
-import { findCellsToOpen } from "../../misc/findCellsToOpen";
-import { generateEmptyField } from "../../misc/generateEmptyField";
-import { isWinCondition } from "../../misc/isWinCondition";
-import { openCells } from "../../misc/openCells";
-import { placeMines } from "../../misc/placeMines";
-import { recalculateMinesAround } from "../../misc/recalculateMinesAround";
-import { Field, ICell } from "../../reducers/processRightClick";
+import { findCellsAround } from "../../../application/logic/findCellsAround";
+import { findCellsToOpen } from "../../../application/logic/findCellsToOpen";
+import { generateEmptyField } from "../../../application/logic/generateEmptyField";
+import { isWinCondition } from "../../../application/logic/isWinCondition";
+import { openCells } from "../../../application/logic/openCells";
+import { placeMines } from "../../../application/logic/placeMines";
+import { recalculateMinesAround } from "../../../application/logic/recalculateMinesAround";
+import { Field, ICell } from "../../../reducers/processRightClick";
 
 it("should return true if all flags are placed on top of mines", () => {
   const emptyCell: ICell = {

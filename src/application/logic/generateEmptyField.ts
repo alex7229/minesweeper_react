@@ -1,4 +1,4 @@
-import { Field, ICell } from "../reducers/processRightClick";
+import { Field, ICell } from "../../reducers/processRightClick";
 
 export type GenerateEmptyField = (width: number, height: number) => Field;
 

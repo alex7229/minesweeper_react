@@ -1,5 +1,6 @@
 import { ICellPosition, OPEN_CELL, RIGHT_CLICK_CELL } from "../../actions";
-import { calculateFlagsCount } from "../../misc/calculateFlagsCount";
+
+import { calculateFlagsCount } from "../../application/logic/calculateFlagsCount";
 import { ICell, processRightClick } from "../../reducers/processRightClick";
 
 const position: ICellPosition = { column: 1, row: 1 };

@@ -1,7 +1,7 @@
-import { findCellsAround } from "../../misc/findCellsAround";
-import { generateEmptyField } from "../../misc/generateEmptyField";
-import { placeMines } from "../../misc/placeMines";
-import { recalculateMinesAround } from "../../misc/recalculateMinesAround";
+import { findCellsAround } from "../../../application/logic/findCellsAround";
+import { generateEmptyField } from "../../../application/logic/generateEmptyField";
+import { placeMines } from "../../../application/logic/placeMines";
+import { recalculateMinesAround } from "../../../application/logic/recalculateMinesAround";
 
 it("should calculate mines around properly for 2 by 4 field", () => {
   const field = generateEmptyField(4, 2);

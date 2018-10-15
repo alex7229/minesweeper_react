@@ -1,4 +1,4 @@
-import { Field } from "../reducers/processRightClick";
+import { Field } from "../../reducers/processRightClick";
 
 export type IsWinCondition = (field: Field) => boolean;
 

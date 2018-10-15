@@ -1,4 +1,4 @@
-import { ICellPosition } from "../actions";
+import { ICellPosition } from "../../actions";
 
 type RNG = () => number;
 type SeedRandom = (seed: string) => RNG;

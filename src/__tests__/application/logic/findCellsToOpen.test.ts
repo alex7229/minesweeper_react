@@ -1,11 +1,11 @@
 import * as _ from "lodash";
-import { ICellPosition } from "../../actions";
-import { findCellsAround } from "../../misc/findCellsAround";
-import { findCellsToOpen } from "../../misc/findCellsToOpen";
-import { generateEmptyField } from "../../misc/generateEmptyField";
-import { placeMines } from "../../misc/placeMines";
-import { recalculateMinesAround } from "../../misc/recalculateMinesAround";
-import { Field, ICell } from "../../reducers/processRightClick";
+import { ICellPosition } from "../../../actions";
+import { findCellsAround } from "../../../application/logic/findCellsAround";
+import { findCellsToOpen } from "../../../application/logic/findCellsToOpen";
+import { generateEmptyField } from "../../../application/logic/generateEmptyField";
+import { placeMines } from "../../../application/logic/placeMines";
+import { recalculateMinesAround } from "../../../application/logic/recalculateMinesAround";
+import { Field, ICell } from "../../../reducers/processRightClick";
 
 const emptyCell: ICell = {
   column: 0,

@@ -1,5 +1,5 @@
-import { ICellPosition } from "../Cell";
-import { Field } from "../reducers/processRightClick";
+import { ICellPosition } from "../../Cell";
+import { Field } from "../../reducers/processRightClick";
 
 export type OpenCells = (
   field: Field,
