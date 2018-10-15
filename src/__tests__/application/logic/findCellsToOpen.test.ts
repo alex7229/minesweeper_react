@@ -4,7 +4,7 @@ import { findCellsAround } from "../../../application/logic/findCellsAround";
 import { findCellsToOpen } from "../../../application/logic/findCellsToOpen";
 import { generateEmptyField } from "../../../application/logic/generateEmptyField";
 import { placeMines } from "../../../application/logic/placeMines";
-import { recalculateMinesAroundFactory } from "../../../factories/recalculateMinesAroundFactory";
+import { recalculateMinesAroundFactory } from "../../../factories/logic/recalculateMinesAroundFactory";
 import { Field, ICell } from "../../../reducers/processRightClick";
 
 const emptyCell: ICell = {

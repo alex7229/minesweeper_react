@@ -1,7 +1,7 @@
 import * as seedRandom from "seedrandom";
-import { ICellPosition } from "../actions";
-import { generateMines } from "../application/logic/generateMines";
-import { IGameOptionsState } from "../reducers/gameOptions";
+import { ICellPosition } from "../../actions";
+import { generateMines } from "../../application/logic/generateMines";
+import { IGameOptionsState } from "../../reducers/gameOptions";
 
 export type GenerateMinesFactory = (
   gameOptions: IGameOptionsState,

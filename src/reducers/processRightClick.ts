@@ -1,5 +1,5 @@
 import { AnyAction, RIGHT_CLICK_CELL } from "../actions";
-import { CalculateFlagsCount } from "../calculateFlagsCount";
+import { CalculateFlagsCount } from "../application/logic/calculateFlagsCount";
 
 export interface ICell {
   readonly column: number;
@@ -14,16 +14,16 @@ export interface ICell {
 export type Row = ReadonlyArray<ICell>;
 export type Field = ReadonlyArray<Row>;
 
-interface IState {
+export interface IRightClickState {
   readonly field: Field;
   readonly totalMines: number;
 }
 
 type ProcessRightClick = (
-  state: IState,
+  state: IRightClickState,
   action: AnyAction,
   calculateFlagsCount: CalculateFlagsCount
-) => IState;
+) => IRightClickState;
 
 export const processRightClick: ProcessRightClick = (
   state,

@@ -2,8 +2,8 @@ import { generateEmptyField } from "../../../application/logic/generateEmptyFiel
 import { isWinCondition } from "../../../application/logic/isWinCondition";
 import { openCells } from "../../../application/logic/openCells";
 import { placeMines } from "../../../application/logic/placeMines";
-import { findCellsToOpenFactory } from "../../../factories/findCellsToOpenFactory";
-import { recalculateMinesAroundFactory } from "../../../factories/recalculateMinesAroundFactory";
+import { findCellsToOpenFactory } from "../../../factories/logic/findCellsToOpenFactory";
+import { recalculateMinesAroundFactory } from "../../../factories/logic/recalculateMinesAroundFactory";
 import { Field, ICell } from "../../../reducers/processRightClick";
 
 it("should return true if all flags are placed on top of mines", () => {
