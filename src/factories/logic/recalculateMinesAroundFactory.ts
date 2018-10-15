@@ -1,6 +1,6 @@
 import { findCellsAround } from "../../application/logic/findCellsAround";
 import { recalculateMinesAround } from "../../application/logic/recalculateMinesAround";
-import { Field } from "../../reducers/processRightClick";
+import { Field } from "../../reducers/rightClickReducer";
 
 export type RecalculateMinesAroundFactory = (field: Field) => Field;
 

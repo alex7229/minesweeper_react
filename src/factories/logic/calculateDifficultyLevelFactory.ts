@@ -1,6 +1,6 @@
 import { calculateDifficultyLevel } from "../../application/logic/calculateDifficultyLevel";
 import { openCells } from "../../application/logic/openCells";
-import { Field } from "../../reducers/processRightClick";
+import { Field } from "../../reducers/rightClickReducer";
 import { findCellsToOpenFactory } from "./findCellsToOpenFactory";
 
 export type CalculateDifficultyLevelFactory = (field: Field) => number;

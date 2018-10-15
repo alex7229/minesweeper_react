@@ -4,7 +4,10 @@ import {
   IRightCLickCellAction,
   RIGHT_CLICK_CELL
 } from "../../actions";
-import { gameOptions, IGameOptionsState } from "../../reducers/gameOptions";
+import {
+  gameOptionsReducer,
+  IGameOptionsState
+} from "../../reducers/gameOptionsReducer";
 
 const defaultState: IGameOptionsState = {
   width: 22,
@@ -18,7 +21,9 @@ it("should not change width if action is not change width", () => {
     type: RIGHT_CLICK_CELL,
     payload: { row: 12, column: 44 }
   };
-  expect(gameOptions(defaultState, action, validate)).toEqual(defaultState);
+  expect(gameOptionsReducer(defaultState, action, validate)).toEqual(
+    defaultState
+  );
 });
 
 it("should return previous width if validation fails", () => {
@@ -27,7 +32,9 @@ it("should return previous width if validation fails", () => {
     type: CHANGE_GAME_OPTIONS,
     payload: { type: "width", value: 66 }
   };
-  expect(gameOptions(defaultState, action, validator)).toEqual(defaultState);
+  expect(gameOptionsReducer(defaultState, action, validator)).toEqual(
+    defaultState
+  );
 });
 
 it("should change width prooperly", () => {
@@ -36,7 +43,7 @@ it("should change width prooperly", () => {
     type: CHANGE_GAME_OPTIONS,
     payload: { type: "width", value: 117 }
   };
-  expect(gameOptions(defaultState, action, validator)).toEqual({
+  expect(gameOptionsReducer(defaultState, action, validator)).toEqual({
     ...defaultState,
     width: 117
   });
@@ -48,7 +55,7 @@ it("should change height prooperly", () => {
     type: CHANGE_GAME_OPTIONS,
     payload: { type: "height", value: 117 }
   };
-  expect(gameOptions(defaultState, action, validator)).toEqual({
+  expect(gameOptionsReducer(defaultState, action, validator)).toEqual({
     ...defaultState,
     height: 117
   });
@@ -60,7 +67,7 @@ it("should change mines prooperly", () => {
     type: CHANGE_GAME_OPTIONS,
     payload: { type: "mines", value: 117 }
   };
-  expect(gameOptions(defaultState, action, validator)).toEqual({
+  expect(gameOptionsReducer(defaultState, action, validator)).toEqual({
     ...defaultState,
     mines: 117
   });

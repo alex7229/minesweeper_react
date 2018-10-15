@@ -1,7 +1,7 @@
 import { ICellPosition, OPEN_CELL, RIGHT_CLICK_CELL } from "../../actions";
 
 import { calculateFlagsCount } from "../../application/logic/calculateFlagsCount";
-import { ICell, processRightClick } from "../../reducers/processRightClick";
+import { ICell, rightClickReducer } from "../../reducers/rightClickReducer";
 
 const position: ICellPosition = { column: 1, row: 1 };
 const cell: ICell = {
@@ -25,7 +25,7 @@ it("should not change state if action type is incorrect", () => {
     field: [[cell, cell], [cell, cell]],
     totalMines: 25
   };
-  const nextState = processRightClick(
+  const nextState = rightClickReducer(
     state,
     {
       payload: position,
@@ -42,7 +42,7 @@ it("should not mutate field if position is out of bounds", () => {
     field: [[cell, cell], [cell, cell]],
     totalMines: 40
   };
-  const nextState = processRightClick(
+  const nextState = rightClickReducer(
     state,
     {
       payload: outOfBoundsPosition,
@@ -58,7 +58,7 @@ it("should not change cell if it is already open", () => {
     field: [[cell, cell], [cell, openedCell]],
     totalMines: 20
   };
-  const nextState = processRightClick(
+  const nextState = rightClickReducer(
     state,
     {
       payload: position,
@@ -74,7 +74,7 @@ it("should set up flag", () => {
     field: [[cell, cell], [cell, cell]],
     totalMines: 20
   };
-  const nextState = processRightClick(
+  const nextState = rightClickReducer(
     state,
     {
       payload: position,
@@ -93,7 +93,7 @@ it("should change flag for question mark and decrement flags count", () => {
     field: [[cell, cell], [cell, flagCell]],
     totalMines: 20
   };
-  const nextState = processRightClick(
+  const nextState = rightClickReducer(
     state,
     {
       payload: position,
@@ -113,7 +113,7 @@ it("should remove question mark", () => {
 
     totalMines: 20
   };
-  const nextState = processRightClick(
+  const nextState = rightClickReducer(
     state,
     {
       payload: position,
@@ -129,7 +129,7 @@ it("should not set flag if amount of flags equals to amount of mines", () => {
     field: [[cell, flagCell], [cell, cell]],
     totalMines: 1
   };
-  const nextState = processRightClick(
+  const nextState = rightClickReducer(
     state,
     {
       payload: position,

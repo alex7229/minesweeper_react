@@ -1,5 +1,5 @@
 import { FindCellsToOpenFactory } from "../../factories/logic/findCellsToOpenFactory";
-import { Field } from "../../reducers/processRightClick";
+import { Field } from "../../reducers/rightClickReducer";
 import { OpenCells } from "./openCells";
 
 export type CalculateDifficultyLevel = (

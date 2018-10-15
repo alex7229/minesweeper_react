@@ -1,5 +1,5 @@
 import { calculateFlagsCount } from "../../../application/logic/calculateFlagsCount";
-import { Field, ICell } from "../../../reducers/processRightClick";
+import { Field, ICell } from "../../../reducers/rightClickReducer";
 
 it("should return correct flags number", () => {
   const cell = {

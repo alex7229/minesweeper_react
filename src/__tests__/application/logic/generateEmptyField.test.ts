@@ -1,5 +1,5 @@
 import { generateEmptyField } from "../../../application/logic/generateEmptyField";
-import { Field, ICell } from "../../../reducers/processRightClick";
+import { Field, ICell } from "../../../reducers/rightClickReducer";
 
 const cell: ICell = {
   column: 0,

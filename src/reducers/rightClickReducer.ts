@@ -14,18 +14,19 @@ export interface ICell {
 export type Row = ReadonlyArray<ICell>;
 export type Field = ReadonlyArray<Row>;
 
+// todo: remove total mines from state (derive it from field)
 export interface IRightClickState {
   readonly field: Field;
   readonly totalMines: number;
 }
 
-type ProcessRightClick = (
+type RightClickReducer = (
   state: IRightClickState,
   action: AnyAction,
   calculateFlagsCount: CalculateFlagsCount
 ) => IRightClickState;
 
-export const processRightClick: ProcessRightClick = (
+export const rightClickReducer: RightClickReducer = (
   state,
   action,
   calculateFlagsCount

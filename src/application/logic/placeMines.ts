@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import { ICellPosition } from "../../actions";
-import { Field } from "../../reducers/processRightClick";
+import { Field } from "../../reducers/rightClickReducer";
 
 export type PlaceMines = (
   field: Field,

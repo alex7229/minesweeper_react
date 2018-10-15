@@ -1,5 +1,5 @@
 import { AnyAction, CHANGE_GAME_OPTIONS } from "../actions";
-import { ValidateGameOptions } from "../logic/validateGameOptions";
+import { ValidateGameOptions } from "../application/logic/validateGameOptions";
 
 export interface IGameOptionsState {
   readonly width: number;
@@ -7,13 +7,13 @@ export interface IGameOptionsState {
   readonly mines: number;
 }
 
-export type GameOptions = (
+export type GameOptionsReducer = (
   state: IGameOptionsState,
   action: AnyAction,
   validateGameOptions: ValidateGameOptions
 ) => IGameOptionsState;
 
-export const gameOptions: GameOptions = (
+export const gameOptionsReducer: GameOptionsReducer = (
   state,
   action,
   validateGameOptions
