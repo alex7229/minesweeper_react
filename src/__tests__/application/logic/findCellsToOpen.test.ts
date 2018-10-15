@@ -4,7 +4,7 @@ import { findCellsAround } from "../../../application/logic/findCellsAround";
 import { findCellsToOpen } from "../../../application/logic/findCellsToOpen";
 import { generateEmptyField } from "../../../application/logic/generateEmptyField";
 import { placeMines } from "../../../application/logic/placeMines";
-import { recalculateMinesAround } from "../../../application/logic/recalculateMinesAround";
+import { recalculateMinesAroundFactory } from "../../../factories/recalculateMinesAroundFactory";
 import { Field, ICell } from "../../../reducers/processRightClick";
 
 const emptyCell: ICell = {
@@ -45,9 +45,8 @@ it("should throw if current cell is  out of bounds", () => {
 
 it("should return only one cell if it is around mine", () => {
   const field = generateEmptyField(2, 2);
-  const fieldWithMines = recalculateMinesAround(
-    placeMines(field, [{ row: 0, column: 0 }]),
-    findCellsAround
+  const fieldWithMines = recalculateMinesAroundFactory(
+    placeMines(field, [{ row: 0, column: 0 }])
   );
   expect(
     findCellsToOpen(fieldWithMines, { row: 0, column: 1 }, findCellsAround)
@@ -70,9 +69,8 @@ it("should return complex grid from 5 by 3 field", () => {
   const field = generateEmptyField(5, 3);
   const mines = [{ row: 0, column: 1 }, { row: 2, column: 2 }];
   const topRightPosition = { row: 0, column: 4 };
-  const fieldWithMines = recalculateMinesAround(
-    placeMines(field, mines),
-    findCellsAround
+  const fieldWithMines = recalculateMinesAroundFactory(
+    placeMines(field, mines)
   );
   // closed, mine,   open,  open,  start
   // closed, closed, open,  open,  open

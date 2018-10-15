@@ -1,20 +1,17 @@
 import { ICellPosition } from "../../actions";
+import { IGameOptionsState } from "../../reducers/gameOptions";
 
 type RNG = () => number;
 type SeedRandom = (seed: string) => RNG;
 
 export type GenerateMines = (
-  width: number,
-  height: number,
-  mines: number,
+  gameOptions: IGameOptionsState,
   seed: string,
   seedRandom: SeedRandom
 ) => ReadonlyArray<ICellPosition>;
 
 export const generateMines: GenerateMines = (
-  width,
-  height,
-  mines,
+  { width, height, mines },
   seed,
   seedRandom
 ) => {

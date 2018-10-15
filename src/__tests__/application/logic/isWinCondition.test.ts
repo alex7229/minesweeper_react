@@ -1,10 +1,9 @@
-import { findCellsAround } from "../../../application/logic/findCellsAround";
-import { findCellsToOpen } from "../../../application/logic/findCellsToOpen";
 import { generateEmptyField } from "../../../application/logic/generateEmptyField";
 import { isWinCondition } from "../../../application/logic/isWinCondition";
 import { openCells } from "../../../application/logic/openCells";
 import { placeMines } from "../../../application/logic/placeMines";
-import { recalculateMinesAround } from "../../../application/logic/recalculateMinesAround";
+import { findCellsToOpenFactory } from "../../../factories/findCellsToOpenFactory";
+import { recalculateMinesAroundFactory } from "../../../factories/recalculateMinesAroundFactory";
 import { Field, ICell } from "../../../reducers/processRightClick";
 
 it("should return true if all flags are placed on top of mines", () => {
@@ -27,15 +26,13 @@ it("should return true if all flags are placed on top of mines", () => {
 
 it("should return true if all possible cells are opened", () => {
   const game = generateEmptyField(3, 3);
-  const fieldWithMines = recalculateMinesAround(
-    placeMines(game, [{ row: 2, column: 2 }]),
-    findCellsAround
+  const fieldWithMines = recalculateMinesAroundFactory(
+    placeMines(game, [{ row: 2, column: 2 }])
   );
-  const cellsToOpen = findCellsToOpen(
-    fieldWithMines,
-    { row: 0, column: 0 },
-    findCellsAround
-  );
+  const cellsToOpen = findCellsToOpenFactory(fieldWithMines, {
+    row: 0,
+    column: 0
+  });
   const openedField = openCells(fieldWithMines, cellsToOpen);
   expect(isWinCondition(openedField)).toBe(true);
 });
