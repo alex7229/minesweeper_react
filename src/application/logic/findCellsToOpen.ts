@@ -34,7 +34,7 @@ export const findCellsToOpen: FindCellsToOpen = (
         oldCell =>
           oldCell.column === cellAround.column && oldCell.row === cellAround.row
       ) !== undefined;
-    if (!cellIsUsed) {
+    if (!cellIsUsed && !cellAround.open) {
       const allOtherCells = findCellsToOpen(
         field,
         { row: cellAround.row, column: cellAround.column },

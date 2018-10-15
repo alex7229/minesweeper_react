@@ -93,3 +93,22 @@ it("should return complex grid from 5 by 3 field", () => {
   const openCellsSorted = _.orderBy(openCellsUnsorted, ["row", "column"]);
   expect(openCellsSorted).toEqual(emptyCells);
 });
+
+it("should not try to open opened cell", () => {
+  const field = generateEmptyField(3, 2);
+  // @ts-ignore
+  field[0][0].open = true;
+  const cellsToOpen = findCellsToOpen(
+    field,
+    { row: 0, column: 1 },
+    findCellsAround
+  );
+  const cellsToOpenSorted = _.orderBy(cellsToOpen, ["row", "column"]);
+  expect(cellsToOpenSorted).toEqual([
+    field[0][1],
+    field[0][2],
+    field[1][0],
+    field[1][1],
+    field[1][2]
+  ]);
+});
