@@ -1,14 +1,12 @@
 import { AnyAction } from "../../application/actions";
 import { calculateCells } from "../../application/logic/calculateCells";
-import {
-  IToggleCellState,
-  toggleCellReducer
-} from "../../application/reducers/toggleCellReducer";
+import { IGameState } from "../../application/reducers/openCellReducer";
+import { toggleCellReducer } from "../../application/reducers/toggleCellReducer";
 
 export type ToggleCellReducerFactory = (
-  state: IToggleCellState,
+  state: IGameState,
   action: AnyAction
-) => IToggleCellState;
+) => IGameState;
 
 export const toggleCellReducerFactory: ToggleCellReducerFactory = (
   state,

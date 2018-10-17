@@ -1,5 +1,6 @@
 import { AnyAction, TOGGLE_CELL } from "../actions";
 import { CalculateCells } from "../logic/calculateCells";
+import { IGameState } from "./openCellReducer";
 
 export interface ICell {
   readonly column: number;
@@ -14,22 +15,18 @@ export interface ICell {
 export type Row = ReadonlyArray<ICell>;
 export type Field = ReadonlyArray<Row>;
 
-export interface IToggleCellState {
-  readonly field: Field;
-}
-
 type ToggleCellReducer = (
-  state: IToggleCellState,
+  state: IGameState,
   action: AnyAction,
   calculateCells: CalculateCells
-) => IToggleCellState;
+) => IGameState;
 
 export const toggleCellReducer: ToggleCellReducer = (
   state,
   action,
   calculateCells
 ) => {
-  if (action.type !== TOGGLE_CELL) {
+  if (action.type !== TOGGLE_CELL || state.isFinished) {
     return state;
   }
   const { row, column } = action.payload;
