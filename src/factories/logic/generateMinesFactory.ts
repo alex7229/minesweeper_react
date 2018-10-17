@@ -5,8 +5,12 @@ import { IGameOptionsState } from "../../application/reducers/gameOptionsReducer
 
 export type GenerateMinesFactory = (
   gameOptions: IGameOptionsState,
-  seed: string
+  seed: string,
+  reservedPositions?: ICellPosition[]
 ) => ReadonlyArray<ICellPosition>;
 
-export const generateMinesFactory: GenerateMinesFactory = (gameOptions, seed) =>
-  generateMines(gameOptions, seed, seedRandom);
+export const generateMinesFactory: GenerateMinesFactory = (
+  gameOptions,
+  seed,
+  reservedPositions
+) => generateMines(gameOptions, seed, seedRandom, reservedPositions);

@@ -10,7 +10,7 @@ it("should generate mines for 60 by 60 field consistently", () => {
   expect(firstRun).toEqual(secondRun);
 });
 
-it("shouuld return proper amount of mines", () => {
+it("should return proper amount of mines", () => {
   const mines = generateMines(
     { width: 25, height: 25, mines: 300 },
     "hi",
@@ -42,4 +42,24 @@ it("should not generate the same mines", () => {
     // @ts-ignore
     field[mine.row][mine.column].isMine = true;
   }
+});
+
+it("should throw if the amount of mines is bigger than empty cells", () => {
+  const gameOptions = { width: 2, height: 2, mines: 3 };
+  const reservedPositions = [{ row: 0, column: 0 }, { row: 0, column: 1 }];
+  expect(() =>
+    generateMines(gameOptions, "any", seedRandom, reservedPositions)
+  ).toThrow();
+});
+
+it("should not place mines in reserved cells", () => {
+  const gameOptions = { width: 2, height: 2, mines: 3 };
+  const reservedPositions = [{ row: 0, column: 0 }];
+  expect(
+    generateMines(gameOptions, "some seed", seedRandom, reservedPositions)
+  ).toEqual([
+    { row: 0, column: 1 },
+    { row: 1, column: 0 },
+    { row: 1, column: 1 }
+  ]);
 });
