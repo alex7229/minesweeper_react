@@ -9,7 +9,6 @@ import { PlaceMines } from "./placeMines";
 
 export type PlaceMinesWithDifficulty = (
   field: Field,
-  minDificulty: number,
   mines: number,
   // from position is first clicked cell. There should be no mines around it
   fromPosition: ICellPosition,
@@ -20,15 +19,16 @@ export type PlaceMinesWithDifficulty = (
     findCellsAround: FindCellsAround;
     recalculateMinesAround: RecalculateMinesAroundFactory;
     generateSeed: GenerateSeedFactory;
-  }
+  },
+  minDificulty?: number
 ) => { field: Field; seed: string };
 
 export const placeMinesWithDifficulty: PlaceMinesWithDifficulty = (
   field,
-  minDifficulty,
   mines,
   fromPosition,
-  functions
+  functions,
+  minDifficulty = 1
 ) => {
   const height = field.length;
   const width = field[0].length;

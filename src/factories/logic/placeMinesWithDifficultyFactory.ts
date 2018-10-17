@@ -10,22 +10,28 @@ import { recalculateMinesAroundFactory } from "./recalculateMinesAroundFactory";
 
 export type PlaceMinesWithDifficultyFactory = (
   field: Field,
-  minDifficulty: number,
   mines: number,
-  fromPosition: ICellPosition
+  fromPosition: ICellPosition,
+  minDifficulty?: number
 ) => { field: Field; seed: string };
 
 export const placeMinesWithDifficultyFactory: PlaceMinesWithDifficultyFactory = (
   field,
-  minDifficulty,
   mines,
-  fromPosition
+  fromPosition,
+  minDifficulty
 ) =>
-  placeMinesWithDifficulty(field, minDifficulty, mines, fromPosition, {
-    calculateDifficultyLevel: calculateDifficultyLevelFactory,
-    generateMines: generateMinesFactory,
-    placeMines,
-    findCellsAround,
-    recalculateMinesAround: recalculateMinesAroundFactory,
-    generateSeed: generateSeedFactory
-  });
+  placeMinesWithDifficulty(
+    field,
+    mines,
+    fromPosition,
+    {
+      calculateDifficultyLevel: calculateDifficultyLevelFactory,
+      generateMines: generateMinesFactory,
+      placeMines,
+      findCellsAround,
+      recalculateMinesAround: recalculateMinesAroundFactory,
+      generateSeed: generateSeedFactory
+    },
+    minDifficulty
+  );

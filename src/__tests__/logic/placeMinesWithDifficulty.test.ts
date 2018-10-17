@@ -22,7 +22,6 @@ it("should use seed provided by generateSeed func", () => {
   const seedMock = jest.fn().mockReturnValue("seed");
   const result = placeMinesWithDifficulty(
     field,
-    0,
     5,
     { row: 0, column: 0 },
     { ...helperFunctions, generateSeed: seedMock }
@@ -34,7 +33,6 @@ it("should not place mines in the adjusted cells to clicked cell", () => {
   const field = generateEmptyField(3, 3);
   const result = placeMinesWithDifficulty(
     field,
-    0,
     5,
     { row: 0, column: 0 },
     helperFunctions
@@ -56,13 +54,13 @@ it("should generate mines until minDifficulty is satisfied", () => {
     .mockReturnValueOnce(45);
   placeMinesWithDifficulty(
     field,
-    22,
     1,
     { row: 0, column: 0 },
     {
       ...helperFunctions,
       calculateDifficultyLevel: difficultyMock
-    }
+    },
+    22
   );
   expect(difficultyMock.mock.calls.length).toBe(3);
 });
