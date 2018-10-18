@@ -8,7 +8,7 @@ export type GenerateMines = (
   gameOptions: IGameOptionsState,
   seed: string,
   seedRandom: SeedRandom,
-  reservedPositions?: ICellPosition[]
+  reservedPositions?: ReadonlyArray<ICellPosition>
 ) => ReadonlyArray<ICellPosition>;
 
 export const generateMines: GenerateMines = (

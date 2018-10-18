@@ -24,8 +24,9 @@ it("should create right click action", () => {
 });
 
 it("should create start game action", () => {
-  expect(startGame()).toEqual({
-    type: START_GAME
+  expect(startGame("beginner")).toEqual({
+    type: START_GAME,
+    payload: "beginner"
   });
 });
 

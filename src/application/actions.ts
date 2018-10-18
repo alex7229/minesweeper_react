@@ -9,6 +9,11 @@ export interface IGameOptions {
   readonly width: number;
 }
 
+export const OPEN_CELL = "OPEN_CELL";
+export const TOGGLE_CELL = "TOGGLE_CELL";
+export const CHANGE_GAME_OPTIONS = "CHANGE_GAME_OPTIONS";
+export const START_GAME = "START_GAME";
+
 export interface IOpenCellAction {
   readonly payload: ICellPosition;
   readonly type: "OPEN_CELL";
@@ -20,42 +25,47 @@ export interface IToggleCellAction {
 }
 
 export interface IGameOptionPayload {
-  type: "width" | "height" | "mines";
-  value: number;
+  readonly type: "width" | "height" | "mines";
+  readonly value: number;
+}
+
+export type StartGamePayload = "beginner" | "advanced" | "expert" | "custom";
+
+export interface IStartGameAction {
+  readonly type: "START_GAME";
+  readonly payload: StartGamePayload;
 }
 
 export interface IChangeGameOptionsAction {
-  readonly payload: {
-    type: "width" | "height" | "mines";
-    value: number;
-  };
+  readonly payload: IGameOptionPayload;
   readonly type: "CHANGE_GAME_OPTIONS";
 }
 
-export const OPEN_CELL = "OPEN_CELL";
 export const openCell = (position: ICellPosition): IOpenCellAction => ({
   payload: position,
   type: OPEN_CELL
 });
 
-export const TOGGLE_CELL = "TOGGLE_CELL";
 export const toggleCell = (position: ICellPosition): IToggleCellAction => ({
   payload: position,
   type: TOGGLE_CELL
 });
 
-export const START_GAME = "START_GAME";
-export const startGame = () => ({
-  type: START_GAME
+export const startGame = (payload: StartGamePayload) => ({
+  type: START_GAME,
+  payload
 });
 
-export const CHANGE_GAME_OPTIONS = "CHANGE_GAME_OPTIONS";
 export const changeGameOption = (payload: IGameOptionPayload) => ({
   type: CHANGE_GAME_OPTIONS,
   payload
 });
 
+// todo: add ellapse one sec reducer and action
+// todo: dispatch actions every sec via redux-thunk
+
 export type AnyAction =
   | IToggleCellAction
   | IOpenCellAction
+  | IStartGameAction
   | IChangeGameOptionsAction;
