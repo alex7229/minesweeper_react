@@ -14,12 +14,17 @@ it("should not change state if action type is incorrect", () => {
     type: TOGGLE_CELL,
     payload: { row: 0, column: 0 }
   };
-  const state = { gameTimeMs: 10000 };
+  const state = { gameTimeMs: 10000, isFinished: false };
   expect(elapseOneSecondReducer(state, action)).toEqual(state);
 });
 
 it("should add one second to game time", () => {
-  const state: IElapseOneSecondReducerState = { gameTimeMs: 15500 };
+  const state: IElapseOneSecondReducerState = {
+    gameTimeMs: 15500
+  };
   const action: IElapseOneSecondAction = { type: ELAPSE_ONE_SECOND };
-  expect(elapseOneSecondReducer(state, action)).toEqual({ gameTimeMs: 16500 });
+  expect(elapseOneSecondReducer(state, action)).toEqual({
+    ...state,
+    gameTimeMs: 16500
+  });
 });

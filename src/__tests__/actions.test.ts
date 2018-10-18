@@ -1,3 +1,5 @@
+import { applyMiddleware, createStore } from "redux";
+import thunkMiddleware from "redux-thunk";
 import {
   CHANGE_GAME_OPTIONS,
   changeGameOption,
@@ -8,9 +10,11 @@ import {
   openCell,
   START_GAME,
   startGame,
+  startTimer,
   TOGGLE_CELL,
   toggleCell
 } from "../application/actions";
+import { elapseOneSecondReducer } from "../application/reducers/elapseOneSecondReducer";
 
 const position: ICellPosition = { column: 2, row: 4 };
 
@@ -42,3 +46,27 @@ it("should create change game options action", () => {
 it("should create elapse one second action", () => {
   expect(elapseOneSecond()).toEqual({ type: ELAPSE_ONE_SECOND });
 });
+
+it(
+  "start timer should dispatch an elapse action " +
+    "every second until the game is finished",
+  () => {
+    jest.useFakeTimers();
+    const store = createStore(
+      elapseOneSecondReducer,
+      { gameTimeMs: 0 },
+      applyMiddleware(thunkMiddleware)
+    );
+    let count = 0;
+    const getStateMock = () => {
+      count++;
+      if (count > 10) {
+        return { isFinished: true };
+      }
+      return { isFinished: false };
+    };
+    startTimer(store.dispatch, getStateMock);
+    jest.runTimersToTime(15000);
+    expect(store.getState().gameTimeMs).toBe(10000);
+  }
+);

@@ -1,3 +1,5 @@
+import { Dispatch } from "redux";
+
 export interface ICellPosition {
   readonly column: number;
   readonly row: number;
@@ -67,6 +69,21 @@ export const changeGameOption = (payload: IGameOptionPayload) => ({
 });
 
 export const elapseOneSecond = () => ({ type: ELAPSE_ONE_SECOND });
+
+export type StartTimer = (
+  dispatch: Dispatch<AnyAction>,
+  getState: () => { readonly isFinished: boolean }
+) => void;
+export const startTimer: StartTimer = (dispatch, getState) => {
+  const intervalId = setInterval(() => {
+    const state = getState();
+    if (state.isFinished) {
+      clearInterval(intervalId);
+      return;
+    }
+    dispatch({ type: "ELAPSE_ONE_SECOND" });
+  }, 1000);
+};
 
 export type AnyAction =
   | IToggleCellAction
