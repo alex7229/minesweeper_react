@@ -1,6 +1,6 @@
 import { AnyAction, TOGGLE_CELL } from "../actions";
 import { CalculateCells } from "../logic/calculateCells";
-import { IGameState } from "./openCellReducer";
+import { IsWinCondition } from "../logic/isWinCondition";
 
 export interface ICell {
   readonly column: number;
@@ -15,16 +15,26 @@ export interface ICell {
 export type Row = ReadonlyArray<ICell>;
 export type Field = ReadonlyArray<Row>;
 
+export interface IToggleCellReducerState {
+  readonly gameTimeMs: number;
+  readonly isFinished: boolean;
+  readonly field: Field;
+}
+
 type ToggleCellReducer = (
-  state: IGameState,
+  state: IToggleCellReducerState,
   action: AnyAction,
-  calculateCells: CalculateCells
-) => IGameState;
+  functions: {
+    calculateCells: CalculateCells;
+    getTime: () => number;
+    isWinCondition: IsWinCondition;
+  }
+) => IToggleCellReducerState;
 
 export const toggleCellReducer: ToggleCellReducer = (
   state,
   action,
-  calculateCells
+  functions
 ) => {
   if (action.type !== TOGGLE_CELL || state.isFinished) {
     return state;
@@ -37,8 +47,8 @@ export const toggleCellReducer: ToggleCellReducer = (
   ) {
     return state;
   }
-  const flagsCount = calculateCells(state.field, "flag");
-  const totalMines = calculateCells(state.field, "mine");
+  const flagsCount = functions.calculateCells(state.field, "flag");
+  const totalMines = functions.calculateCells(state.field, "mine");
   const shouldPlaceFlag =
     state.field[row][column].flag === false &&
     state.field[row][column].questionMark === false;
@@ -62,5 +72,12 @@ export const toggleCellReducer: ToggleCellReducer = (
       return { ...currentCell, flag: true };
     });
   });
+  if (functions.isWinCondition(newField)) {
+    return {
+      isFinished: true,
+      field: newField,
+      gameTimeMs: functions.getTime()
+    };
+  }
   return { ...state, field: newField };
 };

@@ -5,6 +5,7 @@ import {
   TOGGLE_CELL
 } from "../../application/actions";
 import { calculateCells } from "../../application/logic/calculateCells";
+import { generateEmptyField } from "../../application/logic/generateEmptyField";
 import {
   ICell,
   toggleCellReducer
@@ -32,60 +33,70 @@ const defaultAction: IToggleCellAction = {
   payload: position
 };
 
+const defaultState = {
+  isFinished: false,
+  field: generateEmptyField(2, 2),
+  gameTimeMs: 0
+};
+
+const helperFunctions = {
+  calculateCells: jest.fn().mockReturnValue(2),
+  getTime: jest.fn().mockReturnValue(5000),
+  isWinCondition: jest.fn().mockReturnValue(false)
+};
+
 it("should not change state if action type is incorrect", () => {
-  const state = {
-    isFinished: false,
-    field: [[cell, cell], [cell, cell]]
-  };
   const nextState = toggleCellReducer(
-    state,
+    defaultState,
     {
       payload: position,
       type: OPEN_CELL
     },
-    jest.fn()
+    helperFunctions
   );
-  expect(state).toEqual(nextState);
+  expect(nextState).toEqual(defaultState);
 });
 
 it("should not mutate field if position is out of bounds", () => {
   const outOfBoundsPosition: ICellPosition = { column: 25, row: 0 };
-  const state = {
-    isFinished: false,
-    field: [[cell, cell], [cell, cell]]
-  };
   const nextState = toggleCellReducer(
-    state,
+    defaultState,
     { ...defaultAction, payload: outOfBoundsPosition },
-    jest.fn()
+    helperFunctions
   );
-  expect(nextState).toEqual({ ...state, field: [[cell, cell], [cell, cell]] });
+  expect(nextState).toEqual(defaultState);
 });
 
 it("should not change cell if it is already open", () => {
   const state = {
-    isFinished: false,
+    ...defaultState,
     field: [[cell, cell], [cell, openedCell]]
   };
-  const nextState = toggleCellReducer(state, defaultAction, jest.fn());
+  const nextState = toggleCellReducer(state, defaultAction, helperFunctions);
   expect(nextState.field).toEqual([[cell, cell], [cell, openedCell]]);
 });
 
 it("should set up flag", () => {
   const state = {
-    isFinished: false,
+    ...defaultState,
     field: [[cell, cell], [mine, cell]]
   };
-  const nextState = toggleCellReducer(state, defaultAction, calculateCells);
+  const nextState = toggleCellReducer(state, defaultAction, {
+    ...helperFunctions,
+    calculateCells
+  });
   expect(nextState.field).toEqual([[cell, cell], [mine, flagCell]]);
 });
 
-it("should change flag for question mark and decrement flags count", () => {
+it("should change flag for question mark", () => {
   const state = {
-    isFinished: false,
+    ...defaultState,
     field: [[cell, cell], [cell, flagCell]]
   };
-  const nextState = toggleCellReducer(state, defaultAction, calculateCells);
+  const nextState = toggleCellReducer(state, defaultAction, {
+    ...helperFunctions,
+    calculateCells
+  });
   expect(nextState).toEqual({
     ...state,
     field: [[cell, cell], [cell, questionMarkCell]]
@@ -94,28 +105,53 @@ it("should change flag for question mark and decrement flags count", () => {
 
 it("should remove question mark", () => {
   const state = {
-    isFinished: false,
+    ...defaultState,
     field: [[cell, cell], [cell, questionMarkCell]]
   };
-  const nextState = toggleCellReducer(state, defaultAction, calculateCells);
+  const nextState = toggleCellReducer(state, defaultAction, {
+    ...helperFunctions,
+    calculateCells
+  });
   expect(nextState).toEqual({ ...state, field: [[cell, cell], [cell, cell]] });
 });
 
 it("should not set flag if amount of flags equals to amount of mines", () => {
   const state = {
-    isFinished: false,
+    ...defaultState,
     field: [[cell, flagCell], [mine, cell]]
   };
-  const nextState = toggleCellReducer(state, defaultAction, calculateCells);
+  const nextState = toggleCellReducer(state, defaultAction, {
+    ...helperFunctions,
+    calculateCells
+  });
   expect(nextState).toEqual(state);
 });
 
 it("should not change field if the game is finished", () => {
   const state = {
+    ...defaultState,
     isFinished: true,
     field: [[cell, cell], [mine, cell]]
   };
-  expect(toggleCellReducer(state, defaultAction, calculateCells)).toEqual(
-    state
-  );
+  expect(
+    toggleCellReducer(state, defaultAction, {
+      ...helperFunctions,
+      calculateCells
+    })
+  ).toEqual(state);
+});
+
+it("should set isFinished and game time if win condition is true", () => {
+  const winConditionMock = jest.fn().mockReturnValue(true);
+  const state = {
+    ...defaultState,
+    field: [[cell, cell], [cell, mine]]
+  };
+  const newState = toggleCellReducer(state, defaultAction, {
+    ...helperFunctions,
+    calculateCells,
+    isWinCondition: winConditionMock
+  });
+  expect(newState.isFinished).toBe(true);
+  expect(newState.gameTimeMs).toBe(5000);
 });

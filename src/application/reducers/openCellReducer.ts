@@ -9,15 +9,16 @@ import { OpenAllMines } from "../logic/openAllMines";
 import { OpenCells } from "../logic/openCells";
 import { Field } from "./toggleCellReducer";
 
-export interface IGameState {
+export interface IOpenCellReducerState {
   readonly seed: string;
   readonly mines: number;
   readonly isFinished: boolean;
   readonly field: Field;
+  readonly gameTimeMs: number;
 }
 
 export type OpenCellReducer = (
-  state: IGameState,
+  state: IOpenCellReducerState,
   action: AnyAction,
   functions: {
     findCellsToOpen: FindCellsToOpenFactory;
@@ -28,8 +29,9 @@ export type OpenCellReducer = (
     calculateCells: CalculateCells;
     placeMinesWithDifficulty: PlaceMinesWithDifficultyFactory;
     getMinDifficulty: GetMinDifficulty;
+    getTime: () => number;
   }
-) => IGameState;
+) => IOpenCellReducerState;
 
 export const openCellReducer: OpenCellReducer = (state, action, functions) => {
   if (action.type !== "OPEN_CELL" || state.isFinished) {
@@ -57,6 +59,7 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
   if (currentCell.isMine) {
     return {
       ...state,
+      gameTimeMs: functions.getTime(),
       seed: nextSeed,
       field: functions.openAllMines(field),
       isFinished: true
@@ -69,7 +72,8 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
       ...state,
       seed: nextSeed,
       field: functions.flagAllMines(openedField),
-      isFinished: true
+      isFinished: true,
+      gameTimeMs: functions.getTime()
     };
   }
   return { ...state, seed: nextSeed, field: openedField };

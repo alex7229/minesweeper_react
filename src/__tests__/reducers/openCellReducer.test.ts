@@ -8,14 +8,15 @@ import { openAllMines } from "../../application/logic/openAllMines";
 import { openCells } from "../../application/logic/openCells";
 import { placeMines } from "../../application/logic/placeMines";
 import {
-  IGameState,
+  IOpenCellReducerState,
   openCellReducer
 } from "../../application/reducers/openCellReducer";
 import { findCellsToOpenFactory } from "../../factories/logic/findCellsToOpenFactory";
 import { placeMinesWithDifficultyFactory } from "../../factories/logic/placeMinesWithDifficultyFactory";
 import { recalculateMinesAroundFactory } from "../../factories/logic/recalculateMinesAroundFactory";
 
-const defaultState: IGameState = {
+const defaultState: IOpenCellReducerState = {
+  gameTimeMs: 0,
   seed: "default seed",
   mines: 1,
   isFinished: false,
@@ -35,7 +36,8 @@ const helperFunctions = {
   isWinCondition,
   calculateCells,
   placeMinesWithDifficulty: placeMinesWithDifficultyFactory,
-  getMinDifficulty
+  getMinDifficulty,
+  getTime: jest.fn().mockReturnValue(5000)
 };
 
 it("should not change state if action is not open cell", () => {
@@ -88,7 +90,12 @@ it("should finish game and open all mines if mine is clicked", () => {
   const openedMinesField = openAllMines(field);
   expect(
     openCellReducer({ ...defaultState, field }, defaultAction, helperFunctions)
-  ).toEqual({ ...defaultState, isFinished: true, field: openedMinesField });
+  ).toEqual({
+    ...defaultState,
+    isFinished: true,
+    field: openedMinesField,
+    gameTimeMs: 5000
+  });
 });
 
 it("should flag all mines if win condition is true", () => {
@@ -108,7 +115,12 @@ it("should flag all mines if win condition is true", () => {
       action,
       helperFunctions
     )
-  ).toEqual({ ...defaultState, isFinished: true, field: flaggedMines });
+  ).toEqual({
+    ...defaultState,
+    isFinished: true,
+    field: flaggedMines,
+    gameTimeMs: 5000
+  });
 });
 
 it("should generate field and open cell", () => {
@@ -137,6 +149,7 @@ it("should generate field and open cell", () => {
     placeMinesWithDifficulty: placeMinesMock
   });
   expect(nextState).toEqual({
+    gameTimeMs: 0,
     seed: "some seed",
     mines: gameOptions.mines,
     isFinished: false,
