@@ -1,6 +1,8 @@
 import {
   CHANGE_GAME_OPTIONS,
   changeGameOption,
+  ELAPSE_ONE_SECOND,
+  elapseOneSecond,
   ICellPosition,
   OPEN_CELL,
   openCell,
@@ -35,4 +37,8 @@ it("should create change game options action", () => {
     type: CHANGE_GAME_OPTIONS,
     payload: { type: "width", value: 55 }
   });
+});
+
+it("should create elapse one second action", () => {
+  expect(elapseOneSecond()).toEqual({ type: ELAPSE_ONE_SECOND });
 });

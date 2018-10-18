@@ -13,6 +13,7 @@ export const OPEN_CELL = "OPEN_CELL";
 export const TOGGLE_CELL = "TOGGLE_CELL";
 export const CHANGE_GAME_OPTIONS = "CHANGE_GAME_OPTIONS";
 export const START_GAME = "START_GAME";
+export const ELAPSE_ONE_SECOND = "ELAPSE_ONE_SECOND";
 
 export interface IOpenCellAction {
   readonly payload: ICellPosition;
@@ -41,6 +42,10 @@ export interface IChangeGameOptionsAction {
   readonly type: "CHANGE_GAME_OPTIONS";
 }
 
+export interface IElapseOneSecondAction {
+  readonly type: "ELAPSE_ONE_SECOND";
+}
+
 export const openCell = (position: ICellPosition): IOpenCellAction => ({
   payload: position,
   type: OPEN_CELL
@@ -61,11 +66,11 @@ export const changeGameOption = (payload: IGameOptionPayload) => ({
   payload
 });
 
-// todo: add ellapse one sec reducer and action
-// todo: dispatch actions every sec via redux-thunk
+export const elapseOneSecond = () => ({ type: ELAPSE_ONE_SECOND });
 
 export type AnyAction =
   | IToggleCellAction
   | IOpenCellAction
   | IStartGameAction
-  | IChangeGameOptionsAction;
+  | IChangeGameOptionsAction
+  | IElapseOneSecondAction;
