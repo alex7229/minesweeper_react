@@ -14,6 +14,7 @@ export interface IOpenCellReducerState {
   readonly mines: number;
   readonly isFinished: boolean;
   readonly field: Field;
+  readonly gameStartTimestamp: number;
   readonly gameTimeMs: number;
 }
 
@@ -56,10 +57,11 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
     field = result.field;
     nextSeed = result.seed;
   }
+  const gameTimeMs = functions.getTime() - state.gameStartTimestamp;
   if (currentCell.isMine) {
     return {
       ...state,
-      gameTimeMs: functions.getTime(),
+      gameTimeMs,
       seed: nextSeed,
       field: functions.openAllMines(field),
       isFinished: true
@@ -73,7 +75,7 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
       seed: nextSeed,
       field: functions.flagAllMines(openedField),
       isFinished: true,
-      gameTimeMs: functions.getTime()
+      gameTimeMs
     };
   }
   return { ...state, seed: nextSeed, field: openedField };

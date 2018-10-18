@@ -16,6 +16,7 @@ import { placeMinesWithDifficultyFactory } from "../../factories/logic/placeMine
 import { recalculateMinesAroundFactory } from "../../factories/logic/recalculateMinesAroundFactory";
 
 const defaultState: IOpenCellReducerState = {
+  gameStartTimestamp: 3000,
   gameTimeMs: 0,
   seed: "default seed",
   mines: 1,
@@ -94,7 +95,8 @@ it("should finish game and open all mines if mine is clicked", () => {
     ...defaultState,
     isFinished: true,
     field: openedMinesField,
-    gameTimeMs: 5000
+    // game time => current time (5000) minus start time (3000)
+    gameTimeMs: 2000
   });
 });
 
@@ -119,7 +121,8 @@ it("should flag all mines if win condition is true", () => {
     ...defaultState,
     isFinished: true,
     field: flaggedMines,
-    gameTimeMs: 5000
+    // game time => current time (5000) minus start time (3000)
+    gameTimeMs: 2000
   });
 });
 
@@ -149,10 +152,9 @@ it("should generate field and open cell", () => {
     placeMinesWithDifficulty: placeMinesMock
   });
   expect(nextState).toEqual({
-    gameTimeMs: 0,
-    seed: "some seed",
+    ...defaultState,
     mines: gameOptions.mines,
-    isFinished: false,
+    seed: "some seed",
     field: fieldWithOpenedCell
   });
 });

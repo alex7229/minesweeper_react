@@ -16,6 +16,7 @@ export type Row = ReadonlyArray<ICell>;
 export type Field = ReadonlyArray<Row>;
 
 export interface IToggleCellReducerState {
+  readonly gameStartTimestamp: number;
   readonly gameTimeMs: number;
   readonly isFinished: boolean;
   readonly field: Field;
@@ -74,9 +75,10 @@ export const toggleCellReducer: ToggleCellReducer = (
   });
   if (functions.isWinCondition(newField)) {
     return {
+      ...state,
       isFinished: true,
       field: newField,
-      gameTimeMs: functions.getTime()
+      gameTimeMs: functions.getTime() - state.gameStartTimestamp
     };
   }
   return { ...state, field: newField };
