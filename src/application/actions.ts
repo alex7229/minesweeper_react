@@ -5,12 +5,6 @@ export interface ICellPosition {
   readonly row: number;
 }
 
-export interface IGameOptions {
-  readonly height: number;
-  readonly mines: number;
-  readonly width: number;
-}
-
 export const OPEN_CELL = "OPEN_CELL";
 export const TOGGLE_CELL = "TOGGLE_CELL";
 export const CHANGE_GAME_OPTIONS = "CHANGE_GAME_OPTIONS";
@@ -48,29 +42,34 @@ export interface IElapseOneSecondAction {
   readonly type: "ELAPSE_ONE_SECOND";
 }
 
-export const openCell = (position: ICellPosition): IOpenCellAction => ({
+export type OpenCell = (position: ICellPosition) => IOpenCellAction;
+export const openCell: OpenCell = position => ({
   payload: position,
   type: OPEN_CELL
 });
 
-export const toggleCell = (position: ICellPosition): IToggleCellAction => ({
+export type ToggleCell = (position: ICellPosition) => IToggleCellAction;
+export const toggleCell: ToggleCell = position => ({
   payload: position,
   type: TOGGLE_CELL
 });
 
-export const startGame = (payload: StartGamePayload): IStartGameAction => ({
+export type StartGame = (payload: StartGamePayload) => IStartGameAction;
+export const startGame: StartGame = payload => ({
   type: START_GAME,
   payload
 });
 
-export const changeGameOption = (
+export type ChangeGameOption = (
   payload: IGameOptionPayload
-): IChangeGameOptionsAction => ({
+) => IChangeGameOptionsAction;
+export const changeGameOption: ChangeGameOption = payload => ({
   type: CHANGE_GAME_OPTIONS,
   payload
 });
 
-export const elapseOneSecond = (): IElapseOneSecondAction => ({
+export type ElapseOneSecond = () => IElapseOneSecondAction;
+export const elapseOneSecond: ElapseOneSecond = () => ({
   type: ELAPSE_ONE_SECOND
 });
 
