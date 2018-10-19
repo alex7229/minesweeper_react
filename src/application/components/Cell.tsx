@@ -1,47 +1,50 @@
 import * as React from "react";
+import "../css/cell.css";
+import { ICell } from "../reducers/toggleCellReducer";
 
-export interface ICellPosition {
-  row: number;
-  column: number;
+interface IProps extends ICell {
+  openCell: () => void;
+  toggleCell: () => void;
 }
 
-export interface ICellProps extends ICellPosition {
-  mine: boolean;
-  nearbyMines: number;
-  placeMines: (cell: ICellPosition) => void;
-  openCell: (cell: ICellPosition) => void;
-  isOpen: boolean;
-}
-
-export class Cell extends React.Component<ICellProps, {}> {
-  constructor(props: ICellProps) {
-    super(props);
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  public handleClick(event: React.MouseEvent<HTMLDivElement>) {
-    event.preventDefault();
-    this.props.placeMines({
-      column: this.props.column,
-      row: this.props.row
-    });
-    this.props.openCell(this.props);
-  }
-
-  public render() {
-    let className = this.props.isOpen ? "isOpen " : "isClosed ";
-    className += this.props.mine ? "mine " : "mineless ";
+export const Cell = (props: IProps) => {
+  let className = "cell";
+  if (!props.open) {
+    if (props.flag) {
+      className += " flag";
+    } else if (props.questionMark) {
+      className += " questionMark";
+    }
     return (
       <div
-        data-nearbymines={!this.props.mine && this.props.nearbyMines}
         className={className}
-        onClick={this.handleClick}
-      >
-        {this.props.nearbyMines && this.props.isOpen
-          ? this.props.nearbyMines
-          : ""}
-      </div>
+        onClick={props.openCell}
+        onContextMenu={props.toggleCell}
+      />
     );
   }
-}
+  let color = "yellow";
+  if (props.minesAround === 1) {
+    color = "blue";
+  } else if (props.minesAround === 2) {
+    color = "green";
+  } else if (props.minesAround === 3) {
+    color = "red";
+  }
+  if (props.open) {
+    className += " open";
+  }
+  if (props.isMine) {
+    className += " mine";
+  } else if (props.minesAround === 0) {
+    className += " noMinesAround";
+  }
+  if (props.isMine || props.minesAround === 0) {
+    return <div className={className} style={{ color }} />;
+  }
+  return (
+    <div className={className} style={{ color }}>
+      {props.minesAround}
+    </div>
+  );
+};

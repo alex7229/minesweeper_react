@@ -1,0 +1,43 @@
+.cell {
+  font-family: verdana;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  border: 3px outset #aaa;
+  display: block;
+  float: left;
+  cursor: default;
+  background: #c9c9c9;
+}
+.cell:hover {
+  background: #dee6ed;
+}
+.cell:active {
+  border-style: inset;
+}
+.cell.open,
+.cell.open:hover {
+  background: rgb(213, 187, 191);
+  border: 1px solid gray;
+}
+.cell.open.noMinesAround {
+  background: #c9c9c9;
+}
+.cell.mine.open,
+.cell.mine.open:hover {
+  background-color: #c9c9c9;
+  background-image: url("/images/mine.png");
+  background-size: cover;
+}
+.cell.flag,
+.cell.flag:hover {
+  background-color: #c9c9c9;
+  background-image: url("/images/flag.png");
+  background-size: cover;
+}
+.cell.questionMark,
+.cell.questionMark:hover {
+  background-color: #c9c9c9;
+  background-image: url("/images/question_mark.png");
+  background-size: cover;
+}
