@@ -38,12 +38,11 @@ export const rootReducer: RootReducer = (
   state = defaultState,
   action,
   reducers
-) => {
-  return reducers.reduce(
+) =>
+  reducers.reduce(
     (currentState, currentReducer) => ({
       ...currentState,
       ...currentReducer(currentState, action)
     }),
     state
   );
-};
