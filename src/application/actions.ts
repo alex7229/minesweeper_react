@@ -58,17 +58,21 @@ export const toggleCell = (position: ICellPosition): IToggleCellAction => ({
   type: TOGGLE_CELL
 });
 
-export const startGame = (payload: StartGamePayload) => ({
+export const startGame = (payload: StartGamePayload): IStartGameAction => ({
   type: START_GAME,
   payload
 });
 
-export const changeGameOption = (payload: IGameOptionPayload) => ({
+export const changeGameOption = (
+  payload: IGameOptionPayload
+): IChangeGameOptionsAction => ({
   type: CHANGE_GAME_OPTIONS,
   payload
 });
 
-export const elapseOneSecond = () => ({ type: ELAPSE_ONE_SECOND });
+export const elapseOneSecond = (): IElapseOneSecondAction => ({
+  type: ELAPSE_ONE_SECOND
+});
 
 export type StartTimer = (
   dispatch: Dispatch<AnyAction>,
