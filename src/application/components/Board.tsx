@@ -13,34 +13,26 @@ interface IBoardProps {
   readonly toggleCell: ToggleCell;
 }
 
-export class Board extends React.Component<{}, IBoardProps> {
-  public props: IBoardProps;
-
-  constructor(props: IBoardProps) {
-    super(props);
-    this.props = props;
-  }
-  public render() {
-    const blockSize = 25;
-    const height = this.props.height * blockSize;
-    const width = this.props.width * blockSize;
-    const cells = this.props.field.map(row =>
-      row.map(cell => (
-        <Cell
-          {...cell}
-          openCell={this.props.openCell.bind(null, {
-            row: cell.row,
-            column: cell.column
-          })}
-          toggleCell={this.props.toggleCell.bind(null, {
-            row: cell.row,
-            column: cell.column
-          })}
-          key={cell.row.toString() + " - " + cell.column.toString()}
-        />
-      ))
-    );
-    const cellsFlatten = _.flatten(cells);
-    return <div style={{ width, height }}>{cellsFlatten}</div>;
-  }
-}
+export const Board = (props: IBoardProps) => {
+  const blockSize = 25;
+  const height = props.height * blockSize;
+  const width = props.width * blockSize;
+  const cells = props.field.map(row =>
+    row.map(cell => (
+      <Cell
+        {...cell}
+        openCell={props.openCell.bind(null, {
+          row: cell.row,
+          column: cell.column
+        })}
+        toggleCell={props.toggleCell.bind(null, {
+          row: cell.row,
+          column: cell.column
+        })}
+        key={cell.row.toString() + " - " + cell.column.toString()}
+      />
+    ))
+  );
+  const cellsFlatten = _.flatten(cells);
+  return <div style={{ width, height }}>{cellsFlatten}</div>;
+};
