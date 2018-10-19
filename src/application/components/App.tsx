@@ -1,6 +1,5 @@
 import * as React from "react";
 import { ICell } from "../reducers/toggleCellReducer";
-import "./App.css";
 import { Cell } from "./Cell";
 
 const props: ICell = {

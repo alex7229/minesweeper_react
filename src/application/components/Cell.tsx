@@ -15,11 +15,24 @@ export const Cell = (props: IProps) => {
     } else if (props.questionMark) {
       className += " questionMark";
     }
+    const leftClick = (event: React.MouseEvent<HTMLDivElement>) => {
+      // enzyme doesn't not send event hence the condition
+      if (event) {
+        event.preventDefault();
+      }
+      props.openCell();
+    };
+    const rightClick = (event: React.MouseEvent<HTMLDivElement>) => {
+      if (event) {
+        event.preventDefault();
+      }
+      props.toggleCell();
+    };
     return (
       <div
         className={className}
-        onClick={props.openCell}
-        onContextMenu={props.toggleCell}
+        onClick={leftClick}
+        onContextMenu={rightClick}
       />
     );
   }
