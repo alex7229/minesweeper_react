@@ -1,4 +1,4 @@
-import { IStartGameAction, IToggleCellAction } from "../../application/actions";
+import { IStartGameAction, IToggleCellAction } from "../../application/actions/actions";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
 import {
   IStartGameReducerState,

@@ -1,9 +1,7 @@
 import {
-  CHANGE_GAME_OPTIONS,
   IChangeGameOptionsAction,
-  IToggleCellAction,
-  TOGGLE_CELL
-} from "../../application/actions";
+  IToggleCellAction
+} from "../../application/actions/actions";
 import {
   gameOptionsReducer,
   IGameOptionsState
@@ -18,7 +16,7 @@ const defaultState: IGameOptionsState = {
 it("should not change width if action is not change width", () => {
   const validate = jest.fn().mockReturnValue(true);
   const action: IToggleCellAction = {
-    type: TOGGLE_CELL,
+    type: "TOGGLE_CELL",
     payload: { row: 12, column: 44 }
   };
   expect(gameOptionsReducer(defaultState, action, validate)).toEqual(
@@ -29,7 +27,7 @@ it("should not change width if action is not change width", () => {
 it("should return previous width if validation fails", () => {
   const validator = jest.fn().mockReturnValue(false);
   const action: IChangeGameOptionsAction = {
-    type: CHANGE_GAME_OPTIONS,
+    type: "CHANGE_GAME_OPTIONS",
     payload: { type: "width", value: 66 }
   };
   expect(gameOptionsReducer(defaultState, action, validator)).toEqual(
@@ -40,7 +38,7 @@ it("should return previous width if validation fails", () => {
 it("should change width prooperly", () => {
   const validator = jest.fn().mockReturnValue(true);
   const action: IChangeGameOptionsAction = {
-    type: CHANGE_GAME_OPTIONS,
+    type: "CHANGE_GAME_OPTIONS",
     payload: { type: "width", value: 117 }
   };
   expect(gameOptionsReducer(defaultState, action, validator)).toEqual({
@@ -52,7 +50,7 @@ it("should change width prooperly", () => {
 it("should change height prooperly", () => {
   const validator = jest.fn().mockReturnValue(true);
   const action: IChangeGameOptionsAction = {
-    type: CHANGE_GAME_OPTIONS,
+    type: "CHANGE_GAME_OPTIONS",
     payload: { type: "height", value: 117 }
   };
   expect(gameOptionsReducer(defaultState, action, validator)).toEqual({
@@ -64,7 +62,7 @@ it("should change height prooperly", () => {
 it("should change mines prooperly", () => {
   const validator = jest.fn().mockReturnValue(true);
   const action: IChangeGameOptionsAction = {
-    type: CHANGE_GAME_OPTIONS,
+    type: "CHANGE_GAME_OPTIONS",
     payload: { type: "mines", value: 117 }
   };
   expect(gameOptionsReducer(defaultState, action, validator)).toEqual({

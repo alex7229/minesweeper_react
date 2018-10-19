@@ -1,50 +1,45 @@
 import { applyMiddleware, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import {
-  CHANGE_GAME_OPTIONS,
   changeGameOption,
-  ELAPSE_ONE_SECOND,
   elapseOneSecond,
-  ICellPosition,
-  OPEN_CELL,
   openCell,
-  START_GAME,
   startGame,
   startTimer,
-  TOGGLE_CELL,
   toggleCell
-} from "../application/actions";
-import { elapseOneSecondReducer } from "../application/reducers/elapseOneSecondReducer";
+} from "../../application/actions/actionCreators";
+import { ICellPosition } from "../../application/actions/actions";
+import { elapseOneSecondReducer } from "../../application/reducers/elapseOneSecondReducer";
 
 const position: ICellPosition = { column: 2, row: 4 };
 
 it("should create open cell action", () => {
-  expect(openCell(position)).toEqual({ type: OPEN_CELL, payload: position });
+  expect(openCell(position)).toEqual({ type: "OPEN_CELL", payload: position });
 });
 
 it("should create right click action", () => {
   expect(toggleCell(position)).toEqual({
     payload: position,
-    type: TOGGLE_CELL
+    type: "TOGGLE_CELL"
   });
 });
 
 it("should create start game action", () => {
   expect(startGame("beginner")).toEqual({
-    type: START_GAME,
+    type: "START_GAME",
     payload: "beginner"
   });
 });
 
 it("should create change game options action", () => {
   expect(changeGameOption({ type: "width", value: 55 })).toEqual({
-    type: CHANGE_GAME_OPTIONS,
+    type: "CHANGE_GAME_OPTIONS",
     payload: { type: "width", value: 55 }
   });
 });
 
 it("should create elapse one second action", () => {
-  expect(elapseOneSecond()).toEqual({ type: ELAPSE_ONE_SECOND });
+  expect(elapseOneSecond()).toEqual({ type: "ELAPSE_ONE_SECOND" });
 });
 
 it(

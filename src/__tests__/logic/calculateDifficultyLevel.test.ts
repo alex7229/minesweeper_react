@@ -1,4 +1,4 @@
-import { ICellPosition } from "../../application/actions";
+import { ICellPosition } from "../../application/actions/actions";
 import { calculateDifficultyLevel } from "../../application/logic/calculateDifficultyLevel";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
 import { openCells } from "../../application/logic/openCells";

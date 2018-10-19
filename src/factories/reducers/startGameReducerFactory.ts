@@ -1,4 +1,4 @@
-import { AnyAction } from "../../application/actions";
+import { AnyAction } from "../../application/actions/actions";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
 import {
   IStartGameReducerState,

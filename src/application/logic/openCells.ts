@@ -1,4 +1,4 @@
-import { ICellPosition } from "../actions";
+import { ICellPosition } from "../actions/actions";
 import { Field } from "../reducers/toggleCellReducer";
 
 export type OpenCells = (

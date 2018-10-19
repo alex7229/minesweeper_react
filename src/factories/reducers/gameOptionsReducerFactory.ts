@@ -1,4 +1,4 @@
-import { AnyAction } from "../../application/actions";
+import { AnyAction } from "../../application/actions/actions";
 import { validateGameOptions } from "../../application/logic/validateGameOptions";
 import {
   gameOptionsReducer,

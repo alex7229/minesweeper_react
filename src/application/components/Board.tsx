@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import * as React from "react";
-import { OpenCell, ToggleCell } from "../actions";
+import { OpenCell, ToggleCell } from "../actions/actionCreators";
 import { Field } from "../reducers/toggleCellReducer";
 import { Cell } from "./Cell";
 

@@ -1,4 +1,4 @@
-import { ICellPosition } from "../../application/actions";
+import { ICellPosition } from "../../application/actions/actions";
 import { openCells } from "../../application/logic/openCells";
 import { ICell } from "../../application/reducers/toggleCellReducer";
 

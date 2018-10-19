@@ -1,6 +1,6 @@
 import { FindCellsToOpenFactory } from "../../factories/logic/findCellsToOpenFactory";
 import { PlaceMinesWithDifficultyFactory } from "../../factories/logic/placeMinesWithDifficultyFactory";
-import { AnyAction } from "../actions";
+import { AnyAction } from "../actions/actions";
 import { CalculateCells } from "../logic/calculateCells";
 import { FlagAllMines } from "../logic/flagAllMines";
 import { GetMinDifficulty } from "../logic/getMinDifficulty";

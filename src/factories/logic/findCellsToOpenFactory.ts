@@ -1,4 +1,4 @@
-import { ICellPosition } from "../../application/actions";
+import { ICellPosition } from "../../application/actions/actions";
 import { findCellsAround } from "../../application/logic/findCellsAround";
 import { findCellsToOpen } from "../../application/logic/findCellsToOpen";
 import { Field, Row } from "../../application/reducers/toggleCellReducer";

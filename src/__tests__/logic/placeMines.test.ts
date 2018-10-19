@@ -1,4 +1,4 @@
-import { ICellPosition } from "../../application/actions";
+import { ICellPosition } from "../../application/actions/actions";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
 import { placeMines } from "../../application/logic/placeMines";
 

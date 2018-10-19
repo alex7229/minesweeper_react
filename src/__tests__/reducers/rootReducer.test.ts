@@ -1,4 +1,4 @@
-import { elapseOneSecond } from "../../application/actions";
+import { elapseOneSecond } from "../../application/actions/actionCreators";
 import {
   IGlobalState,
   rootReducer

@@ -1,4 +1,4 @@
-import { ICellPosition } from "../../application/actions";
+import { ICellPosition } from "../../application/actions/actions";
 import { findCellsAround } from "../../application/logic/findCellsAround";
 import { placeMines } from "../../application/logic/placeMines";
 import { placeMinesWithDifficulty } from "../../application/logic/placeMinesWithDifficulty";

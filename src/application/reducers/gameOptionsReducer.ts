@@ -1,4 +1,4 @@
-import { AnyAction, CHANGE_GAME_OPTIONS } from "../actions";
+import { AnyAction } from "../actions/actions";
 import { ValidateGameOptions } from "../logic/validateGameOptions";
 
 export interface IGameOptionsState {
@@ -18,7 +18,7 @@ export const gameOptionsReducer: GameOptionsReducer = (
   action,
   validateGameOptions
 ) => {
-  if (action.type !== CHANGE_GAME_OPTIONS) {
+  if (action.type !== "CHANGE_GAME_OPTIONS") {
     return state;
   }
   if (action.payload.type === "width") {

@@ -1,4 +1,4 @@
-import { AnyAction } from "../../application/actions";
+import { AnyAction } from "../../application/actions/actions";
 import { calculateCells } from "../../application/logic/calculateCells";
 import { flagAllMines } from "../../application/logic/flagAllMines";
 import { getMinDifficulty } from "../../application/logic/getMinDifficulty";

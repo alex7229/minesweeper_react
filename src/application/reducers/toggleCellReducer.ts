@@ -1,4 +1,4 @@
-import { AnyAction, TOGGLE_CELL } from "../actions";
+import { AnyAction } from "../actions/actions";
 import { CalculateCells } from "../logic/calculateCells";
 import { IsWinCondition } from "../logic/isWinCondition";
 
@@ -37,7 +37,7 @@ export const toggleCellReducer: ToggleCellReducer = (
   action,
   functions
 ) => {
-  if (action.type !== TOGGLE_CELL || state.isFinished) {
+  if (action.type !== "TOGGLE_CELL" || state.isFinished) {
     return state;
   }
   const { row, column } = action.payload;

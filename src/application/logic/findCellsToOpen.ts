@@ -1,4 +1,4 @@
-import { ICellPosition } from "../actions";
+import { ICellPosition } from "../actions/actions";
 import { Field, Row } from "../reducers/toggleCellReducer";
 import { FindCellsAround } from "./findCellsAround";
 

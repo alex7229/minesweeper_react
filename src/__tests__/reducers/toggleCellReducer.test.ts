@@ -1,9 +1,7 @@
 import {
   ICellPosition,
-  IToggleCellAction,
-  OPEN_CELL,
-  TOGGLE_CELL
-} from "../../application/actions";
+  IToggleCellAction
+} from "../../application/actions/actions";
 import { calculateCells } from "../../application/logic/calculateCells";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
 import {
@@ -29,7 +27,7 @@ const questionMarkCell: ICell = {
 };
 const mine = { ...cell, isMine: true };
 const defaultAction: IToggleCellAction = {
-  type: TOGGLE_CELL,
+  type: "TOGGLE_CELL",
   payload: position
 };
 
@@ -51,7 +49,7 @@ it("should not change state if action type is incorrect", () => {
     defaultState,
     {
       payload: position,
-      type: OPEN_CELL
+      type: "OPEN_CELL"
     },
     helperFunctions
   );

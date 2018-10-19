@@ -1,4 +1,4 @@
-import { AnyAction } from "../actions";
+import { AnyAction } from "../actions/actions";
 import { Field } from "./toggleCellReducer";
 
 export interface IGlobalState {

@@ -1,4 +1,4 @@
-import { IOpenCellAction, IToggleCellAction } from "../../application/actions";
+import { IOpenCellAction, IToggleCellAction } from "../../application/actions/actions";
 import { calculateCells } from "../../application/logic/calculateCells";
 import { flagAllMines } from "../../application/logic/flagAllMines";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";

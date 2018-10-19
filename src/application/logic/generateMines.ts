@@ -1,4 +1,4 @@
-import { ICellPosition } from "../actions";
+import { ICellPosition } from "../actions/actions";
 import { IGameOptionsState } from "../reducers/gameOptionsReducer";
 
 type RNG = () => number;

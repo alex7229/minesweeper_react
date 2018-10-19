@@ -1,4 +1,4 @@
-import { AnyAction } from "../actions";
+import { AnyAction } from "../actions/actions";
 
 export interface IElapseOneSecondReducerState {
   readonly gameTimeMs: number;

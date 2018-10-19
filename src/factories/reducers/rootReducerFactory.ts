@@ -1,4 +1,4 @@
-import { AnyAction } from "../../application/actions";
+import { AnyAction } from "../../application/actions/actions";
 import { elapseOneSecondReducer } from "../../application/reducers/elapseOneSecondReducer";
 import {
   IGlobalState,

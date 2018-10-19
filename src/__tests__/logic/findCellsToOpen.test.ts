@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { ICellPosition } from "../../application/actions";
+import { ICellPosition } from "../../application/actions/actions";
 import { findCellsAround } from "../../application/logic/findCellsAround";
 import { findCellsToOpen } from "../../application/logic/findCellsToOpen";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
