@@ -3,26 +3,26 @@ import * as React from "react";
 import { Board } from "../../application/components/Board";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
 
+const width = 30;
+const height = 16;
+
 const defaultProps = {
-  width: 30,
-  height: 16,
-  mines: 99,
-  field: generateEmptyField(30, 16),
+  field: generateEmptyField(width, height),
   openCell: jest.fn(),
   toggleCell: jest.fn()
 };
 
 it("should render proper size for the field", () => {
   const blockSize = 25;
-  const height = 16 * blockSize;
-  const width = 30 * blockSize;
-  const style = { height, width };
   const board = shallow(<Board {...defaultProps} />);
-  expect(board.props().style).toEqual(style);
+  expect(board.props().style).toEqual({
+    height: height * blockSize,
+    width: width * blockSize
+  });
 });
 
 it("should render proper amount of cells", () => {
-  const cellsNumber = defaultProps.width * defaultProps.height;
+  const cellsNumber = width * height;
   const board = shallow(<Board {...defaultProps} />);
   expect(board.props().children.length).toBe(cellsNumber);
 });
@@ -32,7 +32,7 @@ it("should pass correct cell props", () => {
   // row and column count starts from 0
   const row = 1;
   const column = 2;
-  const position = row * defaultProps.width + column;
+  const position = row * width + column;
 
   const board = shallow(<Board {...defaultProps} />);
   const cell = board.props().children[position];

@@ -5,9 +5,6 @@ import { Field } from "../reducers/toggleCellReducer";
 import { Cell } from "./Cell";
 
 interface IBoardProps {
-  readonly width: number;
-  readonly height: number;
-  readonly mines: number;
   readonly field: Field;
   readonly openCell: OpenCell;
   readonly toggleCell: ToggleCell;
@@ -15,8 +12,8 @@ interface IBoardProps {
 
 export const Board = (props: IBoardProps) => {
   const blockSize = 25;
-  const height = props.height * blockSize;
-  const width = props.width * blockSize;
+  const height = props.field.length * blockSize;
+  const width = props.field[0].length * blockSize;
   const cells = props.field.map(row =>
     row.map(cell => (
       <Cell
