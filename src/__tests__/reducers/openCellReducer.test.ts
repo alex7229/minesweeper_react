@@ -1,4 +1,7 @@
-import { IOpenCellAction, IToggleCellAction } from "../../application/actions/actions";
+import {
+  IOpenCellAction,
+  IToggleCellAction
+} from "../../application/actions/actions";
 import { calculateCells } from "../../application/logic/calculateCells";
 import { flagAllMines } from "../../application/logic/flagAllMines";
 import { generateEmptyField } from "../../application/logic/generateEmptyField";
@@ -11,6 +14,7 @@ import {
   IOpenCellReducerState,
   openCellReducer
 } from "../../application/reducers/openCellReducer";
+import { ICell } from "../../application/reducers/toggleCellReducer";
 import { findCellsToOpenFactory } from "../../factories/logic/findCellsToOpenFactory";
 import { placeMinesWithDifficultyFactory } from "../../factories/logic/placeMinesWithDifficultyFactory";
 import { recalculateMinesAroundFactory } from "../../factories/logic/recalculateMinesAroundFactory";
@@ -168,4 +172,34 @@ it("should return new seed if mines are generated", () => {
       helperFunctions
     ).seed
   ).not.toBe(defaultState.seed);
+});
+
+it("should not open cell if it is flagged or questionMarked", () => {
+  const cell: ICell = {
+    row: 0,
+    column: 0,
+    flag: false,
+    questionMark: false,
+    open: false,
+    isMine: false,
+    minesAround: 0
+  };
+  const flag = { ...cell, flag: true };
+  const questionMark = { ...cell, questionMark: true };
+  const fieldWithFlag = [[flag, cell], [cell, cell]];
+  const fieldWithQuestionMark = [[questionMark, cell], [cell, cell]];
+  expect(
+    openCellReducer(
+      { ...defaultState, field: fieldWithFlag },
+      defaultAction,
+      helperFunctions
+    ).field
+  ).toBe(fieldWithFlag);
+  expect(
+    openCellReducer(
+      { ...defaultState, field: fieldWithQuestionMark },
+      defaultAction,
+      helperFunctions
+    ).field
+  ).toBe(fieldWithQuestionMark);
 });

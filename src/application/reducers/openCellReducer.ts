@@ -42,7 +42,12 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
   let field = state.field;
   let nextSeed = state.seed;
   const currentCell = field[row] && field[row][column];
-  if (!currentCell || currentCell.open) {
+  if (
+    !currentCell ||
+    currentCell.open ||
+    currentCell.flag ||
+    currentCell.questionMark
+  ) {
     return state;
   }
   const minesNumber = functions.calculateCells(field, "mine");
