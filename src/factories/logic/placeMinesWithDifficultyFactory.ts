@@ -1,7 +1,7 @@
 import { ICellPosition } from "../../application/actions/actions";
-import { findCellsAround } from "../../application/logic/findCellsAround";
-import { placeMines } from "../../application/logic/placeMines";
-import { placeMinesWithDifficulty } from "../../application/logic/placeMinesWithDifficulty";
+import { findCellsAround } from "../../application/logic/board/findCellsAround";
+import { placeMines } from "../../application/logic/board/placeMines";
+import { placeMinesWithDifficulty } from "../../application/logic/board/placeMinesWithDifficulty";
 import { Field } from "../../application/reducers/toggleCellReducer";
 import { calculateDifficultyLevelFactory } from "./calculateDifficultyLevelFactory";
 import { generateMinesFactory } from "./generateMinesFactory";

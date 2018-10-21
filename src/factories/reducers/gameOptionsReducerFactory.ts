@@ -1,5 +1,5 @@
 import { AnyAction } from "../../application/actions/actions";
-import { validateGameOptions } from "../../application/logic/validateGameOptions";
+import { validateGameOptions } from "../../application/logic/validators/validateGameOptions";
 import {
   gameOptionsReducer,
   IGameOptionsState

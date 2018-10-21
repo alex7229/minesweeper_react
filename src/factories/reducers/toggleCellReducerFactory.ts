@@ -1,6 +1,6 @@
 import { AnyAction } from "../../application/actions/actions";
-import { calculateCells } from "../../application/logic/calculateCells";
-import { isWinCondition } from "../../application/logic/isWinCondition";
+import { calculateCells } from "../../application/logic/board/calculateCells";
+import { isWinCondition } from "../../application/logic/board/isWinCondition";
 import {
   IToggleCellReducerState,
   toggleCellReducer

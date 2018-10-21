@@ -2,7 +2,7 @@ import { AnyAction } from "../actions/actions";
 import {
   GenerateEmptyField,
   generateEmptyField
-} from "../logic/generateEmptyField";
+} from "../logic/board/generateEmptyField";
 import { Field } from "./toggleCellReducer";
 
 export interface IStartGameReducerState {

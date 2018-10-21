@@ -3,7 +3,6 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { rootReducerFactory } from "../../factories/reducers/rootReducerFactory";
 import BoardContainer from "../containers/BoardContainer";
-import { Digits } from "./Digits";
 
 class App extends React.Component {
   public render() {
@@ -11,7 +10,6 @@ class App extends React.Component {
     store.dispatch({ type: "START_GAME", payload: "expert" });
     return (
       <>
-        <Digits />
         <Provider store={store}>
           <BoardContainer />
         </Provider>

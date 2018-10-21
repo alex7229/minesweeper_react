@@ -2,14 +2,14 @@ import {
   IOpenCellAction,
   IToggleCellAction
 } from "../../application/actions/actions";
-import { calculateCells } from "../../application/logic/calculateCells";
-import { flagAllMines } from "../../application/logic/flagAllMines";
-import { generateEmptyField } from "../../application/logic/generateEmptyField";
-import { getMinDifficulty } from "../../application/logic/getMinDifficulty";
-import { isWinCondition } from "../../application/logic/isWinCondition";
-import { openAllMines } from "../../application/logic/openAllMines";
-import { openCells } from "../../application/logic/openCells";
-import { placeMines } from "../../application/logic/placeMines";
+import { calculateCells } from "../../application/logic/board/calculateCells";
+import { flagAllMines } from "../../application/logic/board/flagAllMines";
+import { generateEmptyField } from "../../application/logic/board/generateEmptyField";
+import { getMinDifficulty } from "../../application/logic/misc/getMinDifficulty";
+import { isWinCondition } from "../../application/logic/board/isWinCondition";
+import { openAllMines } from "../../application/logic/board/openAllMines";
+import { openCells } from "../../application/logic/board/openCells";
+import { placeMines } from "../../application/logic/board/placeMines";
 import {
   IOpenCellReducerState,
   openCellReducer

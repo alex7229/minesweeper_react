@@ -2,8 +2,8 @@ import {
   ICellPosition,
   IToggleCellAction
 } from "../../application/actions/actions";
-import { calculateCells } from "../../application/logic/calculateCells";
-import { generateEmptyField } from "../../application/logic/generateEmptyField";
+import { calculateCells } from "../../application/logic/board/calculateCells";
+import { generateEmptyField } from "../../application/logic/board/generateEmptyField";
 import {
   ICell,
   toggleCellReducer

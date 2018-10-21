@@ -1,4 +1,4 @@
-import { generateSeed } from "../../application/logic/generateSeed";
+import { generateSeed } from "../../application/logic/misc/generateSeed";
 
 export type GenerateSeedFactory = () => string;
 

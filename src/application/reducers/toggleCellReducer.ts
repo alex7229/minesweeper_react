@@ -1,6 +1,6 @@
 import { AnyAction } from "../actions/actions";
-import { CalculateCells } from "../logic/calculateCells";
-import { IsWinCondition } from "../logic/isWinCondition";
+import { CalculateCells } from "../logic/board/calculateCells";
+import { IsWinCondition } from "../logic/board/isWinCondition";
 
 export interface ICell {
   readonly column: number;

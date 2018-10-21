@@ -1,6 +1,6 @@
 import { ICellPosition } from "../../application/actions/actions";
-import { findCellsAround } from "../../application/logic/findCellsAround";
-import { findCellsToOpen } from "../../application/logic/findCellsToOpen";
+import { findCellsAround } from "../../application/logic/board/findCellsAround";
+import { findCellsToOpen } from "../../application/logic/board/findCellsToOpen";
 import { Field, Row } from "../../application/reducers/toggleCellReducer";
 
 export type FindCellsToOpenFactory = (

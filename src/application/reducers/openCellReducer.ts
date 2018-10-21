@@ -1,12 +1,12 @@
 import { FindCellsToOpenFactory } from "../../factories/logic/findCellsToOpenFactory";
 import { PlaceMinesWithDifficultyFactory } from "../../factories/logic/placeMinesWithDifficultyFactory";
 import { AnyAction } from "../actions/actions";
-import { CalculateCells } from "../logic/calculateCells";
-import { FlagAllMines } from "../logic/flagAllMines";
-import { GetMinDifficulty } from "../logic/getMinDifficulty";
-import { IsWinCondition } from "../logic/isWinCondition";
-import { OpenAllMines } from "../logic/openAllMines";
-import { OpenCells } from "../logic/openCells";
+import { CalculateCells } from "../logic/board/calculateCells";
+import { FlagAllMines } from "../logic/board/flagAllMines";
+import { GetMinDifficulty } from "../logic/misc/getMinDifficulty";
+import { IsWinCondition } from "../logic/board/isWinCondition";
+import { OpenAllMines } from "../logic/board/openAllMines";
+import { OpenCells } from "../logic/board/openCells";
 import { Field } from "./toggleCellReducer";
 
 export interface IOpenCellReducerState {

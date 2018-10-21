@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import * as React from "react";
 import { Board } from "../../application/components/Board";
-import { generateEmptyField } from "../../application/logic/generateEmptyField";
+import { generateEmptyField } from "../../application/logic/board/generateEmptyField";
 
 const width = 30;
 const height = 16;

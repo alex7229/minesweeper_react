@@ -1,5 +1,5 @@
 import { AnyAction } from "../actions/actions";
-import { ValidateGameOptions } from "../logic/validateGameOptions";
+import { ValidateGameOptions } from "../logic/validators/validateGameOptions";
 
 export interface IGameOptionsState {
   readonly width: number;

@@ -1,5 +1,5 @@
-import { calculateDifficultyLevel } from "../../application/logic/calculateDifficultyLevel";
-import { openCells } from "../../application/logic/openCells";
+import { calculateDifficultyLevel } from "../../application/logic/board/calculateDifficultyLevel";
+import { openCells } from "../../application/logic/board/openCells";
 import { Field } from "../../application/reducers/toggleCellReducer";
 import { findCellsToOpenFactory } from "./findCellsToOpenFactory";
 

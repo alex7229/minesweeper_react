@@ -2,7 +2,7 @@ import { shallow } from "enzyme";
 import * as React from "react";
 import { Digit } from "../../application/components/Digit";
 import { Digits } from "../../application/components/Digits";
-import { validateDigitsSequence } from "../../application/logic/validateDigitsSequence";
+import { validateDigitsSequence } from "../../application/logic/validators/validateDigitsSequence";
 
 it("should render correct Digit components", () => {
   const sequence = [0, 2, "dot", 2, 7];
