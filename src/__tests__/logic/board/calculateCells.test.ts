@@ -2,8 +2,8 @@ import { calculateCells } from "../../../application/logic/board/calculateCells"
 import { generateEmptyField } from "../../../application/logic/board/generateEmptyField";
 import { placeMines } from "../../../application/logic/board/placeMines";
 import { Field, ICell } from "../../../application/reducers/toggleCellReducer";
-import { generateMinesFactory } from "../../../factories/logic/generateMinesFactory";
-import { recalculateMinesAroundFactory } from "../../../factories/logic/recalculateMinesAroundFactory";
+import { generateMinesFactory } from "../../../factories/logic/board/generateMinesFactory";
+import { recalculateMinesAroundFactory } from "../../../factories/logic/board/recalculateMinesAroundFactory";
 
 it("should return correct flags number", () => {
   const cell = {

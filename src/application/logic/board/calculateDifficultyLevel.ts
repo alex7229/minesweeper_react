@@ -1,4 +1,4 @@
-import { FindCellsToOpenFactory } from "../../../factories/logic/findCellsToOpenFactory";
+import { FindCellsToOpenFactory } from "../../../factories/logic/board/findCellsToOpenFactory";
 import { Field } from "../../reducers/toggleCellReducer";
 import { OpenCells } from "./openCells";
 

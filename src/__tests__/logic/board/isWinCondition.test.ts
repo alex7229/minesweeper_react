@@ -3,8 +3,8 @@ import { isWinCondition } from "../../../application/logic/board/isWinCondition"
 import { openCells } from "../../../application/logic/board/openCells";
 import { placeMines } from "../../../application/logic/board/placeMines";
 import { Field, ICell } from "../../../application/reducers/toggleCellReducer";
-import { findCellsToOpenFactory } from "../../../factories/logic/findCellsToOpenFactory";
-import { recalculateMinesAroundFactory } from "../../../factories/logic/recalculateMinesAroundFactory";
+import { findCellsToOpenFactory } from "../../../factories/logic/board/findCellsToOpenFactory";
+import { recalculateMinesAroundFactory } from "../../../factories/logic/board/recalculateMinesAroundFactory";
 
 it("should return true if all flags are placed on top of mines", () => {
   const emptyCell: ICell = {

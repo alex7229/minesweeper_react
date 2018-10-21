@@ -15,9 +15,9 @@ import {
   openCellReducer
 } from "../../application/reducers/openCellReducer";
 import { ICell } from "../../application/reducers/toggleCellReducer";
-import { findCellsToOpenFactory } from "../../factories/logic/findCellsToOpenFactory";
-import { placeMinesWithDifficultyFactory } from "../../factories/logic/placeMinesWithDifficultyFactory";
-import { recalculateMinesAroundFactory } from "../../factories/logic/recalculateMinesAroundFactory";
+import { findCellsToOpenFactory } from "../../factories/logic/board/findCellsToOpenFactory";
+import { placeMinesWithDifficultyFactory } from "../../factories/logic/board/placeMinesWithDifficultyFactory";
+import { recalculateMinesAroundFactory } from "../../factories/logic/board/recalculateMinesAroundFactory";
 
 const defaultState: IOpenCellReducerState = {
   gameStartTimestamp: 3000,

@@ -1,7 +1,7 @@
-import { CalculateDifficultyLevelFactory } from "../../../factories/logic/calculateDifficultyLevelFactory";
-import { GenerateMinesFactory } from "../../../factories/logic/generateMinesFactory";
-import { GenerateSeedFactory } from "../../../factories/logic/generateSeedFactory";
-import { RecalculateMinesAroundFactory } from "../../../factories/logic/recalculateMinesAroundFactory";
+import { CalculateDifficultyLevelFactory } from "../../../factories/logic/board/calculateDifficultyLevelFactory";
+import { GenerateMinesFactory } from "../../../factories/logic/board/generateMinesFactory";
+import { GenerateSeedFactory } from "../../../factories/logic/misc/generateSeedFactory";
+import { RecalculateMinesAroundFactory } from "../../../factories/logic/board/recalculateMinesAroundFactory";
 import { ICellPosition } from "../../actions/actions";
 import { Field } from "../../reducers/toggleCellReducer";
 import { FindCellsAround } from "./findCellsAround";

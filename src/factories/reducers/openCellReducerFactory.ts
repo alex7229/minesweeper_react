@@ -9,8 +9,8 @@ import {
   IOpenCellReducerState,
   openCellReducer
 } from "../../application/reducers/openCellReducer";
-import { findCellsToOpenFactory } from "../logic/findCellsToOpenFactory";
-import { placeMinesWithDifficultyFactory } from "../logic/placeMinesWithDifficultyFactory";
+import { findCellsToOpenFactory } from "../logic/board/findCellsToOpenFactory";
+import { placeMinesWithDifficultyFactory } from "../logic/board/placeMinesWithDifficultyFactory";
 
 export type OpenCellReducerFactory = (
   state: IOpenCellReducerState,

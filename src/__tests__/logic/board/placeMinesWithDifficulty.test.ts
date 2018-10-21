@@ -3,10 +3,10 @@ import { findCellsAround } from "../../../application/logic/board/findCellsAroun
 import { generateEmptyField } from "../../../application/logic/board/generateEmptyField";
 import { placeMines } from "../../../application/logic/board/placeMines";
 import { placeMinesWithDifficulty } from "../../../application/logic/board/placeMinesWithDifficulty";
-import { calculateDifficultyLevelFactory } from "../../../factories/logic/calculateDifficultyLevelFactory";
-import { generateMinesFactory } from "../../../factories/logic/generateMinesFactory";
-import { generateSeedFactory } from "../../../factories/logic/generateSeedFactory";
-import { recalculateMinesAroundFactory } from "../../../factories/logic/recalculateMinesAroundFactory";
+import { calculateDifficultyLevelFactory } from "../../../factories/logic/board/calculateDifficultyLevelFactory";
+import { generateMinesFactory } from "../../../factories/logic/board/generateMinesFactory";
+import { generateSeedFactory } from "../../../factories/logic/misc/generateSeedFactory";
+import { recalculateMinesAroundFactory } from "../../../factories/logic/board/recalculateMinesAroundFactory";
 
 const helperFunctions = {
   calculateDifficultyLevel: calculateDifficultyLevelFactory,

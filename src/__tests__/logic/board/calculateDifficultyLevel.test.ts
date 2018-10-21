@@ -3,8 +3,8 @@ import { calculateDifficultyLevel } from "../../../application/logic/board/calcu
 import { generateEmptyField } from "../../../application/logic/board/generateEmptyField";
 import { openCells } from "../../../application/logic/board/openCells";
 import { placeMines } from "../../../application/logic/board/placeMines";
-import { findCellsToOpenFactory } from "../../../factories/logic/findCellsToOpenFactory";
-import { recalculateMinesAroundFactory } from "../../../factories/logic/recalculateMinesAroundFactory";
+import { findCellsToOpenFactory } from "../../../factories/logic/board/findCellsToOpenFactory";
+import { recalculateMinesAroundFactory } from "../../../factories/logic/board/recalculateMinesAroundFactory";
 
 it("should return 1 for empty board", () => {
   const field = generateEmptyField(5, 5);

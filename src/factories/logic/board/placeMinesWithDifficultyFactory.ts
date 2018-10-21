@@ -1,11 +1,11 @@
-import { ICellPosition } from "../../application/actions/actions";
-import { findCellsAround } from "../../application/logic/board/findCellsAround";
-import { placeMines } from "../../application/logic/board/placeMines";
-import { placeMinesWithDifficulty } from "../../application/logic/board/placeMinesWithDifficulty";
-import { Field } from "../../application/reducers/toggleCellReducer";
+import { ICellPosition } from "../../../application/actions/actions";
+import { findCellsAround } from "../../../application/logic/board/findCellsAround";
+import { placeMines } from "../../../application/logic/board/placeMines";
+import { placeMinesWithDifficulty } from "../../../application/logic/board/placeMinesWithDifficulty";
+import { Field } from "../../../application/reducers/toggleCellReducer";
+import { generateSeedFactory } from "../misc/generateSeedFactory";
 import { calculateDifficultyLevelFactory } from "./calculateDifficultyLevelFactory";
 import { generateMinesFactory } from "./generateMinesFactory";
-import { generateSeedFactory } from "./generateSeedFactory";
 import { recalculateMinesAroundFactory } from "./recalculateMinesAroundFactory";
 
 export type PlaceMinesWithDifficultyFactory = (
