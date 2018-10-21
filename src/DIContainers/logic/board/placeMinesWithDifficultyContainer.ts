@@ -3,19 +3,19 @@ import { findCellsAround } from "../../../application/logic/board/findCellsAroun
 import { placeMines } from "../../../application/logic/board/placeMines";
 import { placeMinesWithDifficulty } from "../../../application/logic/board/placeMinesWithDifficulty";
 import { Field } from "../../../application/reducers/toggleCellReducer";
-import { generateSeedFactory } from "../misc/generateSeedFactory";
-import { calculateDifficultyLevelFactory } from "./calculateDifficultyLevelFactory";
-import { generateMinesFactory } from "./generateMinesFactory";
-import { recalculateMinesAroundFactory } from "./recalculateMinesAroundFactory";
+import { generateSeedContainer } from "../misc/generateSeedContainer";
+import { calculateDifficultyLevelContainer } from "./calculateDifficultyLevelContainer";
+import { generateMinesContainer } from "./generateMinesContainer";
+import { recalculateMinesAroundContainer } from "./recalculateMinesAroundContainer";
 
-export type PlaceMinesWithDifficultyFactory = (
+export type PlaceMinesWithDifficultyContainer = (
   field: Field,
   mines: number,
   fromPosition: ICellPosition,
   minDifficulty?: number
 ) => { field: Field; seed: string };
 
-export const placeMinesWithDifficultyFactory: PlaceMinesWithDifficultyFactory = (
+export const placeMinesWithDifficultyContainer: PlaceMinesWithDifficultyContainer = (
   field,
   mines,
   fromPosition,
@@ -26,12 +26,12 @@ export const placeMinesWithDifficultyFactory: PlaceMinesWithDifficultyFactory = 
     mines,
     fromPosition,
     {
-      calculateDifficultyLevel: calculateDifficultyLevelFactory,
-      generateMines: generateMinesFactory,
+      calculateDifficultyLevel: calculateDifficultyLevelContainer,
+      generateMines: generateMinesContainer,
       placeMines,
       findCellsAround,
-      recalculateMinesAround: recalculateMinesAroundFactory,
-      generateSeed: generateSeedFactory
+      recalculateMinesAround: recalculateMinesAroundContainer,
+      generateSeed: generateSeedContainer
     },
     minDifficulty
   );

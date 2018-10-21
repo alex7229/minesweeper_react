@@ -1,33 +1,35 @@
 import { AnyAction } from "../../application/actions/actions";
 import { calculateCells } from "../../application/logic/board/calculateCells";
 import { flagAllMines } from "../../application/logic/board/flagAllMines";
-import { getMinDifficulty } from "../../application/logic/misc/getMinDifficulty";
 import { isWinCondition } from "../../application/logic/board/isWinCondition";
 import { openAllMines } from "../../application/logic/board/openAllMines";
 import { openCells } from "../../application/logic/board/openCells";
+import { getMinDifficulty } from "../../application/logic/misc/getMinDifficulty";
 import {
   IOpenCellReducerState,
   openCellReducer
 } from "../../application/reducers/openCellReducer";
-import { findCellsToOpenFactory } from "../logic/board/findCellsToOpenFactory";
-import { placeMinesWithDifficultyFactory } from "../logic/board/placeMinesWithDifficultyFactory";
+import { findCellsToOpenContainer } from "../logic/board/findCellsToOpenContainer";
+import { placeMinesWithDifficultyContainer } from "../logic/board/placeMinesWithDifficultyContainer";
 
-export type OpenCellReducerFactory = (
+export type OpenCellReducerContainer = (
   state: IOpenCellReducerState,
   action: AnyAction
 ) => IOpenCellReducerState;
 
 const helperFunctions = {
-  findCellsToOpen: findCellsToOpenFactory,
+  findCellsToOpen: findCellsToOpenContainer,
   openCells,
   flagAllMines,
   openAllMines,
   isWinCondition,
   calculateCells,
-  placeMinesWithDifficulty: placeMinesWithDifficultyFactory,
+  placeMinesWithDifficulty: placeMinesWithDifficultyContainer,
   getMinDifficulty,
   getTime: () => new Date().getTime()
 };
 
-export const openCellReducerFactory: OpenCellReducerFactory = (state, action) =>
-  openCellReducer(state, action, helperFunctions);
+export const openCellReducerContainer: OpenCellReducerContainer = (
+  state,
+  action
+) => openCellReducer(state, action, helperFunctions);

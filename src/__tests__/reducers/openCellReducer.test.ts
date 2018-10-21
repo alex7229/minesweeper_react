@@ -15,9 +15,9 @@ import {
   openCellReducer
 } from "../../application/reducers/openCellReducer";
 import { ICell } from "../../application/reducers/toggleCellReducer";
-import { findCellsToOpenFactory } from "../../factories/logic/board/findCellsToOpenFactory";
-import { placeMinesWithDifficultyFactory } from "../../factories/logic/board/placeMinesWithDifficultyFactory";
-import { recalculateMinesAroundFactory } from "../../factories/logic/board/recalculateMinesAroundFactory";
+import { findCellsToOpenContainer } from "../../DIContainers/logic/board/findCellsToOpenContainer";
+import { placeMinesWithDifficultyContainer } from "../../DIContainers/logic/board/placeMinesWithDifficultyContainer";
+import { recalculateMinesAroundContainer } from "../../DIContainers/logic/board/recalculateMinesAroundContainer";
 
 const defaultState: IOpenCellReducerState = {
   gameStartTimestamp: 3000,
@@ -34,13 +34,13 @@ const defaultAction: IOpenCellAction = {
 };
 
 const helperFunctions = {
-  findCellsToOpen: findCellsToOpenFactory,
+  findCellsToOpen: findCellsToOpenContainer,
   openCells,
   flagAllMines,
   openAllMines,
   isWinCondition,
   calculateCells,
-  placeMinesWithDifficulty: placeMinesWithDifficultyFactory,
+  placeMinesWithDifficulty: placeMinesWithDifficultyContainer,
   getMinDifficulty,
   getTime: jest.fn().mockReturnValue(5000)
 };
@@ -74,7 +74,7 @@ it("should not open cells if the game is finished", () => {
 });
 
 it("should open one cell if mine is around", () => {
-  const fieldWithMines = recalculateMinesAroundFactory(
+  const fieldWithMines = recalculateMinesAroundContainer(
     placeMines(defaultState.field, [{ row: 1, column: 1 }])
   );
   const openedFirstCell = openCells(fieldWithMines, [{ row: 0, column: 0 }]);
@@ -86,7 +86,7 @@ it("should open one cell if mine is around", () => {
 });
 
 it("should finish game and open all mines if mine is clicked", () => {
-  const field = recalculateMinesAroundFactory(
+  const field = recalculateMinesAroundContainer(
     placeMines(defaultState.field, [
       { row: 0, column: 0 },
       { row: 0, column: 1 }
@@ -105,7 +105,7 @@ it("should finish game and open all mines if mine is clicked", () => {
 });
 
 it("should flag all mines if win condition is true", () => {
-  const field = recalculateMinesAroundFactory(
+  const field = recalculateMinesAroundContainer(
     placeMines(defaultState.field, [
       { row: 0, column: 0 },
       { row: 1, column: 1 }
@@ -138,7 +138,7 @@ it("should generate field and open cell", () => {
     mines: gameOptions.mines,
     field: generateEmptyField(gameOptions.width, gameOptions.height)
   };
-  const fieldWithMines = placeMinesWithDifficultyFactory(
+  const fieldWithMines = placeMinesWithDifficultyContainer(
     state.field,
     state.mines,
     defaultAction.payload,
@@ -146,7 +146,7 @@ it("should generate field and open cell", () => {
   ).field;
   const fieldWithOpenedCell = openCells(
     fieldWithMines,
-    findCellsToOpenFactory(fieldWithMines, defaultAction.payload)
+    findCellsToOpenContainer(fieldWithMines, defaultAction.payload)
   );
   const placeMinesMock = jest
     .fn()

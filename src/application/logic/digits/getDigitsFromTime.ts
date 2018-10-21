@@ -1,9 +1,9 @@
-import { GetDigitsFromNumberFactory } from "../../../factories/logic/digits/getDigitsFromNumberFactory";
+import { GetDigitsFromNumberContainer } from "../../../DIContainers/logic/digits/getDigitsFromNumberContainer";
 import { DigitOrDot } from "../../components/Digit";
 
 export type GetDigitsFromTime = (
   timeMs: number,
-  getDigitsFromNumber: GetDigitsFromNumberFactory
+  getDigitsFromNumber: GetDigitsFromNumberContainer
 ) => ReadonlyArray<DigitOrDot>;
 
 export const getDigitsFromTime: GetDigitsFromTime = (

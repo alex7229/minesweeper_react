@@ -1,7 +1,7 @@
-import { CalculateDifficultyLevelFactory } from "../../../factories/logic/board/calculateDifficultyLevelFactory";
-import { GenerateMinesFactory } from "../../../factories/logic/board/generateMinesFactory";
-import { GenerateSeedFactory } from "../../../factories/logic/misc/generateSeedFactory";
-import { RecalculateMinesAroundFactory } from "../../../factories/logic/board/recalculateMinesAroundFactory";
+import { CalculateDifficultyLevelContainer } from "../../../DIContainers/logic/board/calculateDifficultyLevelContainer";
+import { GenerateMinesContainer } from "../../../DIContainers/logic/board/generateMinesContainer";
+import { RecalculateMinesAroundContainer } from "../../../DIContainers/logic/board/recalculateMinesAroundContainer";
+import { GenerateSeedContainer } from "../../../DIContainers/logic/misc/generateSeedContainer";
 import { ICellPosition } from "../../actions/actions";
 import { Field } from "../../reducers/toggleCellReducer";
 import { FindCellsAround } from "./findCellsAround";
@@ -13,12 +13,12 @@ export type PlaceMinesWithDifficulty = (
   // from position is first clicked cell. There should be no mines around it
   fromPosition: ICellPosition,
   functions: {
-    calculateDifficultyLevel: CalculateDifficultyLevelFactory;
-    generateMines: GenerateMinesFactory;
+    calculateDifficultyLevel: CalculateDifficultyLevelContainer;
+    generateMines: GenerateMinesContainer;
     placeMines: PlaceMines;
     findCellsAround: FindCellsAround;
-    recalculateMinesAround: RecalculateMinesAroundFactory;
-    generateSeed: GenerateSeedFactory;
+    recalculateMinesAround: RecalculateMinesAroundContainer;
+    generateSeed: GenerateSeedContainer;
   },
   minDificulty?: number
 ) => { field: Field; seed: string };

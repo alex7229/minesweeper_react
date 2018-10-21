@@ -3,8 +3,8 @@ import { isWinCondition } from "../../../application/logic/board/isWinCondition"
 import { openCells } from "../../../application/logic/board/openCells";
 import { placeMines } from "../../../application/logic/board/placeMines";
 import { Field, ICell } from "../../../application/reducers/toggleCellReducer";
-import { findCellsToOpenFactory } from "../../../factories/logic/board/findCellsToOpenFactory";
-import { recalculateMinesAroundFactory } from "../../../factories/logic/board/recalculateMinesAroundFactory";
+import { findCellsToOpenContainer } from "../../../DIContainers/logic/board/findCellsToOpenContainer";
+import { recalculateMinesAroundContainer } from "../../../DIContainers/logic/board/recalculateMinesAroundContainer";
 
 it("should return true if all flags are placed on top of mines", () => {
   const emptyCell: ICell = {
@@ -26,10 +26,10 @@ it("should return true if all flags are placed on top of mines", () => {
 
 it("should return true if all possible cells are opened", () => {
   const game = generateEmptyField(3, 3);
-  const fieldWithMines = recalculateMinesAroundFactory(
+  const fieldWithMines = recalculateMinesAroundContainer(
     placeMines(game, [{ row: 2, column: 2 }])
   );
-  const cellsToOpen = findCellsToOpenFactory(fieldWithMines, {
+  const cellsToOpen = findCellsToOpenContainer(fieldWithMines, {
     row: 0,
     column: 0
   });

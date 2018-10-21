@@ -5,7 +5,7 @@ import { findCellsToOpen } from "../../../application/logic/board/findCellsToOpe
 import { generateEmptyField } from "../../../application/logic/board/generateEmptyField";
 import { placeMines } from "../../../application/logic/board/placeMines";
 import { Field, ICell } from "../../../application/reducers/toggleCellReducer";
-import { recalculateMinesAroundFactory } from "../../../factories/logic/board/recalculateMinesAroundFactory";
+import { recalculateMinesAroundContainer } from "../../../DIContainers/logic/board/recalculateMinesAroundContainer";
 
 const emptyCell: ICell = {
   column: 0,
@@ -45,7 +45,7 @@ it("should throw if current cell is  out of bounds", () => {
 
 it("should return only one cell if it is around mine", () => {
   const field = generateEmptyField(2, 2);
-  const fieldWithMines = recalculateMinesAroundFactory(
+  const fieldWithMines = recalculateMinesAroundContainer(
     placeMines(field, [{ row: 0, column: 0 }])
   );
   expect(
@@ -69,7 +69,7 @@ it("should return complex grid from 5 by 3 field", () => {
   const field = generateEmptyField(5, 3);
   const mines = [{ row: 0, column: 1 }, { row: 2, column: 2 }];
   const topRightPosition = { row: 0, column: 4 };
-  const fieldWithMines = recalculateMinesAroundFactory(
+  const fieldWithMines = recalculateMinesAroundContainer(
     placeMines(field, mines)
   );
   // closed, mine,   open,  open,  start

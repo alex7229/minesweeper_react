@@ -3,18 +3,18 @@ import { findCellsAround } from "../../../application/logic/board/findCellsAroun
 import { generateEmptyField } from "../../../application/logic/board/generateEmptyField";
 import { placeMines } from "../../../application/logic/board/placeMines";
 import { placeMinesWithDifficulty } from "../../../application/logic/board/placeMinesWithDifficulty";
-import { calculateDifficultyLevelFactory } from "../../../factories/logic/board/calculateDifficultyLevelFactory";
-import { generateMinesFactory } from "../../../factories/logic/board/generateMinesFactory";
-import { generateSeedFactory } from "../../../factories/logic/misc/generateSeedFactory";
-import { recalculateMinesAroundFactory } from "../../../factories/logic/board/recalculateMinesAroundFactory";
+import { calculateDifficultyLevelContainer } from "../../../DIContainers/logic/board/calculateDifficultyLevelContainer";
+import { generateMinesContainer } from "../../../DIContainers/logic/board/generateMinesContainer";
+import { recalculateMinesAroundContainer } from "../../../DIContainers/logic/board/recalculateMinesAroundContainer";
+import { generateSeedContainer } from "../../../DIContainers/logic/misc/generateSeedContainer";
 
 const helperFunctions = {
-  calculateDifficultyLevel: calculateDifficultyLevelFactory,
-  generateMines: generateMinesFactory,
+  calculateDifficultyLevel: calculateDifficultyLevelContainer,
+  generateMines: generateMinesContainer,
   placeMines,
   findCellsAround,
-  recalculateMinesAround: recalculateMinesAroundFactory,
-  generateSeed: generateSeedFactory
+  recalculateMinesAround: recalculateMinesAroundContainer,
+  generateSeed: generateSeedContainer
 };
 
 it("should use seed provided by generateSeed func", () => {

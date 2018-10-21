@@ -3,10 +3,10 @@ import {
   IGlobalState,
   rootReducer
 } from "../../application/reducers/rootReducer";
-import { gameOptionsReducerFactory } from "../../factories/reducers/gameOptionsReducerFactory";
-import { openCellReducerFactory } from "../../factories/reducers/openCellReducerFactory";
-import { startGameReducerFactory } from "../../factories/reducers/startGameReducerFactory";
-import { toggleCellReducerFactory } from "../../factories/reducers/toggleCellReducerFactory";
+import { gameOptionsReducerContainer } from "../../DIContainers/reducers/gameOptionsReducerContainer";
+import { openCellReducerContainer } from "../../DIContainers/reducers/openCellReducerContainer";
+import { startGameReducerContainer } from "../../DIContainers/reducers/startGameReducerContainer";
+import { toggleCellReducerContainer } from "../../DIContainers/reducers/toggleCellReducerContainer";
 
 const defaultState: IGlobalState = {
   gameTimeMs: 0,
@@ -26,10 +26,10 @@ it("should change state properly", () => {
     .mockReturnValue({ gameTimeMs: 6000 });
   const reducers = [
     elapseOneSecondReducerMock,
-    gameOptionsReducerFactory,
-    openCellReducerFactory,
-    startGameReducerFactory,
-    toggleCellReducerFactory
+    gameOptionsReducerContainer,
+    openCellReducerContainer,
+    startGameReducerContainer,
+    toggleCellReducerContainer
   ];
 
   const nextState = rootReducer(defaultState, action, reducers);

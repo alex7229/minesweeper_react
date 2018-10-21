@@ -5,7 +5,7 @@ import {
   startGameReducer
 } from "../../application/reducers/startGameReducer";
 
-export type StartGameReducerFactory = (
+export type StartGameReducerContainer = (
   state: IStartGameReducerState,
   action: AnyAction
 ) => IStartGameReducerState;
@@ -15,7 +15,7 @@ const helperFunctions = {
   generateEmptyField
 };
 
-export const startGameReducerFactory: StartGameReducerFactory = (
+export const startGameReducerContainer: StartGameReducerContainer = (
   state,
   action
 ) => startGameReducer(state, action, helperFunctions);

@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { rootReducerFactory } from "../../factories/reducers/rootReducerFactory";
-import BoardContainer from "../containers/BoardContainer";
+import { rootReducerContainer } from "../../DIContainers/reducers/rootReducerContainer";
+import BoardContainer from "../reactContainers/BoardContainer";
 
 class App extends React.Component {
   public render() {
-    const store = createStore(rootReducerFactory);
+    const store = createStore(rootReducerContainer);
     store.dispatch({ type: "START_GAME", payload: "expert" });
     return (
       <>

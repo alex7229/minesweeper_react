@@ -1,10 +1,10 @@
-import { FindCellsToOpenFactory } from "../../../factories/logic/board/findCellsToOpenFactory";
+import { FindCellsToOpenContainer } from "../../../DIContainers/logic/board/findCellsToOpenContainer";
 import { Field } from "../../reducers/toggleCellReducer";
 import { OpenCells } from "./openCells";
 
 export type CalculateDifficultyLevel = (
   field: Field,
-  findCellsToOpen: FindCellsToOpenFactory,
+  findCellsToOpen: FindCellsToOpenContainer,
   openCells: OpenCells
 ) => number;
 

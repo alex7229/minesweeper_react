@@ -3,12 +3,12 @@ import { findCellsAround } from "../../../application/logic/board/findCellsAroun
 import { findCellsToOpen } from "../../../application/logic/board/findCellsToOpen";
 import { Field, Row } from "../../../application/reducers/toggleCellReducer";
 
-export type FindCellsToOpenFactory = (
+export type FindCellsToOpenContainer = (
   field: Field,
   currentCellPosition: ICellPosition
 ) => Row;
 
-export const findCellsToOpenFactory: FindCellsToOpenFactory = (
+export const findCellsToOpenContainer: FindCellsToOpenContainer = (
   field,
   currentCellPosition
 ) => findCellsToOpen(field, currentCellPosition, findCellsAround);

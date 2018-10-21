@@ -6,7 +6,7 @@ import {
   toggleCellReducer
 } from "../../application/reducers/toggleCellReducer";
 
-export type ToggleCellReducerFactory = (
+export type ToggleCellReducerContainer = (
   state: IToggleCellReducerState,
   action: AnyAction
 ) => IToggleCellReducerState;
@@ -17,7 +17,7 @@ const helperFunctions = {
   isWinCondition
 };
 
-export const toggleCellReducerFactory: ToggleCellReducerFactory = (
+export const toggleCellReducerContainer: ToggleCellReducerContainer = (
   state,
   action
 ) => toggleCellReducer(state, action, helperFunctions);

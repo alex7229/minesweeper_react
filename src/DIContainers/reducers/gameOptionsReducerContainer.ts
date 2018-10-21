@@ -5,12 +5,12 @@ import {
   IGameOptionsState
 } from "../../application/reducers/gameOptionsReducer";
 
-export type GameOptionsReducerFactory = (
+export type GameOptionsReducerContainer = (
   state: IGameOptionsState,
   action: AnyAction
 ) => IGameOptionsState;
 
-export const gameOptionsReducerFactory: GameOptionsReducerFactory = (
+export const gameOptionsReducerContainer: GameOptionsReducerContainer = (
   state,
   action
 ) => gameOptionsReducer(state, action, validateGameOptions);
