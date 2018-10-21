@@ -1,10 +1,12 @@
 import * as React from "react";
 
-export interface IDigit {
-  digit: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | "dot";
+export type DigitOrDot = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | "dot";
+
+interface IProps {
+  readonly digit: DigitOrDot;
 }
 
-export const Digit = (props: IDigit) => {
+export const Digit = (props: IProps) => {
   let className = "dots";
   if (props.digit === 0) {
     className = "zero";
