@@ -1,8 +1,8 @@
+import { generateEmptyField } from "../../application/logic/board/generateEmptyField";
 import {
   mapDispatchToProps,
   mapStateToProps
-} from "../../application/containers/BoardContainer";
-import { generateEmptyField } from "../../application/logic/board/generateEmptyField";
+} from "../../application/reactContainers/BoardContainer";
 import { IGlobalState } from "../../application/reducers/rootReducer";
 
 export const testGlobalState: IGlobalState = {
