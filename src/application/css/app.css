@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  font-size: 17px;
+}
+
+#stats {
+  border: 3px solid #aaa;
+  border-bottom: none;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  width: 750px;
+  clear: both;
+  background-color: #dddddd;
+  padding: 6px;
+}
+
+.scale {
+  -moz-transform: scale(0.5, 0.5);
+  -ms-transform: scale(0.5, 0.5);
+  -webkit-transform: scale(0.5, 0.5);
+  -o-transform: scale(0.5, 0.5);
+  transform: scale(0.5, 0.5);
+}
