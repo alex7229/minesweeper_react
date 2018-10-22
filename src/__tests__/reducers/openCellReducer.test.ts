@@ -5,11 +5,11 @@ import {
 import { calculateCells } from "../../application/logic/board/calculateCells";
 import { flagAllMines } from "../../application/logic/board/flagAllMines";
 import { generateEmptyField } from "../../application/logic/board/generateEmptyField";
-import { getMinDifficulty } from "../../application/logic/misc/getMinDifficulty";
 import { isWinCondition } from "../../application/logic/board/isWinCondition";
 import { openAllMines } from "../../application/logic/board/openAllMines";
 import { openCells } from "../../application/logic/board/openCells";
 import { placeMines } from "../../application/logic/board/placeMines";
+import { getMinDifficulty } from "../../application/logic/misc/getMinDifficulty";
 import {
   IOpenCellReducerState,
   openCellReducer
