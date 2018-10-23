@@ -12,17 +12,19 @@ const defaultProps = {
   toggleCell: jest.fn()
 };
 
-it("should render proper size for the field", () => {
-  const blockSize = 25;
-  const board = shallow(<Board {...defaultProps} />);
-  expect(board.props().style).toEqual({
-    height: height * blockSize,
-    width: width * blockSize
-  });
+it("should place clear div in the end of every row", () => {
+  // row length is 10, so 10-th, 21-th and 32-th cell should be clear div
+  const props = { ...defaultProps, field: generateEmptyField(10, 3) };
+  const board = shallow(<Board {...props} />);
+  expect(board.find(".clear").length).toBe(3);
+  expect(board.props().children[10].props.className).toBe("clear");
+  expect(board.props().children[21].props.className).toBe("clear");
+  expect(board.props().children[32].props.className).toBe("clear");
 });
 
 it("should render proper amount of cells", () => {
-  const cellsNumber = width * height;
+  const cellsNumber = (width + 1) * height;
+  // +1 is from clear div on every row
   const board = shallow(<Board {...defaultProps} />);
   expect(board.props().children.length).toBe(cellsNumber);
 });
@@ -30,9 +32,10 @@ it("should render proper amount of cells", () => {
 it("should pass correct cell props", () => {
   // cherry picking is used. Cell from second row and third column is used
   // row and column count starts from 0
+  // width +1 because of clear div in the end of the row
   const row = 1;
   const column = 2;
-  const position = row * width + column;
+  const position = row * (width + 1) + column;
 
   const board = shallow(<Board {...defaultProps} />);
   const cell = board.props().children[position];
@@ -57,8 +60,10 @@ it("should pass correct click handlers", () => {
       toggleCell={toggleCellMock}
     />
   );
-  // 479 is the last position for 30*16 field
-  const cellChild = board.props().children[479];
+  const children = board.props().children;
+  // last cell is used (but not the last element)
+  // because the last element is clear div
+  const cellChild = children[children.length - 2];
   const cell = shallow(cellChild);
   cell.simulate("click");
   expect(openCellMock.mock.calls.length).toBe(1);

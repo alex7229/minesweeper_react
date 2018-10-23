@@ -11,11 +11,8 @@ interface IBoardProps {
 }
 
 export const Board = (props: IBoardProps) => {
-  const blockSize = 25;
-  const height = props.field.length * blockSize;
-  const width = props.field[0].length * blockSize;
-  const cells = props.field.map(row =>
-    row.map(cell => (
+  const cells = props.field.map((row, index) => {
+    const regularCells = row.map(cell => (
       <Cell
         {...cell}
         openCell={props.openCell.bind(null, {
@@ -28,8 +25,10 @@ export const Board = (props: IBoardProps) => {
         })}
         key={cell.row.toString() + " - " + cell.column.toString()}
       />
-    ))
-  );
+    ));
+    regularCells.push(<div className="clear" key={"clear_" + index} />);
+    return regularCells;
+  });
   const cellsFlatten = _.flatten(cells);
-  return <div style={{ width, height }}>{cellsFlatten}</div>;
+  return <div>{cellsFlatten}</div>;
 };

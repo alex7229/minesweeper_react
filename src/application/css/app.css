@@ -8,7 +8,6 @@
   border-bottom: none;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
-  width: 750px;
   clear: both;
   background-color: #dddddd;
   padding: 6px;
@@ -20,4 +19,19 @@
   -webkit-transform: scale(0.5, 0.5);
   -o-transform: scale(0.5, 0.5);
   transform: scale(0.5, 0.5);
+}
+
+.clear {
+  clear: both;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
