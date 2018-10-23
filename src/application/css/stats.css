@@ -1,0 +1,40 @@
+#stats {
+  border: 3px solid #aaa;
+  border-bottom: none;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  display: flex;
+  background-color: #dddddd;
+}
+.small #timer {
+  position: absolute;
+  left: -52px;
+}
+.small #restart_face {
+  left: 45%;
+}
+.small #flags_count {
+  position: absolute;
+  right: 28px;
+}
+#stats.small > * {
+  transform: scale(0.4);
+}
+
+#stats > img {
+  max-height: 55px;
+}
+
+#restart_face {
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+}
+
+#restart_block img {
+  cursor: pointer;
+}
+
+#stats.big > * {
+  transform: scale(0.6);
+}

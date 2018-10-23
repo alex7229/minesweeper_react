@@ -6,9 +6,7 @@ import { Digits, IDigitsProps } from "../../application/components/Digits";
 const defaultProps: IDigitsProps = {
   digits: [7],
   primaryColor: "black",
-  secondaryColor: "white",
-  float: "left",
-  scaling: 0.6
+  secondaryColor: "white"
 };
 
 it("should render correct Digit components", () => {
@@ -31,15 +29,4 @@ it("should pass color down to digit component", () => {
   const element = shallow(<Digits {...defaultProps} />);
   const digit = element.find(Digit);
   expect(digit.props()).toEqual(digitProps);
-});
-
-it("should render float and scaling css", () => {
-  const style = {
-    float: "right",
-    transform: "scale(1.2)"
-  };
-  const element = shallow(
-    <Digits {...defaultProps} float="right" scaling={1.2} />
-  );
-  expect(element.props().style).toEqual(style);
 });
