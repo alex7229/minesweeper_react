@@ -1,17 +1,9 @@
 import { ICellPosition } from "../../../application/actions/actions";
 import { openCells } from "../../../application/logic/board/openCells";
-import { ICell } from "../../../application/reducers/toggleCellReducer";
+import { testEmptyCell } from "./generateEmptyField.test";
 
 const defaultPosition: ICellPosition = { row: 1, column: 1 };
-const emptyCell: ICell = {
-  row: 0,
-  column: 0,
-  flag: false,
-  isMine: false,
-  minesAround: 0,
-  open: false,
-  questionMark: false
-};
+const emptyCell = { ...testEmptyCell };
 const openedCell = { ...emptyCell, open: true };
 
 it("should not throw if the cell is out of bounds", () => {

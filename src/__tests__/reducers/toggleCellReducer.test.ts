@@ -8,17 +8,10 @@ import {
   ICell,
   toggleCellReducer
 } from "../../application/reducers/toggleCellReducer";
+import { testEmptyCell } from "../logic/board/generateEmptyField.test";
 
 const position: ICellPosition = { column: 1, row: 1 };
-const cell: ICell = {
-  row: 0,
-  column: 0,
-  flag: false,
-  isMine: false,
-  minesAround: 0,
-  open: false,
-  questionMark: false
-};
+const cell = { ...testEmptyCell };
 const openedCell: ICell = { ...cell, open: true };
 const flagCell: ICell = { ...cell, flag: true };
 const questionMarkCell: ICell = {

@@ -1,17 +1,10 @@
 import { ICellPosition } from "../../../application/actions/actions";
 import { findCellsAround } from "../../../application/logic/board/findCellsAround";
 import { generateEmptyField } from "../../../application/logic/board/generateEmptyField";
-import { ICell, Row } from "../../../application/reducers/toggleCellReducer";
+import { Row } from "../../../application/reducers/toggleCellReducer";
+import { testEmptyCell } from "./generateEmptyField.test";
 
-const cell: ICell = {
-  column: 0,
-  row: 0,
-  flag: false,
-  isMine: false,
-  minesAround: 0,
-  open: false,
-  questionMark: false
-};
+const cell = { ...testEmptyCell };
 
 const field = generateEmptyField(3, 3);
 

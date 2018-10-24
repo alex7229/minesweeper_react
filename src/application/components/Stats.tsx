@@ -4,6 +4,7 @@ import { DigitOrDot } from "./Digit";
 import { Digits } from "./Digits";
 
 export interface IStatsProps {
+  readonly mineWasClicked: boolean;
   readonly timer: ReadonlyArray<DigitOrDot>;
   readonly flagsLeft: ReadonlyArray<DigitOrDot>;
   readonly isSmall: boolean;
@@ -30,7 +31,7 @@ export const Stats = (props: IStatsProps) => (
     <img id="flag" src="/images/flag.png" />
     <img
       id="restart_face"
-      src="/images/smiley_face.png"
+      src={`/images/${props.mineWasClicked ? "dead" : "smiley"}_face.png`}
       onClick={props.restartGame}
     />
   </div>

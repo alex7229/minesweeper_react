@@ -11,6 +11,7 @@ export interface IStartGameReducerState {
   readonly mines: number;
   readonly gameStartTimestamp: number;
   readonly field: Field;
+  readonly isFinished: boolean;
 }
 
 export type StartGameReducer = (
@@ -49,6 +50,7 @@ export const startGameReducer: StartGameReducer = (
     mines = 99;
   }
   return {
+    isFinished: false,
     width,
     height,
     mines,

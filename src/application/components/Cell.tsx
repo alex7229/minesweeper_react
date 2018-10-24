@@ -47,17 +47,28 @@ export const Cell = (props: IProps) => {
   if (props.open) {
     className += " open";
   }
-  if (props.isMine) {
+  if (props.isMine && props.isMineActive) {
+    className += " active_mine";
+  } else if (props.isMine) {
     className += " mine";
   } else if (props.minesAround === 0) {
     className += " noMinesAround";
   }
-  if (props.isMine || props.minesAround === 0) {
-    return <div className={className} style={{ color }} />;
-  }
+  const preventDefaultAction = (event: React.MouseEvent<HTMLDivElement>) => {
+    // enzyme doesn't not send event hence the condition
+    if (event) {
+      event.preventDefault();
+    }
+    return true;
+  };
   return (
-    <div className={className} style={{ color }}>
-      {props.minesAround}
+    <div
+      onClick={preventDefaultAction}
+      onContextMenu={preventDefaultAction}
+      className={className}
+      style={{ color }}
+    >
+      {props.isMine || props.minesAround === 0 ? null : props.minesAround}
     </div>
   );
 };

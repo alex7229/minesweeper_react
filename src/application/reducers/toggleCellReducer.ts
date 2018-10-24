@@ -7,6 +7,7 @@ export interface ICell {
   readonly row: number;
   readonly open: boolean;
   readonly isMine: boolean;
+  readonly isMineActive: boolean;
   readonly flag: boolean;
   readonly questionMark: boolean;
   readonly minesAround: number;

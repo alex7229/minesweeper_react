@@ -9,14 +9,16 @@ it("should open all mines", () => {
     isMine: false,
     row: 0,
     column: 0,
-    minesAround: 3
+    minesAround: 3,
+    isMineActive: false
   };
   const closedMine = { ...emptyCell, isMine: true };
   const openedMine = { ...closedMine, open: true };
+  const activeMine = { ...openedMine, isMineActive: true };
   // for the sake of simplicity row and columns are all zeroes
   const field: Field = [[emptyCell, closedMine], [closedMine, closedMine]];
-  expect(openAllMines(field)).toEqual([
+  expect(openAllMines(field, { row: 1, column: 1 })).toEqual([
     [emptyCell, openedMine],
-    [openedMine, openedMine]
+    [openedMine, activeMine]
   ]);
 });

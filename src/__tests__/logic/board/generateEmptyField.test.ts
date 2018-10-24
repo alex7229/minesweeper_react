@@ -1,15 +1,17 @@
 import { generateEmptyField } from "../../../application/logic/board/generateEmptyField";
 import { Field, ICell } from "../../../application/reducers/toggleCellReducer";
 
-const cell: ICell = {
+export const testEmptyCell: ICell = {
   column: 0,
   row: 0,
   open: false,
   flag: false,
   questionMark: false,
   minesAround: 0,
-  isMine: false
+  isMine: false,
+  isMineActive: false
 };
+const cell = { ...testEmptyCell };
 
 it("should generate 1 by 1 field", () => {
   expect(generateEmptyField(1, 1)).toEqual([[cell]]);

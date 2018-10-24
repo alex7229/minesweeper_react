@@ -14,10 +14,10 @@ import {
   IOpenCellReducerState,
   openCellReducer
 } from "../../application/reducers/openCellReducer";
-import { ICell } from "../../application/reducers/toggleCellReducer";
 import { findCellsToOpenContainer } from "../../DIContainers/logic/board/findCellsToOpenContainer";
 import { placeMinesWithDifficultyContainer } from "../../DIContainers/logic/board/placeMinesWithDifficultyContainer";
 import { recalculateMinesAroundContainer } from "../../DIContainers/logic/board/recalculateMinesAroundContainer";
+import { testEmptyCell } from "../logic/board/generateEmptyField.test";
 
 const defaultState: IOpenCellReducerState = {
   gameStartTimestamp: 3000,
@@ -92,7 +92,7 @@ it("should finish game and open all mines if mine is clicked", () => {
       { row: 0, column: 1 }
     ])
   );
-  const openedMinesField = openAllMines(field);
+  const openedMinesField = openAllMines(field, defaultAction.payload);
   expect(
     openCellReducer({ ...defaultState, field }, defaultAction, helperFunctions)
   ).toEqual({
@@ -175,15 +175,7 @@ it("should return new seed if mines are generated", () => {
 });
 
 it("should not open cell if it is flagged or questionMarked", () => {
-  const cell: ICell = {
-    row: 0,
-    column: 0,
-    flag: false,
-    questionMark: false,
-    open: false,
-    isMine: false,
-    minesAround: 0
-  };
+  const cell = { ...testEmptyCell };
   const flag = { ...cell, flag: true };
   const questionMark = { ...cell, questionMark: true };
   const fieldWithFlag = [[flag, cell], [cell, cell]];

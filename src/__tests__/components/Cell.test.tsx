@@ -11,7 +11,8 @@ const defaultProps = {
   open: false,
   questionMark: false,
   minesAround: 0,
-  isMine: false
+  isMine: false,
+  isMineActive: false
 };
 
 it("should render proper color depending on mines nearby", () => {
@@ -48,12 +49,20 @@ it("should provide correct class for unopened cell", () => {
 
 it("should provide correct class for opened cell", () => {
   const mine = shallow(<Cell {...defaultProps} isMine={true} open={true} />);
+  const activeMine = shallow(
+    <Cell {...defaultProps} isMine={true} open={true} isMineActive={true} />
+  );
   const nonMine = shallow(<Cell {...defaultProps} open={true} />);
   const noMinesAround = shallow(
     <Cell {...defaultProps} minesAround={0} open={true} />
   );
   expect(
     mine.hasClass("cell") && mine.hasClass("open") && mine.hasClass("mine")
+  ).toBe(true);
+  expect(
+    activeMine.hasClass("cell") &&
+      activeMine.hasClass("open") &&
+      activeMine.hasClass("active_mine")
   ).toBe(true);
   expect(nonMine.hasClass("cell") && nonMine.hasClass("open")).toBe(true);
   expect(

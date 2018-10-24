@@ -4,18 +4,11 @@ import { findCellsAround } from "../../../application/logic/board/findCellsAroun
 import { findCellsToOpen } from "../../../application/logic/board/findCellsToOpen";
 import { generateEmptyField } from "../../../application/logic/board/generateEmptyField";
 import { placeMines } from "../../../application/logic/board/placeMines";
-import { Field, ICell } from "../../../application/reducers/toggleCellReducer";
+import { Field } from "../../../application/reducers/toggleCellReducer";
 import { recalculateMinesAroundContainer } from "../../../DIContainers/logic/board/recalculateMinesAroundContainer";
+import { testEmptyCell } from "./generateEmptyField.test";
 
-const emptyCell: ICell = {
-  column: 0,
-  row: 0,
-  flag: false,
-  isMine: false,
-  minesAround: 0,
-  questionMark: false,
-  open: false
-};
+const emptyCell = { ...testEmptyCell };
 
 const mine = { ...emptyCell, isMine: true };
 const openedCell = { ...emptyCell, open: true };

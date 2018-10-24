@@ -14,7 +14,8 @@ export const generateEmptyField: GenerateEmptyField = (width, height) => {
         flag: false,
         isMine: false,
         minesAround: 0,
-        questionMark: false
+        questionMark: false,
+        isMineActive: false
       };
     }
   }

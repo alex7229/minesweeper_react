@@ -32,6 +32,15 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+.cell.active_mine.open,
+.cell.active_mine.open:hover {
+  background-color: #c9c9c9;
+  background-image: url("/images/red_mine.png");
+  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .cell.flag,
 .cell.flag:hover {
   background-color: #c9c9c9;

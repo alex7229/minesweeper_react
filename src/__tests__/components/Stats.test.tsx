@@ -7,7 +7,8 @@ const defaultProps: IStatsProps = {
   timer: [2, 2, "dot", 3, 5, "dot", 0, 0],
   flagsLeft: [4, 4],
   isSmall: false,
-  restartGame: jest.fn()
+  restartGame: jest.fn(),
+  mineWasClicked: false
 };
 
 it("should render correct id and class of the container", () => {
@@ -55,9 +56,16 @@ it("should have flag image", () => {
   expect(element.find("img#flag").length).toBe(1);
 });
 
-it("should have smiley face img", () => {
+it("should render smiley face img if game is not failed", () => {
   const element = shallow(<Stats {...defaultProps} />);
-  expect(element.find("img#restart_face").length).toBe(1);
+  const image = element.find("#restart_face");
+  expect(image.props().src).toContain("smiley_face");
+});
+
+it("should render dead face if mine was clicked", () => {
+  const element = shallow(<Stats {...defaultProps} mineWasClicked={true} />);
+  const image = element.find("#restart_face");
+  expect(image.props().src).toContain("dead_face");
 });
 
 it("should call restart game on smiley face click", () => {

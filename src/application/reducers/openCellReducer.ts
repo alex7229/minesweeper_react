@@ -68,7 +68,7 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
       ...state,
       gameTimeMs,
       seed: nextSeed,
-      field: functions.openAllMines(field),
+      field: functions.openAllMines(field, action.payload),
       isFinished: true
     };
   }

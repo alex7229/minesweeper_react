@@ -1,16 +1,9 @@
 import { flagAllMines } from "../../../application/logic/board/flagAllMines";
-import { Field, ICell } from "../../../application/reducers/toggleCellReducer";
+import { Field } from "../../../application/reducers/toggleCellReducer";
+import { testEmptyCell } from "./generateEmptyField.test";
 
 it("should remove all extra flags and place them on mines", () => {
-  const emptyCell: ICell = {
-    flag: false,
-    open: false,
-    questionMark: false,
-    minesAround: 2,
-    isMine: false,
-    column: 0,
-    row: 0
-  };
+  const emptyCell = { ...testEmptyCell };
   const flaggedCell = { ...emptyCell, flag: true };
   const flaggedMine = { ...flaggedCell, isMine: true };
   const unflaggedMine = { ...emptyCell, isMine: true };

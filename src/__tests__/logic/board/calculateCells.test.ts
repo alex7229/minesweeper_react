@@ -4,17 +4,11 @@ import { placeMines } from "../../../application/logic/board/placeMines";
 import { Field, ICell } from "../../../application/reducers/toggleCellReducer";
 import { generateMinesContainer } from "../../../DIContainers/logic/board/generateMinesContainer";
 import { recalculateMinesAroundContainer } from "../../../DIContainers/logic/board/recalculateMinesAroundContainer";
+import { testEmptyCell } from "./generateEmptyField.test";
+
+const cell = { ...testEmptyCell };
 
 it("should return correct flags number", () => {
-  const cell = {
-    row: 0,
-    column: 0,
-    isMine: false,
-    minesAround: 0,
-    open: false,
-    flag: false,
-    questionMark: false
-  };
   const flagCell: ICell = { ...cell, flag: true };
   const emptyField = [[cell, cell], [cell, cell]];
   const field: Field = [[cell, flagCell], [flagCell, flagCell]];
@@ -33,4 +27,12 @@ it("should return correct mines number", () => {
   );
   expect(calculateCells(emptyField, "mine")).toBe(0);
   expect(calculateCells(fieldWithMines, "mine")).toBe(117);
+});
+
+it("should return correct active mines number", () => {
+  // it can be either one or nill
+  expect(calculateCells(generateEmptyField(5, 5), "active_mine")).toBe(0);
+  const activeMine = { ...cell, isMine: true, isMineActive: true };
+  const fieldWithActiveMine = [[cell, cell], [cell, activeMine]];
+  expect(calculateCells(fieldWithActiveMine, "active_mine")).toBe(1);
 });

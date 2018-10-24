@@ -1,4 +1,7 @@
-import { IStartGameAction, IToggleCellAction } from "../../application/actions/actions";
+import {
+  IStartGameAction,
+  IToggleCellAction
+} from "../../application/actions/actions";
 import { generateEmptyField } from "../../application/logic/board/generateEmptyField";
 import {
   IStartGameReducerState,
@@ -10,7 +13,8 @@ const defaultState: IStartGameReducerState = {
   height: 9,
   mines: 5,
   gameStartTimestamp: 0,
-  field: [[]]
+  field: [[]],
+  isFinished: true
 };
 
 const defaultAction: IStartGameAction = {
@@ -52,7 +56,8 @@ it("should set 9 by 9 field and 10 mines for beginner", () => {
     height: 9,
     mines: 10,
     gameStartTimestamp: 10000,
-    field
+    field,
+    isFinished: false
   });
 });
 
@@ -69,7 +74,8 @@ it("should set 16 by 16 field and 40 mines for advanced", () => {
     height: 16,
     mines: 40,
     gameStartTimestamp: 10000,
-    field
+    field,
+    isFinished: false
   });
 });
 
@@ -86,7 +92,8 @@ it("should set 30 by 16 field and 99 mines for expert", () => {
     height: 16,
     mines: 99,
     gameStartTimestamp: 10000,
-    field
+    field,
+    isFinished: false
   });
 });
 
@@ -104,6 +111,7 @@ it("should set current field size mines for custom", () => {
     height,
     mines: defaultState.mines,
     gameStartTimestamp: 10000,
-    field
+    field,
+    isFinished: false
   });
 });

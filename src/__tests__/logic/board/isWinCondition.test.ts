@@ -2,20 +2,13 @@ import { generateEmptyField } from "../../../application/logic/board/generateEmp
 import { isWinCondition } from "../../../application/logic/board/isWinCondition";
 import { openCells } from "../../../application/logic/board/openCells";
 import { placeMines } from "../../../application/logic/board/placeMines";
-import { Field, ICell } from "../../../application/reducers/toggleCellReducer";
+import { Field } from "../../../application/reducers/toggleCellReducer";
 import { findCellsToOpenContainer } from "../../../DIContainers/logic/board/findCellsToOpenContainer";
 import { recalculateMinesAroundContainer } from "../../../DIContainers/logic/board/recalculateMinesAroundContainer";
+import { testEmptyCell } from "./generateEmptyField.test";
 
 it("should return true if all flags are placed on top of mines", () => {
-  const emptyCell: ICell = {
-    flag: false,
-    questionMark: false,
-    minesAround: 2,
-    isMine: false,
-    row: 0,
-    column: 0,
-    open: false
-  };
+  const emptyCell = { ...testEmptyCell };
   const flaggedMine = { ...emptyCell, isMine: true, flag: true };
   const field: Field = [
     [emptyCell, { ...flaggedMine, column: 1 }],
