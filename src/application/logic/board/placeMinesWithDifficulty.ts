@@ -49,7 +49,13 @@ export const placeMinesWithDifficulty: PlaceMinesWithDifficulty = (
     fieldWithMines = functions.recalculateMinesAround(
       functions.placeMines(field, generatedMines)
     );
-    currentDifficulty = functions.calculateDifficultyLevel(fieldWithMines);
+    if (minDifficulty === 1) {
+      // min difficulty 1 means  that this is custom field.
+      // Checking difficulty is pointless
+      currentDifficulty = 2;
+    } else {
+      currentDifficulty = functions.calculateDifficultyLevel(fieldWithMines);
+    }
   }
   return { field: fieldWithMines, seed: currentSeed };
 };

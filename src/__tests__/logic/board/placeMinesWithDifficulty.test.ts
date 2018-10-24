@@ -64,3 +64,16 @@ it("should generate mines until minDifficulty is satisfied", () => {
   );
   expect(difficultyMock.mock.calls.length).toBe(3);
 });
+
+it("should not check difficulty if min difficulty is one", () => {
+  const field = generateEmptyField(9, 9);
+  const difficultyMock = jest.fn();
+  placeMinesWithDifficulty(
+    field,
+    6,
+    { row: 0, column: 0 },
+    { ...helperFunctions, calculateDifficultyLevel: difficultyMock },
+    1
+  );
+  expect(difficultyMock.mock.calls.length).toBe(0);
+});
