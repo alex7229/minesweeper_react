@@ -28,13 +28,8 @@ export interface IChangeGameOptionsAction {
   readonly type: "CHANGE_GAME_OPTIONS";
 }
 
-export interface IElapseOneSecondAction {
-  readonly type: "ELAPSE_ONE_SECOND";
-}
-
 export type AnyAction =
   | IToggleCellAction
   | IOpenCellAction
   | IStartGameAction
-  | IChangeGameOptionsAction
-  | IElapseOneSecondAction;
+  | IChangeGameOptionsAction;

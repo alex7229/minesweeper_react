@@ -130,7 +130,7 @@ it("should flag all mines if win condition is true", () => {
   });
 });
 
-it("should generate field and open cell", () => {
+it("should generate field, update game start time and open cell on first click", () => {
   const gameOptions = { height: 9, width: 9, mines: 10 };
   // minimum difficulty is 2 for those options
   const state = {
@@ -151,15 +151,18 @@ it("should generate field and open cell", () => {
   const placeMinesMock = jest
     .fn()
     .mockReturnValue({ field: fieldWithMines, seed: "some seed" });
+  const getTimeMock = jest.fn().mockReturnValue(445);
   const nextState = openCellReducer(state, defaultAction, {
     ...helperFunctions,
-    placeMinesWithDifficulty: placeMinesMock
+    placeMinesWithDifficulty: placeMinesMock,
+    getTime: getTimeMock
   });
   expect(nextState).toEqual({
     ...defaultState,
     mines: gameOptions.mines,
     seed: "some seed",
-    field: fieldWithOpenedCell
+    field: fieldWithOpenedCell,
+    gameStartTimestamp: 445
   });
 });
 

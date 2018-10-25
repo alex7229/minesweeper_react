@@ -51,6 +51,9 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
     return state;
   }
   const minesNumber = functions.calculateCells(field, "mine");
+  const currentTime = functions.getTime();
+  const gameStartTimestamp =
+    minesNumber === 0 ? currentTime : state.gameStartTimestamp;
   if (minesNumber === 0) {
     const difficulty = functions.getMinDifficulty(field, state.mines);
     const result = functions.placeMinesWithDifficulty(
@@ -62,10 +65,11 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
     field = result.field;
     nextSeed = result.seed;
   }
-  const gameTimeMs = functions.getTime() - state.gameStartTimestamp;
+  const gameTimeMs = currentTime - gameStartTimestamp;
   if (currentCell.isMine) {
     return {
       ...state,
+      gameStartTimestamp,
       gameTimeMs,
       seed: nextSeed,
       field: functions.openAllMines(field, action.payload),
@@ -77,11 +81,12 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
   if (functions.isWinCondition(openedField)) {
     return {
       ...state,
+      gameStartTimestamp,
       seed: nextSeed,
       field: functions.flagAllMines(openedField),
       isFinished: true,
       gameTimeMs
     };
   }
-  return { ...state, seed: nextSeed, field: openedField };
+  return { ...state, seed: nextSeed, field: openedField, gameStartTimestamp };
 };

@@ -1,5 +1,4 @@
 import { AnyAction } from "../../application/actions/actions";
-import { elapseOneSecondReducer } from "../../application/reducers/elapseOneSecondReducer";
 import {
   IGlobalState,
   rootReducer
@@ -16,7 +15,6 @@ export type RootReducerContainer = (
 
 export const rootReducerContainer: RootReducerContainer = (state, action) =>
   rootReducer(state, action, [
-    elapseOneSecondReducer,
     gameOptionsReducerContainer,
     openCellReducerContainer,
     startGameReducerContainer,

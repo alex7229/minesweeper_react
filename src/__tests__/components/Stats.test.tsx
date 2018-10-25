@@ -3,12 +3,18 @@ import * as React from "react";
 import { Digits } from "../../application/components/Digits";
 import { IStatsProps, Stats } from "../../application/components/Stats";
 
+jest.useFakeTimers();
+
 const defaultProps: IStatsProps = {
-  timer: [2, 2, "dot", 3, 5, "dot", 0, 0],
+  gameHasStarted: true,
+  getTime: jest.fn(),
+  getDigitsFromTime: jest.fn(),
+  gameStartTimestamp: 0,
   flagsLeft: [4, 4],
   isSmall: false,
   restartGame: jest.fn(),
-  mineWasClicked: false
+  mineWasClicked: false,
+  isFinished: false
 };
 
 it("should render correct id and class of the container", () => {
@@ -19,7 +25,18 @@ it("should render correct id and class of the container", () => {
 });
 
 it("should pass correct props to timer", () => {
-  const element = shallow(<Stats {...defaultProps} />);
+  const currentTime = 10000;
+  const gameStartTimestamp = 5000;
+  const timerDigits = [0, 5];
+  const getTime = jest.fn().mockReturnValue(currentTime);
+  const getDigitsFromTime = jest.fn().mockReturnValue(timerDigits);
+  const props = {
+    ...defaultProps,
+    gameStartTimestamp,
+    getTime,
+    getDigitsFromTime
+  };
+  const element = shallow(<Stats {...props} />);
   expect(
     element
       .find("#timer")
@@ -28,8 +45,97 @@ it("should pass correct props to timer", () => {
   ).toEqual({
     primaryColor: "rebeccapurple",
     secondaryColor: "rebeccapurple",
-    digits: defaultProps.timer
+    digits: timerDigits
   });
+  expect(getTime.mock.calls.length).toBe(1);
+  expect(getDigitsFromTime.mock.calls[0][0]).toBe(
+    currentTime - gameStartTimestamp
+  );
+});
+
+it("should pass 0 to timer if game has not started", () => {
+  const getDigitsFromTime = jest.fn();
+  const props = { ...defaultProps, gameHasStarted: false, getDigitsFromTime };
+  shallow(<Stats {...props} />);
+  expect(getDigitsFromTime.mock.calls[0][0]).toBe(0);
+});
+
+it("component should be force updated every second", () => {
+  let timesCalled = 0;
+  const props = {
+    ...defaultProps
+  };
+  const element = shallow(<Stats {...props} />);
+  const instance = element.instance();
+  const pureForceUpdate = instance.forceUpdate;
+  instance.forceUpdate = () => {
+    timesCalled++;
+    return pureForceUpdate.bind(pureForceUpdate);
+  };
+  jest.runTimersToTime(14700);
+  jest.clearAllTimers();
+  expect(timesCalled).toBe(14);
+  instance.forceUpdate = pureForceUpdate;
+});
+
+it("should not force update element if the game is finished", () => {
+  let timesCalled = 0;
+  const props = {
+    ...defaultProps
+  };
+  const element = shallow(<Stats {...props} />);
+  const instance = element.instance();
+  const pureForceUpdate = instance.forceUpdate;
+  instance.forceUpdate = () => {
+    timesCalled++;
+    return pureForceUpdate.bind(pureForceUpdate);
+  };
+  jest.runTimersToTime(14700);
+  element.setProps({ isFinished: true });
+  jest.runTimersToTime(20000);
+  jest.clearAllTimers();
+  expect(timesCalled).toBe(14);
+  instance.forceUpdate = pureForceUpdate;
+});
+
+it("should continue updating element if the game was restarted", () => {
+  let timesCalled = 0;
+  const props = {
+    ...defaultProps
+  };
+  const element = shallow(<Stats {...props} />);
+  const instance = element.instance();
+  const pureForceUpdate = instance.forceUpdate;
+  instance.forceUpdate = () => {
+    timesCalled++;
+    return pureForceUpdate.bind(pureForceUpdate);
+  };
+  jest.runTimersToTime(14700);
+  element.setProps({ isFinished: true });
+  jest.runTimersToTime(20000);
+  element.setProps({ isFinished: false });
+  jest.runTimersToTime(10000);
+  jest.clearAllTimers();
+  expect(timesCalled).toBe(24);
+  instance.forceUpdate = pureForceUpdate;
+});
+
+it("should not call getTime if component was unmounted", () => {
+  const getTime = jest.fn();
+  const props = {
+    ...defaultProps,
+    getTime
+  };
+  // first call on mount
+  const element = shallow(<Stats {...props} />);
+  // second call after 1 sec via interval
+  jest.runTimersToTime(1500);
+  element.unmount();
+  jest.runTimersToTime(15000);
+  jest.clearAllTimers();
+  // should be no more calls after unmount
+  element.update();
+  expect(getTime.mock.calls.length).toBe(2);
 });
 
 it("should pass correct props to flags count", () => {

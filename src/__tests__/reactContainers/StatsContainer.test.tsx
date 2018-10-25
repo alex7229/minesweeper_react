@@ -9,7 +9,9 @@ const stateDependencies = {
   getDigitsFromTime: jest.fn(),
   calculateFlags: jest.fn(),
   calculateActiveMines: jest.fn(),
-  getDigitsFromNumber: jest.fn()
+  getDigitsFromNumber: jest.fn(),
+  getTime: jest.fn(),
+  calculateMines: jest.fn()
 };
 
 it("should calculate small size properly", () => {
@@ -20,17 +22,6 @@ it("should calculate small size properly", () => {
   const bigField = { ...testGlobalState, width: 17 };
   factory = mapStateToPropsFactory(stateDependencies);
   expect(factory(bigField).isSmall).toBe(false);
-});
-
-it("should calculate timer properly", () => {
-  const getDigitsFromTime = jest.fn().mockReturnValue([2, 5]);
-  const state = { ...testGlobalState };
-  const factory = mapStateToPropsFactory({
-    ...stateDependencies,
-    getDigitsFromTime
-  });
-  expect(factory(state).timer).toEqual([2, 5]);
-  expect(getDigitsFromTime.mock.calls[0][0]).toBe(state.gameTimeMs);
 });
 
 it("should set mine was clicked if field contains clicked mine", () => {
@@ -65,6 +56,52 @@ it("should calculate flags count properly", () => {
   // 10 mines minus 3 flags
   expect(factory(state).flagsLeft).toEqual([0, 7]);
   expect(calculateFlagsMock.mock.calls[0][0]).toBe(state.field);
+});
+
+it("should provide game start timestamp", () => {
+  const state = { ...testGlobalState };
+  const factory = mapStateToPropsFactory(stateDependencies);
+  expect(factory(state).gameStartTimestamp).toBe(state.gameStartTimestamp);
+});
+
+it("should provide is finished field", () => {
+  const state = { ...testGlobalState, isFinished: true };
+  const factory = mapStateToPropsFactory(stateDependencies);
+  expect(factory(state).isFinished).toBe(state.isFinished);
+});
+
+it("should provide get time function", () => {
+  const getTimeMock = jest.fn().mockReturnValue(2);
+  const state = { ...testGlobalState };
+  const factory = mapStateToPropsFactory({
+    ...stateDependencies,
+    getTime: getTimeMock
+  });
+  expect(factory(state).getTime()).toBe(2);
+});
+
+it("should provide get digits from time function", () => {
+  const getDigitsMock = jest.fn().mockReturnValue([0, 2]);
+  const state = { ...testGlobalState };
+  const factory = mapStateToPropsFactory({
+    ...stateDependencies,
+    getDigitsFromTime: getDigitsMock
+  });
+  expect(factory(state).getDigitsFromTime(2)).toEqual([0, 2]);
+});
+
+it("should provide game has started property depending on mines count", () => {
+  const calculateMinesMock = jest
+    .fn()
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(15);
+  const state = { ...testGlobalState };
+  const factory = mapStateToPropsFactory({
+    ...stateDependencies,
+    calculateMines: calculateMinesMock
+  });
+  expect(factory(state).gameHasStarted).toBe(false);
+  expect(factory(state).gameHasStarted).toBe(true);
 });
 
 it("should dispatch restart game handler", () => {
