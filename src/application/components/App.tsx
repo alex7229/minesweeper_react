@@ -5,6 +5,7 @@ import { rootReducerContainer } from "../../DIContainers/reducers/rootReducerCon
 import "../css/app.css";
 import BoardContainer from "../reactContainers/BoardContainer";
 import StatsContainer from "../reactContainers/StatsContainer";
+import { Buttons } from "./Buttons";
 
 class App extends React.Component {
   public render() {
@@ -20,13 +21,14 @@ class App extends React.Component {
     });
     store.dispatch({
       type: "CHANGE_GAME_OPTIONS",
-      payload: { type: "mines", value: 2 }
+      payload: { type: "mines", value: 20 }
     });
-    store.dispatch({ type: "START_GAME", payload: "expert" });
+    store.dispatch({ type: "START_GAME", payload: "beginner" });
     return (
       <>
         <Provider store={store}>
           <>
+            <Buttons />
             <StatsContainer />
             <BoardContainer />
           </>

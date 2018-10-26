@@ -35,6 +35,7 @@ export const findCellsToOpen: FindCellsToOpen = (
           oldCell.column === cellAround.column && oldCell.row === cellAround.row
       ) !== undefined;
     if (!cellIsUsed && !cellAround.open) {
+      // todo: remove recursion. Stack size exceeds limits if 60*60 field is used
       const allOtherCells = findCellsToOpen(
         field,
         { row: cellAround.row, column: cellAround.column },

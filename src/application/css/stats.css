@@ -1,4 +1,5 @@
 #stats {
+  position: relative;
   border: 3px solid #aaa;
   border-bottom: none;
   border-top-left-radius: 40px;
@@ -6,16 +7,13 @@
   display: flex;
   background-color: #dddddd;
 }
+.small #flags_count {
+  position: relative;
+  right: -28px;
+}
 .small #timer {
   position: absolute;
-  left: -52px;
-}
-.small #restart_face {
-  left: 45%;
-}
-.small #flags_count {
-  position: absolute;
-  right: 28px;
+  left: -33px;
 }
 #stats.small > * {
   transform: scale(0.4);
@@ -28,7 +26,7 @@
 #restart_face {
   cursor: pointer;
   position: absolute;
-  left: 50%;
+  left: calc(50% - 25px);
 }
 
 #restart_block img {
