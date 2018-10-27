@@ -3,9 +3,7 @@ import * as React from "react";
 import { Digit } from "../../application/components/Digit";
 
 const defaultProps = {
-  digit: 5,
-  primaryColor: "rebeccapurple",
-  secondaryColor: "rebeccapurple"
+  digit: 5
 };
 
 it("should provide correct spans for digit", () => {
@@ -34,19 +32,4 @@ it("should provide correct class name for digit", () => {
   expect(shallow(<Digit {...p} digit={"dot"} />).find("div.dots").length).toBe(
     1
   );
-});
-
-it("should render proper colors", () => {
-  const primaryColor = "black";
-  const secondaryColor = "white";
-  const colors = { backgroundColor: primaryColor, borderColor: secondaryColor };
-  const props = { ...defaultProps, primaryColor, secondaryColor };
-  const element = shallow(<Digit {...props} digit={1} />);
-  expect(element.find("span.d1").props().style).toEqual(colors);
-  expect(element.find("span.d2").props().style).toEqual(colors);
-  expect(element.find("span.d3").props().style).toEqual(colors);
-  expect(element.find("span.d4").props().style).toEqual(colors);
-  expect(element.find("span.d5").props().style).toEqual(colors);
-  expect(element.find("span.d6").props().style).toEqual(colors);
-  expect(element.find("span.d7").props().style).toEqual(colors);
 });

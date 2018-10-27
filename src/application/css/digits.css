@@ -1,32 +1,36 @@
 /* Source: http://tutorialzine.com/2013/06/digital-clock/ */
 
 .digits div span {
-  background-color: #272e38;
-  border-color: #272e38;
+  background-color: rebeccapurple;
+  border-color: rebeccapurple;
 }
 
 .digits div.dots:before,
 .digits div.dots:after {
-  background-color: #272e38;
+  background-color: rebeccapurple;
 }
 
 /*-------------------------
       The Digits
   --------------------------*/
 
+.digits {
+  font-size: 1em;
+  height: 1.06em;
+}
+
 .digits div {
   text-align: left;
   position: relative;
-  width: 28px;
-  height: 50px;
+  width: 0.56em;
+  height: 1.06em;
   display: inline-block;
-  margin: 0 4px;
+  margin: 0 0.08em;
 }
 
 .digits div span {
   opacity: 0;
   position: absolute;
-
   -webkit-transition: 0.25s;
   -o-transition: 0.25s;
   transition: 0.25s;
@@ -38,126 +42,126 @@
   position: absolute;
   width: 0;
   height: 0;
-  border: 5px solid transparent;
+  border: 0.1em solid transparent;
 }
 
 .digits .d1 {
-  height: 5px;
-  width: 16px;
+  height: 0.1em;
+  width: 0.32em;
   top: 0;
-  left: 6px;
+  left: 0.12em;
 }
 .digits .d1:before {
-  border-width: 0 5px 5px 0;
+  border-width: 0 0.1em 0.1em 0;
   border-right-color: inherit;
-  left: -5px;
+  left: -0.1em;
 }
 .digits .d1:after {
-  border-width: 0 0 5px 5px;
+  border-width: 0 0 0.1em 0.1em;
   border-left-color: inherit;
-  right: -5px;
+  right: -0.1em;
 }
 
 .digits .d2 {
-  height: 5px;
-  width: 16px;
-  top: 24px;
-  left: 6px;
+  height: 0.1em;
+  width: 0.32em;
+  top: 0.48em;
+  left: 0.12em;
 }
 .digits .d2:before {
-  border-width: 3px 4px 2px;
+  border-width: 0.06em 0.08em 0.04em;
   border-right-color: inherit;
-  left: -8px;
+  left: -0.16em;
 }
 .digits .d2:after {
-  border-width: 3px 4px 2px;
+  border-width: 0.06em 0.08em 0.04em;
   border-left-color: inherit;
-  right: -8px;
+  right: -0.16em;
 }
 
 .digits .d3 {
-  height: 5px;
-  width: 16px;
-  top: 48px;
-  left: 6px;
+  height: 0.1em;
+  width: 0.32em;
+  top: 0.96em;
+  left: 0.12em;
 }
 .digits .d3:before {
-  border-width: 5px 5px 0 0;
+  border-width: 0.1em 0.1em 0 0;
   border-right-color: inherit;
-  left: -5px;
+  left: -0.1em;
 }
 .digits .d3:after {
-  border-width: 5px 0 0 5px;
+  border-width: 0.1em 0 0 0.1em;
   border-left-color: inherit;
-  right: -5px;
+  right: -0.1em;
 }
 
 .digits .d4 {
-  width: 5px;
-  height: 14px;
-  top: 7px;
+  width: 0.1em;
+  height: 0.28em;
+  top: 0.14em;
   left: 0;
 }
 .digits .d4:before {
-  border-width: 0 5px 5px 0;
+  border-width: 0 0.1em 0.1em 0;
   border-bottom-color: inherit;
-  top: -5px;
+  top: -0.1em;
 }
 .digits .d4:after {
-  border-width: 0 0 5px 5px;
+  border-width: 0 0 0.1em 0.1em;
   border-left-color: inherit;
-  bottom: -5px;
+  bottom: -0.1em;
 }
 
 .digits .d5 {
-  width: 5px;
-  height: 14px;
-  top: 7px;
+  width: 0.1em;
+  height: 0.28em;
+  top: 0.14em;
   right: 0;
 }
 .digits .d5:before {
-  border-width: 0 0 5px 5px;
+  border-width: 0 0 0.1em 0.1em;
   border-bottom-color: inherit;
-  top: -5px;
+  top: -0.1em;
 }
 .digits .d5:after {
-  border-width: 5px 0 0 5px;
+  border-width: 0.1em 0 0 0.1em;
   border-top-color: inherit;
-  bottom: -5px;
+  bottom: -0.1em;
 }
 
 .digits .d6 {
-  width: 5px;
-  height: 14px;
-  top: 32px;
+  width: 0.1em;
+  height: 0.28em;
+  top: 0.64em;
   left: 0;
 }
 .digits .d6:before {
-  border-width: 0 5px 5px 0;
+  border-width: 0 0.1em 0.1em 0;
   border-bottom-color: inherit;
-  top: -5px;
+  top: -0.1em;
 }
 .digits .d6:after {
-  border-width: 0 0 5px 5px;
+  border-width: 0 0 0.1em 0.1em;
   border-left-color: inherit;
-  bottom: -5px;
+  bottom: -0.1em;
 }
 
 .digits .d7 {
-  width: 5px;
-  height: 14px;
-  top: 32px;
+  width: 0.1em;
+  height: 0.28em;
+  top: 0.64em;
   right: 0;
 }
 .digits .d7:before {
-  border-width: 0 0 5px 5px;
+  border-width: 0 0 0.1em 0.1em;
   border-bottom-color: inherit;
-  top: -5px;
+  top: -0.1em;
 }
 .digits .d7:after {
-  border-width: 5px 0 0 5px;
+  border-width: 0.1em 0 0 0.1em;
   border-top-color: inherit;
-  bottom: -5px;
+  bottom: -0.1em;
 }
 
 /* 1 */
@@ -262,19 +266,19 @@
 /* The dots */
 
 .digits div.dots {
-  width: 5px;
+  width: 0.1em;
 }
 
 .digits div.dots:before,
 .digits div.dots:after {
-  width: 5px;
-  height: 5px;
+  width: 0.1em;
+  height: 0.1em;
   content: "";
   position: absolute;
   left: 0;
-  top: 14px;
+  top: 0.28em;
 }
 
 .digits div.dots:after {
-  top: 34px;
+  top: 0.68em;
 }

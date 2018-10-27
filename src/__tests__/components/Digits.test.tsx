@@ -4,9 +4,7 @@ import { Digit, DigitOrDot } from "../../application/components/Digit";
 import { Digits, IDigitsProps } from "../../application/components/Digits";
 
 const defaultProps: IDigitsProps = {
-  digits: [7],
-  primaryColor: "black",
-  secondaryColor: "white"
+  digits: [7]
 };
 
 it("should render correct Digit components", () => {
@@ -18,15 +16,4 @@ it("should render correct Digit components", () => {
   expect(element.find(Digit).get(2).props.digit).toBe("dot");
   expect(element.find(Digit).get(3).props.digit).toBe(2);
   expect(element.find(Digit).get(4).props.digit).toBe(7);
-});
-
-it("should pass color down to digit component", () => {
-  const digitProps = {
-    primaryColor: defaultProps.primaryColor,
-    secondaryColor: defaultProps.secondaryColor,
-    digit: defaultProps.digits[0]
-  };
-  const element = shallow(<Digits {...defaultProps} />);
-  const digit = element.find(Digit);
-  expect(digit.props()).toEqual(digitProps);
 });

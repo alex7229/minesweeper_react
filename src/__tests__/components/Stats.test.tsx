@@ -43,8 +43,6 @@ it("should pass correct props to timer", () => {
       .find(Digits)
       .props()
   ).toEqual({
-    primaryColor: "rebeccapurple",
-    secondaryColor: "rebeccapurple",
     digits: timerDigits
   });
   expect(getTime.mock.calls.length).toBe(1);
@@ -146,8 +144,6 @@ it("should pass correct props to flags count", () => {
       .find(Digits)
       .props()
   ).toEqual({
-    primaryColor: "rebeccapurple",
-    secondaryColor: "rebeccapurple",
     digits: defaultProps.flagsLeft
   });
 });

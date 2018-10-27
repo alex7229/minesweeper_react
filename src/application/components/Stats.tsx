@@ -66,19 +66,11 @@ export class Stats extends React.Component<IStatsProps> {
         className={`${this.props.isSmall === true ? "small" : "big"}`}
       >
         <div id="timer">
-          <Digits
-            primaryColor="rebeccapurple"
-            secondaryColor="rebeccapurple"
-            digits={timerDigits}
-          />
+          <Digits digits={timerDigits} />
         </div>
         <div className="filler" />
         <div id="flags_count">
-          <Digits
-            primaryColor="rebeccapurple"
-            secondaryColor="rebeccapurple"
-            digits={this.props.flagsLeft}
-          />
+          <Digits digits={this.props.flagsLeft} />
         </div>
         <img id="flag" src="/images/flag.png" />
         <img

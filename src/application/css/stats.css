@@ -1,40 +1,36 @@
 #stats {
-  border: 3px solid #aaa;
+  padding: 0.2em 0.7em 0.2em 0.7em;
+  border: 0.06em solid #aaa;
   border-bottom: none;
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
+  border-top-left-radius: 0.8em;
+  border-top-right-radius: 0.8em;
   display: flex;
+  position: relative;
   background-color: #dddddd;
-}
-.small #timer {
-  position: absolute;
-  left: -52px;
-}
-.small #restart_face {
-  left: 45%;
-}
-.small #flags_count {
-  position: absolute;
-  right: 28px;
-}
-#stats.small > * {
-  transform: scale(0.4);
 }
 
 #stats > img {
-  max-height: 55px;
+  max-height: 1em;
 }
 
 #restart_face {
   cursor: pointer;
   position: absolute;
-  left: 50%;
+  left: calc(50% - 0.5em);
+}
+
+#flag {
+  margin-left: 0.2em;
 }
 
 #restart_block img {
   cursor: pointer;
 }
 
-#stats.big > * {
-  transform: scale(0.6);
+#stats.small {
+  font-size: 40px;
+}
+
+#stats.big {
+  font-size: 60px;
 }
