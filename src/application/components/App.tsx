@@ -5,6 +5,7 @@ import { rootReducerContainer } from "../../DIContainers/reducers/rootReducerCon
 import "../css/app.css";
 import BoardContainer from "../reactContainers/BoardContainer";
 import StatsContainer from "../reactContainers/StatsContainer";
+import { Buttons } from "./Buttons";
 
 class App extends React.Component {
   public render() {
@@ -29,6 +30,7 @@ class App extends React.Component {
       <>
         <Provider store={store}>
           <>
+            <Buttons />
             <StatsContainer />
             <BoardContainer />
           </>

@@ -19,11 +19,11 @@ const defaultProps: IStatsProps = {
 
 it("should render correct id and class of the container", () => {
   const bigElement = shallow(<Stats {...defaultProps} size="big" />);
-  expect(bigElement.find("div#stats.big").length).toBe(1);
+  expect(bigElement.find("div#stats.big.row").length).toBe(1);
   const smallElement = shallow(<Stats {...defaultProps} size="small" />);
-  expect(smallElement.find("div#stats.small").length).toBe(1);
+  expect(smallElement.find("div#stats.small.row").length).toBe(1);
   const tinyElement = shallow(<Stats {...defaultProps} size="tiny" />);
-  expect(tinyElement.find("div#stats.tiny").length).toBe(1);
+  expect(tinyElement.find("div#stats.tiny.row").length).toBe(1);
 });
 
 it("should pass correct props to timer", () => {

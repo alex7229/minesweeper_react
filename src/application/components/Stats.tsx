@@ -66,7 +66,7 @@ export class Stats extends React.Component<IStatsProps> {
       this.props.gameHasStarted ? gameTime : 0
     );
     return (
-      <div id="stats" className={this.props.size}>
+      <div id="stats" className={"row " + this.props.size}>
         <div id="timer">
           <Digits digits={timerDigits} />
         </div>

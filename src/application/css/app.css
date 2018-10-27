@@ -22,3 +22,12 @@ body {
   justify-content: center;
   flex-direction: column;
 }
+
+.row {
+  padding: 0.2em 0.7em 0.2em 0.7em;
+  border: 0.06em solid #aaa;
+  border-bottom: none;
+  display: flex;
+  position: relative;
+  background-color: #dddddd;
+}

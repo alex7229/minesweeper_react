@@ -1,0 +1,75 @@
+#buttons .buttonWrapper:last-child:hover #dropDown {
+  display: block;
+}
+
+#dropDown {
+  z-index: 1;
+  background: white;
+  color: black;
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: calc(100% + 0.065em);
+  background-color: #dddddd;
+  border: 0.06em solid #aaa;
+}
+
+.inputRow {
+  width: 100%;
+  margin-bottom: 0.2em;
+  color: rgb(100, 100, 100);
+}
+
+.inputRow:last-child {
+  border-top: 0.06em solid #aaa;
+  cursor: pointer;
+}
+.inputRow:last-child:hover {
+  color: white;
+  background: black;
+}
+
+.inputRow:nth-child(3),
+.inputRow:nth-child(4) {
+  margin: 0;
+}
+
+label,
+input {
+  width: 50%;
+  position: relative;
+  display: block;
+  float: left;
+}
+label {
+  height: 2em;
+  line-height: 2em;
+  font-size: 0.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+input {
+  color: inherit;
+  padding-left: 0.5em;
+  height: 1em;
+  font-size: inherit;
+  border: none;
+}
+.errorContainer {
+  position: absolute;
+  display: block;
+  left: -100%;
+  font-size: 0.5em;
+  color: darkred;
+  line-height: 2em;
+  width: 100%;
+}
+
+.error {
+  float: right;
+  font-weight: bold;
+  padding: 0 0.5em 0 0.5em;
+  background: white;
+}
