@@ -39,3 +39,9 @@ class App extends React.Component {
 }
 
 export default App;
+
+// todo: remove recursion from 'find cells to open"
+// todo: fix the bug when changing one option field doesn't change anything
+// todo: for example field 9 by 9 and 80 mines. If change width to 4 -> it would not change it
+// todo: desired behaviour: reduce mines count to 1 when changing width or height
+// todo: doesn't satisfy cells/mines ratio
