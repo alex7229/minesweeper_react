@@ -9,25 +9,16 @@ import {
   getDigitsFromTimeContainer
 } from "../../DIContainers/logic/digits/getDigitsFromTimeContainer";
 import { startGame } from "../actions/actionCreators";
-import { DigitOrDot } from "../components/Digit";
-import { Stats } from "../components/Stats";
+import {
+  IStatsDispatchProps,
+  IStatsStateProps,
+  Stats
+} from "../components/Stats";
 import { calculateCells } from "../logic/board/calculateCells";
 import { IGlobalState } from "../reducers/rootReducer";
 import { Field } from "../reducers/toggleCellReducer";
 
-type MapStateToProps = (
-  state: IGlobalState
-) => {
-  readonly gameHasStarted: boolean;
-  readonly gameStartTimestamp: number;
-  readonly mineWasClicked: boolean;
-  readonly timer: ReadonlyArray<DigitOrDot>;
-  readonly flagsLeft: ReadonlyArray<DigitOrDot>;
-  readonly isSmall: boolean;
-  readonly isFinished: boolean;
-  readonly getTime: () => number;
-  readonly getDigitsFromTime: GetDigitsFromTimeContainer
-};
+type MapStateToProps = (state: IGlobalState) => IStatsStateProps;
 interface IStateDependencies {
   readonly getDigitsFromTime: GetDigitsFromTimeContainer;
   readonly getDigitsFromNumber: GetDigitsFromNumberContainer;
@@ -40,9 +31,7 @@ type MapStateToPropsFactory = (
   dependencies: IStateDependencies
 ) => MapStateToProps;
 
-type MapDispatchToProps = (
-  dispatch: Dispatch
-) => { readonly restartGame: () => void };
+type MapDispatchToProps = (dispatch: Dispatch) => IStatsDispatchProps;
 
 export const mapStateToPropsFactory: MapStateToPropsFactory = dependencies => state => ({
   mineWasClicked: dependencies.calculateActiveMines(state.field) === 1,
@@ -50,7 +39,8 @@ export const mapStateToPropsFactory: MapStateToPropsFactory = dependencies => st
   flagsLeft: dependencies.getDigitsFromNumber(
     state.mines - dependencies.calculateFlags(state.field)
   ),
-  isSmall: state.width < 17,
+  // 1-8 -> tiny, 9-16 -> small, 17+ -> big
+  size: state.width > 16 ? "big" : state.width > 8 ? "small" : "tiny",
   gameStartTimestamp: state.gameStartTimestamp,
   isFinished: state.isFinished,
   getTime: dependencies.getTime,
@@ -70,7 +60,7 @@ export default connect(
       calculateCells(field, "active_mine"),
     getDigitsFromNumber: getDigitsFromNumberContainer,
     getTime: () => new Date().getTime(),
-    calculateMines: (field: Field) => calculateCells(field, 'mine')
+    calculateMines: (field: Field) => calculateCells(field, "mine")
   }),
   mapDispatchToProps
 )(Stats);

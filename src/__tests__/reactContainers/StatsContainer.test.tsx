@@ -14,14 +14,13 @@ const stateDependencies = {
   calculateMines: jest.fn()
 };
 
-it("should calculate small size properly", () => {
-  const smallField = { ...testGlobalState, width: 16 };
-  let factory = mapStateToPropsFactory(stateDependencies);
-  expect(factory(smallField).isSmall).toBe(true);
+it("should calculate size properly", () => {
+  const factory = mapStateToPropsFactory(stateDependencies);
 
-  const bigField = { ...testGlobalState, width: 17 };
-  factory = mapStateToPropsFactory(stateDependencies);
-  expect(factory(bigField).isSmall).toBe(false);
+  expect(factory({ ...testGlobalState, width: 17 }).size).toBe("big");
+  expect(factory({ ...testGlobalState, width: 16 }).size).toBe("small");
+  expect(factory({ ...testGlobalState, width: 9 }).size).toBe("small");
+  expect(factory({ ...testGlobalState, width: 8 }).size).toBe("tiny");
 });
 
 it("should set mine was clicked if field contains clicked mine", () => {

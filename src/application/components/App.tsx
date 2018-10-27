@@ -12,16 +12,18 @@ class App extends React.Component {
 
     store.dispatch({
       type: "CHANGE_GAME_OPTIONS",
-      payload: { type: "width", value: 50 }
+      payload: { type: "mines", value: 1 }
+    });
+
+    store.dispatch({
+      type: "CHANGE_GAME_OPTIONS",
+      payload: { type: "width", value: 4 }
     });
     store.dispatch({
       type: "CHANGE_GAME_OPTIONS",
-      payload: { type: "height", value: 50 }
+      payload: { type: "height", value: 4 }
     });
-    store.dispatch({
-      type: "CHANGE_GAME_OPTIONS",
-      payload: { type: "mines", value: 2 }
-    });
+
     store.dispatch({ type: "START_GAME", payload: "expert" });
     return (
       <>

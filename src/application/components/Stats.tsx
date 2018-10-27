@@ -4,17 +4,22 @@ import "../css/stats.css";
 import { DigitOrDot } from "./Digit";
 import { Digits } from "./Digits";
 
-export interface IStatsProps {
+export interface IStatsDispatchProps {
+  readonly restartGame: () => void;
+}
+
+export interface IStatsStateProps {
   readonly gameHasStarted: boolean;
   readonly mineWasClicked: boolean;
   readonly gameStartTimestamp: number;
   readonly flagsLeft: ReadonlyArray<DigitOrDot>;
-  readonly isSmall: boolean;
+  readonly size: "tiny" | "small" | "big";
   readonly isFinished: boolean;
-  readonly restartGame: () => void;
   readonly getTime: () => number;
   readonly getDigitsFromTime: GetDigitsFromTimeContainer;
 }
+
+export type IStatsProps = IStatsStateProps & IStatsDispatchProps;
 
 export class Stats extends React.Component<IStatsProps> {
   public props: IStatsProps;
@@ -61,10 +66,7 @@ export class Stats extends React.Component<IStatsProps> {
       this.props.gameHasStarted ? gameTime : 0
     );
     return (
-      <div
-        id="stats"
-        className={`${this.props.isSmall === true ? "small" : "big"}`}
-      >
+      <div id="stats" className={this.props.size}>
         <div id="timer">
           <Digits digits={timerDigits} />
         </div>
