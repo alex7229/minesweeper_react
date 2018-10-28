@@ -1,12 +1,16 @@
 # minesweeper_new
 
-Stact: react, redux, typescript, no back-end.
+Stack: react, redux, typescript, no back-end.
 
-todo:
+Differences from old knockout version
+https://github.com/tup1tsa/minesweeper_knockout
 
-1. similar interface to the old one
-2. first click - make opening (cell with no mines around), and then populate the board
-3. implementation of 3bv rating. Limits: beginner - 2, intermediate - 30, expert - 100. Details: http://www.minesweeper.info/wiki/3BV
-4. show time in secs, but show result with time in ms.
-5. probably save records in the localStorage and show them in the 'history' tab. If no records available - show free tab.
-6. the game should place flags on all mines when all cells are opened
+
+1. Multiple UI improvements.
+2. Drastically increased performance on big fields (50*50 and bigger). 
+3. First click on the field always creates an opening
+4. Implementation of 3bv rating requirements. 
+    Details: http://www.minesweeper.info/wiki/3BV
+6. Game state is saved in local storage.
+7. Win condition is also tracked if all mines are flagged
+8. Restart button was added.
