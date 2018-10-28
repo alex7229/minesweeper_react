@@ -1,4 +1,4 @@
-# minesweeper_new
+# Minesweeper built with react
 
 Stack: react, redux, typescript, no back-end.
 
