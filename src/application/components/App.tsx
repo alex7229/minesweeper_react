@@ -6,6 +6,7 @@ import "../css/app.css";
 import BoardContainer from "../reactContainers/BoardContainer";
 import StatsContainer from "../reactContainers/StatsContainer";
 import { Buttons } from "./Buttons";
+import { WinOverlay } from "./WinOverlay";
 
 class App extends React.Component {
   public render() {
@@ -33,6 +34,7 @@ class App extends React.Component {
             <Buttons />
             <StatsContainer />
             <BoardContainer />
+            <WinOverlay />
           </>
         </Provider>
       </>

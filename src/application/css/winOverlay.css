@@ -1,0 +1,24 @@
+#overlay {
+  position: fixed;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0, 0.8);
+  z-index: 1;
+  left: 0;
+  top: 0;
+}
+#overlay > div {
+  width: 11em;
+  background: #dddddd;
+  padding: 0.5em;
+  position: relative;
+  margin: auto auto;
+  color: rgb(100, 100, 100);
+  font-weight: bold;
+  font-size: 0.9rem;
+  border-radius: 0.8rem;
+}
+#overlay span {
+  float: right;
+}
