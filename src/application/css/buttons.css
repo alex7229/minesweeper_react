@@ -1,16 +1,16 @@
 #buttons {
   display: flex;
   justify-content: center;
-  font-size: 60px;
+  font-size: 1.2rem;
   padding: 0;
   border-top-left-radius: 0.8em;
   border-top-right-radius: 0.8em;
 }
-#buttons .buttonWrapper:first-child {
+#beginner {
   border-top-left-radius: 0.8em;
 }
 
-#buttons .buttonWrapper:last-child {
+#custom {
   border-top-right-radius: 0.8em;
   cursor: default;
 }
@@ -34,4 +34,20 @@
   color: white;
   background: black;
   border-color: black;
+}
+#buttons.small {
+  display: block;
+}
+#buttons.small .buttonWrapper {
+  width: 50%;
+  float: left;
+}
+#buttons.small #advanced {
+  border-top-right-radius: 0.8em;
+}
+#buttons.small #expert {
+  clear: both;
+}
+#buttons.small #custom {
+  border-top-right-radius: 0;
 }

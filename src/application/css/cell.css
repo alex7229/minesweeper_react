@@ -1,10 +1,10 @@
 .cell {
   font-family: verdana;
   text-align: center;
-  width: 50px;
-  height: 50px;
-  border: 6px outset #aaa;
-  font-size: 35px;
+  width: 1rem;
+  height: 1rem;
+  border: 0.12rem outset #aaa;
+  font-size: 0.7rem;
   display: block;
   float: left;
   cursor: default;
@@ -19,7 +19,7 @@
 .cell.open,
 .cell.open:hover {
   background: rgb(213, 187, 191);
-  border: 1px solid gray;
+  border: 0.02rem solid gray;
 }
 .cell.open.noMinesAround {
   background: #c9c9c9;

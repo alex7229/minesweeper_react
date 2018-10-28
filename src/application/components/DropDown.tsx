@@ -8,7 +8,7 @@ export const DropDown = (props: {}) => (
         <div className="error">error</div>
       </div>
       <label htmlFor="width">Width: </label>
-      <input id="width" type="number" defaultValue="4" min="4" max="99" />
+      <input id="width" type="text" defaultValue="30" />
       <div className="clear" />
     </div>
 
@@ -17,7 +17,7 @@ export const DropDown = (props: {}) => (
         <div className="error">error</div>
       </div>
       <label htmlFor="height">Height: </label>
-      <input id="height" type="number" defaultValue="4" />
+      <input id="height" type="text" defaultValue="16" />
       <div className="clear" />
     </div>
 
@@ -26,7 +26,7 @@ export const DropDown = (props: {}) => (
         <div className="error">error</div>
       </div>
       <label htmlFor="mines">Mines: </label>
-      <input id="mines" type="number" defaultValue="4" />
+      <input id="mines" type="text" defaultValue="99" />
       <div className="clear" />
     </div>
 

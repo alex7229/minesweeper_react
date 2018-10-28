@@ -25,7 +25,7 @@ class App extends React.Component {
       payload: { type: "height", value: 4 }
     });
 
-    store.dispatch({ type: "START_GAME", payload: "expert" });
+    store.dispatch({ type: "START_GAME", payload: "advanced" });
     return (
       <>
         <Provider store={store}>

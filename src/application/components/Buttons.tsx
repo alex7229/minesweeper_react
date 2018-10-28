@@ -3,14 +3,15 @@ import "../css/buttons.css";
 import { DropDown } from "./DropDown";
 
 export const Buttons = (props: {}) => (
-  <div id="buttons" className="row">
-    <div className="buttonWrapper">
+  // todo: should add small if board width is less than 16
+  <div id="buttons" className="row small">
+    <div className="buttonWrapper" id="beginner">
       <div className="button">Beginner</div>
     </div>
-    <div className="buttonWrapper">
+    <div className="buttonWrapper" id="advanced">
       <div className="button">Advanced</div>
     </div>
-    <div className="buttonWrapper">
+    <div className="buttonWrapper" id="expert">
       <div className="button">Expert</div>
     </div>
     <div className="buttonWrapper" id="custom">

@@ -30,5 +30,6 @@ export const Board = (props: IBoardProps) => {
     return regularCells;
   });
   const cellsFlatten = _.flatten(cells);
-  return <div>{cellsFlatten}</div>;
+  const width = props.field[0].length;
+  return <div style={{ minWidth: `${width}rem` }}>{cellsFlatten}</div>;
 };

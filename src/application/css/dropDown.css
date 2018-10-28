@@ -41,6 +41,7 @@ input {
   position: relative;
   display: block;
   float: left;
+  font-size: 0.5em;
 }
 label {
   height: 2em;
@@ -53,8 +54,7 @@ label {
 input {
   color: inherit;
   padding-left: 0.5em;
-  height: 1em;
-  font-size: inherit;
+  height: 1rem;
   border: none;
 }
 .errorContainer {
