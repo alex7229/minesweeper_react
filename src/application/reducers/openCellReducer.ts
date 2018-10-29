@@ -16,6 +16,7 @@ export interface IOpenCellReducerState {
   readonly field: Field;
   readonly gameStartTimestamp: number;
   readonly gameTimeMs: number;
+  readonly winOverlay: boolean;
 }
 
 export type OpenCellReducer = (
@@ -81,6 +82,7 @@ export const openCellReducer: OpenCellReducer = (state, action, functions) => {
   if (functions.isWinCondition(openedField)) {
     return {
       ...state,
+      winOverlay: true,
       gameStartTimestamp,
       seed: nextSeed,
       field: functions.flagAllMines(openedField),

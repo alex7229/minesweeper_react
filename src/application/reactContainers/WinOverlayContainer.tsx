@@ -11,6 +11,7 @@ import { IGlobalState } from "../reducers/rootReducer";
 interface IStateProps {
   readonly time: number;
   readonly difficulty: number;
+  readonly visible: boolean;
 }
 
 interface IStateDependecies {
@@ -23,7 +24,8 @@ export type MapStateToPropsFactory = (
 
 export const mapStateToPropsFactory: MapStateToPropsFactory = deps => state => ({
   time: state.gameTimeMs,
-  difficulty: deps.calculateDifficultyLevel(state.field)
+  difficulty: deps.calculateDifficultyLevel(state.field),
+  visible: state.winOverlay
 });
 
 const mapStateToProps = mapStateToPropsFactory({

@@ -21,6 +21,7 @@ export interface IToggleCellReducerState {
   readonly gameTimeMs: number;
   readonly isFinished: boolean;
   readonly field: Field;
+  readonly winOverlay: boolean;
 }
 
 type ToggleCellReducer = (
@@ -77,6 +78,7 @@ export const toggleCellReducer: ToggleCellReducer = (
   if (functions.isWinCondition(newField)) {
     return {
       ...state,
+      winOverlay: true,
       isFinished: true,
       field: newField,
       gameTimeMs: functions.getTime() - state.gameStartTimestamp

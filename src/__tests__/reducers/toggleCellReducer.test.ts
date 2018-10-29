@@ -26,6 +26,7 @@ const defaultAction: IToggleCellAction = {
 
 const defaultState = {
   gameStartTimestamp: 1000,
+  winOverlay: false,
   isFinished: false,
   field: generateEmptyField(2, 2),
   gameTimeMs: 0
@@ -145,6 +146,7 @@ it("should set isFinished and game time if win condition is true", () => {
     isWinCondition: winConditionMock
   });
   expect(newState.isFinished).toBe(true);
+  expect(newState.winOverlay).toBe(true);
   // 4000 is 5000 (current time) minus 1000 (start time)
   expect(newState.gameTimeMs).toBe(4000);
 });

@@ -26,7 +26,7 @@ class App extends React.Component {
       payload: { type: "height", value: 4 }
     });
 
-    store.dispatch({ type: "START_GAME", payload: "advanced" });
+    store.dispatch({ type: "START_GAME", payload: "expert" });
 
     return (
       <>
@@ -50,3 +50,4 @@ export default App;
 // todo: for example field 9 by 9 and 80 mines. If change width to 4 -> it would not change it
 // todo: desired behaviour: reduce mines count to 1 when changing width or height
 // todo: doesn't satisfy cells/mines ratio
+// todo: timer should not be updated when the game is finished

@@ -20,6 +20,7 @@ import { recalculateMinesAroundContainer } from "../../DIContainers/logic/board/
 import { testEmptyCell } from "../logic/board/generateEmptyField.test";
 
 const defaultState: IOpenCellReducerState = {
+  winOverlay: false,
   gameStartTimestamp: 3000,
   gameTimeMs: 0,
   seed: "default seed",
@@ -124,6 +125,7 @@ it("should flag all mines if win condition is true", () => {
   ).toEqual({
     ...defaultState,
     isFinished: true,
+    winOverlay: true,
     field: flaggedMines,
     // game time => current time (5000) minus start time (3000)
     gameTimeMs: 2000

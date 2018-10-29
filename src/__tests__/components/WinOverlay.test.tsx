@@ -5,7 +5,8 @@ import { WinOverlay } from "../../application/components/WinOverlay";
 const defaultProps = {
   time: 22,
   difficulty: 110,
-  hideOverlay: jest.fn()
+  hideOverlay: jest.fn(),
+  visible: true
 };
 
 it("should not trigger hide overlay if content was clicked", () => {
@@ -48,4 +49,17 @@ it("should round difficulty per time to three decimal places", () => {
   // 1 difficulty per 3 secs, or 0.33333333 diff per sec
   const element = shallow(<WinOverlay {...props} />);
   expect(element.find("span").get(2).props.children).toBe(0.333);
+});
+
+it("should render correct display depending on visible state", () => {
+  const invisibleElement = shallow(
+    <WinOverlay {...defaultProps} visible={false} />
+  );
+  expect(invisibleElement.find("#overlay").hasClass("invisible")).toBe(true);
+
+  const visibleElement = shallow(
+    <WinOverlay {...defaultProps} visible={true} />
+  );
+
+  expect(visibleElement.find("#overlay").hasClass("invisible")).toBe(false);
 });

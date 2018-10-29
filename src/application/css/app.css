@@ -37,3 +37,6 @@ body {
   position: relative;
   background-color: #dddddd;
 }
+.invisible {
+  display: none !important;
+}

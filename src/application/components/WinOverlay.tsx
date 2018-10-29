@@ -5,6 +5,7 @@ interface IProps {
   readonly time: number;
   readonly difficulty: number;
   readonly hideOverlay: () => void;
+  readonly visible: boolean;
 }
 
 export const WinOverlay = (props: IProps) => {
@@ -13,8 +14,10 @@ export const WinOverlay = (props: IProps) => {
     return target.id === "overlay" ? props.hideOverlay() : null;
   };
 
+  const className = props.visible ? "" : "invisible";
+
   return (
-    <div id="overlay" onClick={hideOverlay}>
+    <div id="overlay" onClick={hideOverlay} className={className}>
       <div id="overlayContent" onClick={hideOverlay}>
         <div>
           {/* rounded to two decimal places */}

@@ -10,7 +10,11 @@ it("should provide correct difficulty and time props", () => {
   const factory = mapStateToPropsFactory({
     calculateDifficultyLevel: difficultyMock
   });
-  expect(factory(state)).toEqual({ time: 552, difficulty: 144 });
+  expect(factory(state)).toEqual({
+    time: 552,
+    difficulty: 144,
+    visible: state.winOverlay
+  });
 });
 
 it("should dispatch hide overlay action", () => {
