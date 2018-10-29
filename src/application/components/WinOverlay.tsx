@@ -1,8 +1,14 @@
 import * as React from "react";
 import "../css/winOverlay.css";
 
-export const WinOverlay = () => (
-  <div id="overlay">
+interface IProps {
+  readonly time: number;
+  readonly difficulty: number;
+  readonly hideOverlay: () => void;
+}
+
+export const WinOverlay = (props: IProps) => (
+  <div id="overlay" onClick={props.hideOverlay}>
     <div>
       <div>
         Time (secs): <span>223.52</span>

@@ -10,6 +10,7 @@ export interface IGlobalState {
   readonly isFinished: boolean;
   readonly field: Field;
   readonly gameStartTimestamp: number;
+  readonly winOverlay: boolean;
 }
 
 export type Reducer = (
@@ -31,7 +32,8 @@ const defaultState: IGlobalState = {
   mines: 99,
   seed: "default seed",
   isFinished: false,
-  field: [[]]
+  field: [[]],
+  winOverlay: false
 };
 
 export const rootReducer: RootReducer = (

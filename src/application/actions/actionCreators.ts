@@ -2,6 +2,7 @@ import {
   ICellPosition,
   IChangeGameOptionsAction,
   IGameOptionPayload,
+  IHideOverlayAction,
   IOpenCellAction,
   IStartGameAction,
   IToggleCellAction,
@@ -33,3 +34,6 @@ export const changeGameOption: ChangeGameOption = payload => ({
   type: "CHANGE_GAME_OPTIONS",
   payload
 });
+
+export type HideOverlay = () => IHideOverlayAction;
+export const hideOverlay: HideOverlay = () => ({ type: "HIDE_OVERLAY" });

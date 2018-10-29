@@ -28,8 +28,13 @@ export interface IChangeGameOptionsAction {
   readonly type: "CHANGE_GAME_OPTIONS";
 }
 
+export interface IHideOverlayAction {
+  readonly type: "HIDE_OVERLAY";
+}
+
 export type AnyAction =
   | IToggleCellAction
   | IOpenCellAction
   | IStartGameAction
-  | IChangeGameOptionsAction;
+  | IChangeGameOptionsAction
+  | IHideOverlayAction;

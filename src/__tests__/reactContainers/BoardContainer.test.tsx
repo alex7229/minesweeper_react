@@ -13,7 +13,8 @@ export const testGlobalState: IGlobalState = {
   gameStartTimestamp: 1000,
   gameTimeMs: 25000,
   seed: "random seed",
-  isFinished: false
+  isFinished: false,
+  winOverlay: false
 };
 
 it("should provide props from state", () => {

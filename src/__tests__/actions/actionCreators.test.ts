@@ -1,5 +1,6 @@
 import {
   changeGameOption,
+  hideOverlay,
   openCell,
   startGame,
   toggleCell
@@ -31,4 +32,8 @@ it("should create change game options action", () => {
     type: "CHANGE_GAME_OPTIONS",
     payload: { type: "width", value: 55 }
   });
+});
+
+it("should create hide overlay action", () => {
+  expect(hideOverlay()).toEqual({ type: "HIDE_OVERLAY" });
 });
