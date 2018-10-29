@@ -1,4 +1,5 @@
 import { AnyAction } from "../../application/actions/actions";
+import { hideOverlayReducer } from "../../application/reducers/hideOverlayReducer";
 import {
   IGlobalState,
   rootReducer
@@ -18,5 +19,6 @@ export const rootReducerContainer: RootReducerContainer = (state, action) =>
     gameOptionsReducerContainer,
     openCellReducerContainer,
     startGameReducerContainer,
-    toggleCellReducerContainer
+    toggleCellReducerContainer,
+    hideOverlayReducer
   ]);
