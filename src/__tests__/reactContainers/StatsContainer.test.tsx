@@ -63,6 +63,12 @@ it("should provide game start timestamp", () => {
   expect(factory(state).gameStartTimestamp).toBe(state.gameStartTimestamp);
 });
 
+it("should provide game time ", () => {
+  const state = { ...testGlobalState };
+  const factory = mapStateToPropsFactory(stateDependencies);
+  expect(factory(state).gameTimeMs).toBe(state.gameTimeMs);
+});
+
 it("should provide is finished field", () => {
   const state = { ...testGlobalState, isFinished: true };
   const factory = mapStateToPropsFactory(stateDependencies);

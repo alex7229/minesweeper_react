@@ -2,6 +2,7 @@ import { shallow } from "enzyme";
 import * as React from "react";
 import { Digits } from "../../application/components/Digits";
 import { IStatsProps, Stats } from "../../application/components/Stats";
+import { getDigitsFromTimeContainer } from "../../DIContainers/logic/digits/getDigitsFromTimeContainer";
 
 jest.useFakeTimers();
 
@@ -9,6 +10,7 @@ const defaultProps: IStatsProps = {
   gameHasStarted: true,
   getTime: jest.fn(),
   getDigitsFromTime: jest.fn(),
+  gameTimeMs: 0,
   gameStartTimestamp: 0,
   flagsLeft: [4, 4],
   size: "big",
@@ -178,4 +180,18 @@ it("should call restart game on smiley face click", () => {
   const image = element.find("img#restart_face");
   image.simulate("click");
   expect(clickMock.mock.calls.length).toBe(1);
+});
+
+it("should not update timer if the game is already finished", () => {
+  const props = {
+    ...defaultProps,
+    gameTimeMs: 47000,
+    isFinished: true,
+    getTime: () => 25000,
+    getDigitsFromTime: getDigitsFromTimeContainer
+  };
+  const element = shallow(<Stats {...props} />);
+  const timer = element.find("#timer").find(Digits);
+  // 47 seconds
+  expect(timer.props().digits).toEqual([4, 7]);
 });

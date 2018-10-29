@@ -17,6 +17,7 @@ export interface IStatsStateProps {
   readonly isFinished: boolean;
   readonly getTime: () => number;
   readonly getDigitsFromTime: GetDigitsFromTimeContainer;
+  readonly gameTimeMs: number;
 }
 
 export type IStatsProps = IStatsStateProps & IStatsDispatchProps;
@@ -61,7 +62,9 @@ export class Stats extends React.Component<IStatsProps> {
       this.stopInterval();
     }
 
-    const gameTime = this.props.getTime() - this.props.gameStartTimestamp;
+    const gameTime = this.props.isFinished
+      ? this.props.gameTimeMs
+      : this.props.getTime() - this.props.gameStartTimestamp;
     const timerDigits = this.props.getDigitsFromTime(
       this.props.gameHasStarted ? gameTime : 0
     );

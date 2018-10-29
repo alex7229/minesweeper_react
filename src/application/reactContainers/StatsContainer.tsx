@@ -45,7 +45,8 @@ export const mapStateToPropsFactory: MapStateToPropsFactory = dependencies => st
   isFinished: state.isFinished,
   getTime: dependencies.getTime,
   getDigitsFromTime: dependencies.getDigitsFromTime,
-  gameHasStarted: dependencies.calculateMines(state.field) > 0
+  gameHasStarted: dependencies.calculateMines(state.field) > 0,
+  gameTimeMs: state.gameTimeMs
 });
 
 export const mapDispatchToProps: MapDispatchToProps = dispatch => ({
