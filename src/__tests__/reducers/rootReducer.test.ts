@@ -1,22 +1,12 @@
 import { changeGameOption } from "../../application/actions/actionCreators";
-import {
-  IGlobalState,
-  rootReducer
-} from "../../application/reducers/rootReducer";
+import { hideOverlayReducer } from "../../application/reducers/hideOverlayReducer";
+import { rootReducer } from "../../application/reducers/rootReducer";
 import { openCellReducerContainer } from "../../DIContainers/reducers/openCellReducerContainer";
 import { startGameReducerContainer } from "../../DIContainers/reducers/startGameReducerContainer";
 import { toggleCellReducerContainer } from "../../DIContainers/reducers/toggleCellReducerContainer";
+import { testGlobalState } from "../reactContainers/BoardContainer.test";
 
-const defaultState: IGlobalState = {
-  gameTimeMs: 0,
-  width: 30,
-  height: 16,
-  mines: 99,
-  seed: "random seed",
-  isFinished: false,
-  field: [[]],
-  gameStartTimestamp: 0
-};
+const defaultState = { ...testGlobalState };
 
 it("should change state properly", () => {
   const action = changeGameOption({ type: "width", value: 67 });
@@ -25,7 +15,8 @@ it("should change state properly", () => {
     changeGameOptionReducerMock,
     openCellReducerContainer,
     startGameReducerContainer,
-    toggleCellReducerContainer
+    toggleCellReducerContainer,
+    hideOverlayReducer
   ];
 
   const nextState = rootReducer(defaultState, action, reducers);

@@ -27,6 +27,9 @@ class App extends React.Component {
     });
 
     store.dispatch({ type: "START_GAME", payload: "advanced" });
+    // tslint:disable-next-line
+    const hideOverlay = () => console.log("background was clicked");
+
     return (
       <>
         <Provider store={store}>
@@ -34,7 +37,7 @@ class App extends React.Component {
             <Buttons />
             <StatsContainer />
             <BoardContainer />
-            <WinOverlay />
+            <WinOverlay hideOverlay={hideOverlay} time={23} difficulty={44} />
           </>
         </Provider>
       </>

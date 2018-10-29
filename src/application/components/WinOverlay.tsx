@@ -7,21 +7,30 @@ interface IProps {
   readonly hideOverlay: () => void;
 }
 
-export const WinOverlay = (props: IProps) => (
-  <div id="overlay" onClick={props.hideOverlay}>
-    <div>
-      <div>
-        Time (secs): <span>223.52</span>
-        {/* 2 digits after decimal */}
-      </div>
-      <div>
-        Difficulty 3BV: <span>116</span>
-        {/* integer */}
-      </div>
-      <div>
-        3BV/sec: <span>0.5</span>
-        {/* 3 digits after . */}
+export const WinOverlay = (props: IProps) => {
+  const hideOverlay = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
+    return target.id === "overlay" ? props.hideOverlay() : null;
+  };
+
+  return (
+    <div id="overlay" onClick={hideOverlay}>
+      <div id="overlayContent" onClick={hideOverlay}>
+        <div>
+          {/* rounded to two decimal places */}
+          Time (secs): <span>{Math.floor(props.time / 10) / 100}</span>
+        </div>
+        <div>
+          Difficulty 3BV: <span>{props.difficulty}</span>
+        </div>
+        <div>
+          3BV/sec:{" "}
+          <span>
+            {/* It is rounded to 3 decimal places */}
+            {Math.floor((props.difficulty / props.time) * 1000000) / 1000}
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
