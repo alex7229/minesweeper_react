@@ -5,8 +5,8 @@ import { rootReducerContainer } from "../../DIContainers/reducers/rootReducerCon
 import "../css/app.css";
 import BoardContainer from "../reactContainers/BoardContainer";
 import StatsContainer from "../reactContainers/StatsContainer";
+import WinOverlayContainer from "../reactContainers/WinOverlayContainer";
 import { Buttons } from "./Buttons";
-import { WinOverlay } from "./WinOverlay";
 
 class App extends React.Component {
   public render() {
@@ -27,8 +27,6 @@ class App extends React.Component {
     });
 
     store.dispatch({ type: "START_GAME", payload: "advanced" });
-    // tslint:disable-next-line
-    const hideOverlay = () => console.log("background was clicked");
 
     return (
       <>
@@ -37,7 +35,7 @@ class App extends React.Component {
             <Buttons />
             <StatsContainer />
             <BoardContainer />
-            <WinOverlay hideOverlay={hideOverlay} time={23} difficulty={44} />
+            <WinOverlayContainer />
           </>
         </Provider>
       </>
