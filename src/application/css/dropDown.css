@@ -60,11 +60,11 @@ input {
 .errorContainer {
   position: absolute;
   display: block;
-  left: -100%;
+  left: -150%;
   font-size: 0.5em;
   color: darkred;
   line-height: 2em;
-  width: 100%;
+  width: 150%;
 }
 
 .error {

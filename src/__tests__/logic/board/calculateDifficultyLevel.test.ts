@@ -3,13 +3,19 @@ import { calculateDifficultyLevel } from "../../../application/logic/board/calcu
 import { generateEmptyField } from "../../../application/logic/board/generateEmptyField";
 import { openCells } from "../../../application/logic/board/openCells";
 import { placeMines } from "../../../application/logic/board/placeMines";
+import { restoreField } from "../../../application/logic/board/restoreField";
 import { findCellsToOpenContainer } from "../../../DIContainers/logic/board/findCellsToOpenContainer";
 import { recalculateMinesAroundContainer } from "../../../DIContainers/logic/board/recalculateMinesAroundContainer";
 
 it("should return 1 for empty board", () => {
   const field = generateEmptyField(5, 5);
   expect(
-    calculateDifficultyLevel(field, findCellsToOpenContainer, openCells)
+    calculateDifficultyLevel(
+      field,
+      findCellsToOpenContainer,
+      openCells,
+      restoreField
+    )
   ).toBe(1);
 });
 
@@ -65,7 +71,27 @@ it("should return 39 for the board from the wiki", () => {
     calculateDifficultyLevel(
       boardWithMines,
       findCellsToOpenContainer,
-      openCells
+      openCells,
+      restoreField
     )
   ).toBe(39);
+});
+
+it("should work for opened field", () => {
+  const field = generateEmptyField(10, 10);
+  const fieldWithMines = recalculateMinesAroundContainer(
+    placeMines(field, [{ row: 0, column: 0 }, { row: 9, column: 9 }])
+  );
+  const openedField = openCells(
+    fieldWithMines,
+    findCellsToOpenContainer(fieldWithMines, { row: 6, column: 6 })
+  );
+  expect(
+    calculateDifficultyLevel(
+      openedField,
+      findCellsToOpenContainer,
+      openCells,
+      restoreField
+    )
+  ).toBe(1);
 });
