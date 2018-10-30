@@ -30,6 +30,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// todo: remove recursion from 'find cells to open"
-// todo: add local storage  state saving
