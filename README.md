@@ -2,6 +2,8 @@
 
 Stack: react, redux, typescript, no back-end.
 
+Demo: https://minesweeper-react.netlify.com/
+
 Differences from old knockout version
 https://github.com/tup1tsa/minesweeper_knockout
 
