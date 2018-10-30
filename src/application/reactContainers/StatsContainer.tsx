@@ -51,7 +51,7 @@ export const mapStateToPropsFactory: MapStateToPropsFactory = dependencies => st
 });
 
 export const mapDispatchToProps: MapDispatchToProps = dispatch => ({
-  restartGame: () => dispatch(startGame("custom"))
+  restartGame: () => dispatch(startGame("restart"))
 });
 
 export default connect(

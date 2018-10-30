@@ -13,7 +13,12 @@ export interface IToggleCellAction {
   readonly type: "TOGGLE_CELL";
 }
 
-export type StartGamePayload = "beginner" | "advanced" | "expert" | "custom";
+export type StartGamePayload =
+  | "beginner"
+  | "advanced"
+  | "expert"
+  | "custom"
+  | "restart";
 export interface IStartGameAction {
   readonly type: "START_GAME";
   readonly payload: StartGamePayload;

@@ -1,3 +1,4 @@
+import { InferGameConfigContainer } from "../../DIContainers/logic/board/inferGameConfigContainer";
 import { ValidateGameOptionsContainer } from "../../DIContainers/logic/validators/validateGameOptionsContainer";
 import { AnyAction } from "../actions/actions";
 import { ADVANCED_CONFIG, BEGINNER_CONFIG, EXPERT_CONFIG } from "../constants";
@@ -20,6 +21,7 @@ export type StartGameReducer = (
     getTime: () => number;
     generateEmptyField: GenerateEmptyField;
     validateGameOptions: ValidateGameOptionsContainer;
+    inferGameConfig: InferGameConfigContainer;
   }
 ) => IStartGameReducerState;
 
@@ -45,6 +47,9 @@ export const startGameReducer: StartGameReducer = (
   }
   if (action.payload === "expert") {
     config = EXPERT_CONFIG;
+  }
+  if (action.payload === "restart") {
+    config = functions.inferGameConfig(state.field);
   }
   if (functions.validateGameOptions(config) === false) {
     return state;

@@ -6,11 +6,11 @@ import {
   MIN_MINES,
   MIN_WIDTH
 } from "../../constants";
-import { IGameOptionsState } from "../../reducers/gameOptionsReducer";
+import { IGameConfig } from "../board/inferGameConfig";
 import { CheckNumberRange } from "./checkNumberRange";
 
 export type ValidateGameOptions = (
-  options: IGameOptionsState,
+  options: IGameConfig,
   checkNumberRange: CheckNumberRange
 ) => boolean;
 

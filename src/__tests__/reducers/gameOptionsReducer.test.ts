@@ -2,12 +2,10 @@ import {
   IChangeGameOptionsAction,
   IToggleCellAction
 } from "../../application/actions/actions";
-import {
-  gameOptionsReducer,
-  IGameOptionsState
-} from "../../application/reducers/gameOptionsReducer";
+import { IGameConfig } from "../../application/logic/board/inferGameConfig";
+import { gameOptionsReducer } from "../../application/reducers/gameOptionsReducer";
 
-const defaultState: IGameOptionsState = {
+const defaultState: IGameConfig = {
   width: 22,
   height: 22,
   mines: 13

@@ -124,6 +124,6 @@ it("should dispatch restart game handler", () => {
   props.restartGame();
   expect(dispatch.mock.calls[0][0]).toEqual({
     type: "START_GAME",
-    payload: "custom"
+    payload: "restart"
   });
 });

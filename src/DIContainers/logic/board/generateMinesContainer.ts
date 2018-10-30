@@ -1,10 +1,10 @@
 import * as seedRandom from "seedrandom";
 import { ICellPosition } from "../../../application/actions/actions";
 import { generateMines } from "../../../application/logic/board/generateMines";
-import { IGameOptionsState } from "../../../application/reducers/gameOptionsReducer";
+import { IGameConfig } from "../../../application/logic/board/inferGameConfig";
 
 export type GenerateMinesContainer = (
-  gameOptions: IGameOptionsState,
+  gameOptions: IGameConfig,
   seed: string,
   reservedPositions?: ReadonlyArray<ICellPosition>
 ) => ReadonlyArray<ICellPosition>;

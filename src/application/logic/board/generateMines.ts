@@ -1,11 +1,11 @@
 import { ICellPosition } from "../../actions/actions";
-import { IGameOptionsState } from "../../reducers/gameOptionsReducer";
+import { IGameConfig } from "./inferGameConfig";
 
 type RNG = () => number;
 type SeedRandom = (seed: string) => RNG;
 
 export type GenerateMines = (
-  gameOptions: IGameOptionsState,
+  gameOptions: IGameConfig,
   seed: string,
   seedRandom: SeedRandom,
   reservedPositions?: ReadonlyArray<ICellPosition>

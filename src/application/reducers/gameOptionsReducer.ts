@@ -1,15 +1,10 @@
 import { AnyAction } from "../actions/actions";
-
-export interface IGameOptionsState {
-  readonly width: number;
-  readonly height: number;
-  readonly mines: number;
-}
+import { IGameConfig } from "../logic/board/inferGameConfig";
 
 export type GameOptionsReducer = (
-  state: IGameOptionsState,
+  state: IGameConfig,
   action: AnyAction
-) => IGameOptionsState;
+) => IGameConfig;
 
 export const gameOptionsReducer: GameOptionsReducer = (state, action) => {
   if (action.type !== "CHANGE_GAME_OPTIONS") {

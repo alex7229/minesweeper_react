@@ -25,7 +25,8 @@ const defaultAction: IStartGameAction = {
 const helperFunctions = {
   getTime: jest.fn().mockReturnValue(10000),
   generateEmptyField,
-  validateGameOptions: jest.fn().mockReturnValue(true)
+  validateGameOptions: jest.fn().mockReturnValue(true),
+  inferGameConfig: jest.fn()
 };
 
 it("should not change state if action is not start game", () => {
@@ -124,5 +125,27 @@ it("should set current field size mines for custom", () => {
     gameStartTimestamp: 10000,
     field,
     isFinished: false
+  });
+});
+
+it("should set inferred field size and mines on restart", () => {
+  const inferConfigMock = jest.fn().mockReturnValue({
+    mines: 17,
+    width: 33,
+    height: 32
+  });
+  expect(
+    startGameReducer(
+      defaultState,
+      { ...defaultAction, payload: "restart" },
+      { ...helperFunctions, inferGameConfig: inferConfigMock }
+    )
+  ).toEqual({
+    mines: 17,
+    width: 33,
+    height: 32,
+    field: generateEmptyField(33, 32),
+    isFinished: false,
+    gameStartTimestamp: 10000
   });
 });
