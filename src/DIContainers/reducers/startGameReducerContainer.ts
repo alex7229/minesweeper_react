@@ -4,6 +4,7 @@ import {
   IStartGameReducerState,
   startGameReducer
 } from "../../application/reducers/startGameReducer";
+import { validateGameOptionsContainer } from "../logic/validators/validateGameOptionsContainer";
 
 export type StartGameReducerContainer = (
   state: IStartGameReducerState,
@@ -12,7 +13,8 @@ export type StartGameReducerContainer = (
 
 const helperFunctions = {
   getTime: () => new Date().getTime(),
-  generateEmptyField
+  generateEmptyField,
+  validateGameOptions: validateGameOptionsContainer
 };
 
 export const startGameReducerContainer: StartGameReducerContainer = (

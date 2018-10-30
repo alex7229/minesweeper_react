@@ -24,7 +24,8 @@ const defaultAction: IStartGameAction = {
 
 const helperFunctions = {
   getTime: jest.fn().mockReturnValue(10000),
-  generateEmptyField
+  generateEmptyField,
+  validateGameOptions: jest.fn().mockReturnValue(true)
 };
 
 it("should not change state if action is not start game", () => {
@@ -35,6 +36,16 @@ it("should not change state if action is not start game", () => {
   expect(startGameReducer(defaultState, action, helperFunctions)).toEqual(
     defaultState
   );
+});
+
+it("should not start game if options are not valid", () => {
+  const validate = jest.fn().mockReturnValue(false);
+  expect(
+    startGameReducer(defaultState, defaultAction, {
+      ...helperFunctions,
+      validateGameOptions: validate
+    })
+  ).toEqual(defaultState);
 });
 
 it("should set correct start time", () => {

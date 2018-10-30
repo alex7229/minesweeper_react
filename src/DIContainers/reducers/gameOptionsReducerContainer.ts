@@ -1,5 +1,4 @@
 import { AnyAction } from "../../application/actions/actions";
-import { validateGameOptions } from "../../application/logic/validators/validateGameOptions";
 import {
   gameOptionsReducer,
   IGameOptionsState
@@ -13,4 +12,4 @@ export type GameOptionsReducerContainer = (
 export const gameOptionsReducerContainer: GameOptionsReducerContainer = (
   state,
   action
-) => gameOptionsReducer(state, action, validateGameOptions);
+) => gameOptionsReducer(state, action);

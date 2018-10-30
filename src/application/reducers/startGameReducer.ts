@@ -1,8 +1,7 @@
+import { ValidateGameOptionsContainer } from "../../DIContainers/logic/validators/validateGameOptionsContainer";
 import { AnyAction } from "../actions/actions";
-import {
-  GenerateEmptyField,
-  generateEmptyField
-} from "../logic/board/generateEmptyField";
+import { ADVANCED_CONFIG, BEGINNER_CONFIG, EXPERT_CONFIG } from "../constants";
+import { GenerateEmptyField } from "../logic/board/generateEmptyField";
 import { Field } from "./toggleCellReducer";
 
 export interface IStartGameReducerState {
@@ -20,6 +19,7 @@ export type StartGameReducer = (
   functions: {
     getTime: () => number;
     generateEmptyField: GenerateEmptyField;
+    validateGameOptions: ValidateGameOptionsContainer;
   }
 ) => IStartGameReducerState;
 
@@ -31,30 +31,28 @@ export const startGameReducer: StartGameReducer = (
   if (action.type !== "START_GAME") {
     return state;
   }
-  let width = state.width;
-  let height = state.height;
-  let mines = state.mines;
+  let config = {
+    width: state.width,
+    height: state.height,
+    mines: state.mines
+  };
+
   if (action.payload === "beginner") {
-    width = 9;
-    height = 9;
-    mines = 10;
+    config = BEGINNER_CONFIG;
   }
   if (action.payload === "advanced") {
-    width = 16;
-    height = 16;
-    mines = 40;
+    config = ADVANCED_CONFIG;
   }
   if (action.payload === "expert") {
-    width = 30;
-    height = 16;
-    mines = 99;
+    config = EXPERT_CONFIG;
+  }
+  if (functions.validateGameOptions(config) === false) {
+    return state;
   }
   return {
+    ...config,
     isFinished: false,
-    width,
-    height,
-    mines,
     gameStartTimestamp: functions.getTime(),
-    field: generateEmptyField(width, height)
+    field: functions.generateEmptyField(config.width, config.height)
   };
 };

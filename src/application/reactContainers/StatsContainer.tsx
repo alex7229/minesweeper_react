@@ -37,10 +37,11 @@ export const mapStateToPropsFactory: MapStateToPropsFactory = dependencies => st
   mineWasClicked: dependencies.calculateActiveMines(state.field) === 1,
   timer: dependencies.getDigitsFromTime(state.gameTimeMs),
   flagsLeft: dependencies.getDigitsFromNumber(
-    state.mines - dependencies.calculateFlags(state.field)
+    dependencies.calculateMines(state.field) -
+      dependencies.calculateFlags(state.field)
   ),
-  // 1-8 -> tiny, 9-16 -> small, 17+ -> big
-  size: state.width > 16 ? "big" : state.width > 8 ? "small" : "tiny",
+  //  9-16 -> small, 17+ -> big
+  size: state.field[0].length > 16 ? "big" : "small",
   gameStartTimestamp: state.gameStartTimestamp,
   isFinished: state.isFinished,
   getTime: dependencies.getTime,

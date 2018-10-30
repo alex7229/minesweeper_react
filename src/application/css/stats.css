@@ -16,10 +16,6 @@
   cursor: pointer;
 }
 
-#stats.tiny {
-  font-size: 0.4rem;
-}
-
 #stats.small {
   font-size: 0.8rem;
 }

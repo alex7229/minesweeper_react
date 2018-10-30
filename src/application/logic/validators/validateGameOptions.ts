@@ -1,26 +1,23 @@
+import {
+  MAX_HEIGHT,
+  MAX_WIDTH,
+  MIN_EMPTY_CELLS,
+  MIN_HEIGHT,
+  MIN_MINES,
+  MIN_WIDTH
+} from "../../constants";
 import { IGameOptionsState } from "../../reducers/gameOptionsReducer";
+import { CheckNumberRange } from "./checkNumberRange";
 
-export type ValidateGameOptions = (options: IGameOptionsState) => boolean;
+export type ValidateGameOptions = (
+  options: IGameOptionsState,
+  checkNumberRange: CheckNumberRange
+) => boolean;
 
-export const validateGameOptions: ValidateGameOptions = ({
-  height,
-  width,
-  mines
-}) => {
-  if (
-    width !== Math.floor(width) ||
-    height !== Math.floor(height) ||
-    mines !== Math.floor(mines)
-  ) {
-    return false;
-  }
-  if (width < 4 || width > 100 || height < 4 || height > 100) {
-    return false;
-  }
-  if (mines < 1) {
-    return false;
-  }
-  const minEmptyCellsNumber = 9;
-  const limit = width * height - minEmptyCellsNumber;
-  return mines <= limit;
-};
+export const validateGameOptions: ValidateGameOptions = (
+  { height, width, mines },
+  checkNumberRange
+) =>
+  checkNumberRange(width, MIN_WIDTH, MAX_WIDTH) === "" &&
+  checkNumberRange(height, MIN_HEIGHT, MAX_HEIGHT) === "" &&
+  checkNumberRange(mines, MIN_MINES, width * height - MIN_EMPTY_CELLS) === "";

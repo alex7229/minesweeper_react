@@ -13,59 +13,42 @@ const defaultState: IGameOptionsState = {
   mines: 13
 };
 
-it("should not change width if action is not change width", () => {
-  const validate = jest.fn().mockReturnValue(true);
+it("should not change state if action is not change options", () => {
   const action: IToggleCellAction = {
     type: "TOGGLE_CELL",
     payload: { row: 12, column: 44 }
   };
-  expect(gameOptionsReducer(defaultState, action, validate)).toEqual(
-    defaultState
-  );
+  expect(gameOptionsReducer(defaultState, action)).toEqual(defaultState);
 });
 
-it("should return previous width if validation fails", () => {
-  const validator = jest.fn().mockReturnValue(false);
-  const action: IChangeGameOptionsAction = {
-    type: "CHANGE_GAME_OPTIONS",
-    payload: { type: "width", value: 66 }
-  };
-  expect(gameOptionsReducer(defaultState, action, validator)).toEqual(
-    defaultState
-  );
-});
-
-it("should change width prooperly", () => {
-  const validator = jest.fn().mockReturnValue(true);
+it("should change width properly", () => {
   const action: IChangeGameOptionsAction = {
     type: "CHANGE_GAME_OPTIONS",
     payload: { type: "width", value: 117 }
   };
-  expect(gameOptionsReducer(defaultState, action, validator)).toEqual({
+  expect(gameOptionsReducer(defaultState, action)).toEqual({
     ...defaultState,
     width: 117
   });
 });
 
-it("should change height prooperly", () => {
-  const validator = jest.fn().mockReturnValue(true);
+it("should change height properly", () => {
   const action: IChangeGameOptionsAction = {
     type: "CHANGE_GAME_OPTIONS",
     payload: { type: "height", value: 117 }
   };
-  expect(gameOptionsReducer(defaultState, action, validator)).toEqual({
+  expect(gameOptionsReducer(defaultState, action)).toEqual({
     ...defaultState,
     height: 117
   });
 });
 
-it("should change mines prooperly", () => {
-  const validator = jest.fn().mockReturnValue(true);
+it("should change mines properly", () => {
   const action: IChangeGameOptionsAction = {
     type: "CHANGE_GAME_OPTIONS",
     payload: { type: "mines", value: 117 }
   };
-  expect(gameOptionsReducer(defaultState, action, validator)).toEqual({
+  expect(gameOptionsReducer(defaultState, action)).toEqual({
     ...defaultState,
     mines: 117
   });

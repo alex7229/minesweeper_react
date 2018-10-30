@@ -1,3 +1,4 @@
+import { generateEmptyField } from "../../application/logic/board/generateEmptyField";
 import {
   mapDispatchToProps,
   mapStateToPropsFactory
@@ -16,11 +17,15 @@ const stateDependencies = {
 
 it("should calculate size properly", () => {
   const factory = mapStateToPropsFactory(stateDependencies);
-
-  expect(factory({ ...testGlobalState, width: 17 }).size).toBe("big");
-  expect(factory({ ...testGlobalState, width: 16 }).size).toBe("small");
-  expect(factory({ ...testGlobalState, width: 9 }).size).toBe("small");
-  expect(factory({ ...testGlobalState, width: 8 }).size).toBe("tiny");
+  expect(
+    factory({ ...testGlobalState, field: generateEmptyField(17, 2) }).size
+  ).toBe("big");
+  expect(
+    factory({ ...testGlobalState, field: generateEmptyField(16, 5) }).size
+  ).toBe("small");
+  expect(
+    factory({ ...testGlobalState, field: generateEmptyField(9, 5) }).size
+  ).toBe("small");
 });
 
 it("should set mine was clicked if field contains clicked mine", () => {
@@ -46,15 +51,18 @@ it("should set mine was clicked if field contains clicked mine", () => {
 it("should calculate flags count properly", () => {
   const state = { ...testGlobalState };
   const calculateFlagsMock = jest.fn().mockReturnValue(3);
+  const calculateMinesCount = jest.fn().mockReturnValue(13);
 
   const factory = mapStateToPropsFactory({
     ...stateDependencies,
     getDigitsFromNumber: getDigitsFromNumberContainer,
+    calculateMines: calculateMinesCount,
     calculateFlags: calculateFlagsMock
   });
-  // 10 mines minus 3 flags
-  expect(factory(state).flagsLeft).toEqual([0, 7]);
+  // 13 mines minus 3 flags
+  expect(factory(state).flagsLeft).toEqual([1, 0]);
   expect(calculateFlagsMock.mock.calls[0][0]).toBe(state.field);
+  expect(calculateMinesCount.mock.calls[0][0]).toBe(state.field);
 });
 
 it("should provide game start timestamp", () => {
@@ -96,16 +104,16 @@ it("should provide get digits from time function", () => {
 });
 
 it("should provide game has started property depending on mines count", () => {
-  const calculateMinesMock = jest
-    .fn()
-    .mockReturnValueOnce(0)
-    .mockReturnValueOnce(15);
+  let calculateMines = jest.fn().mockReturnValue(0);
   const state = { ...testGlobalState };
-  const factory = mapStateToPropsFactory({
+  let factory = mapStateToPropsFactory({
     ...stateDependencies,
-    calculateMines: calculateMinesMock
+    calculateMines
   });
   expect(factory(state).gameHasStarted).toBe(false);
+
+  calculateMines = jest.fn().mockReturnValue(15);
+  factory = mapStateToPropsFactory({ ...stateDependencies, calculateMines });
   expect(factory(state).gameHasStarted).toBe(true);
 });
 

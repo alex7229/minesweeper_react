@@ -13,7 +13,7 @@ export interface IStatsStateProps {
   readonly mineWasClicked: boolean;
   readonly gameStartTimestamp: number;
   readonly flagsLeft: ReadonlyArray<DigitOrDot>;
-  readonly size: "tiny" | "small" | "big";
+  readonly size: "small" | "big";
   readonly isFinished: boolean;
   readonly getTime: () => number;
   readonly getDigitsFromTime: GetDigitsFromTimeContainer;

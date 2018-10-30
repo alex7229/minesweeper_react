@@ -1,5 +1,4 @@
 import { AnyAction } from "../actions/actions";
-import { ValidateGameOptions } from "../logic/validators/validateGameOptions";
 
 export interface IGameOptionsState {
   readonly width: number;
@@ -9,35 +8,21 @@ export interface IGameOptionsState {
 
 export type GameOptionsReducer = (
   state: IGameOptionsState,
-  action: AnyAction,
-  validateGameOptions: ValidateGameOptions
+  action: AnyAction
 ) => IGameOptionsState;
 
-export const gameOptionsReducer: GameOptionsReducer = (
-  state,
-  action,
-  validateGameOptions
-) => {
+export const gameOptionsReducer: GameOptionsReducer = (state, action) => {
   if (action.type !== "CHANGE_GAME_OPTIONS") {
     return state;
   }
   if (action.payload.type === "width") {
-    const options = { ...state, width: action.payload.value };
-    if (validateGameOptions(options)) {
-      return options;
-    }
+    return { ...state, width: action.payload.value };
   }
   if (action.payload.type === "height") {
-    const options = { ...state, height: action.payload.value };
-    if (validateGameOptions(options)) {
-      return options;
-    }
+    return { ...state, height: action.payload.value };
   }
   if (action.payload.type === "mines") {
-    const options = { ...state, mines: action.payload.value };
-    if (validateGameOptions(options)) {
-      return options;
-    }
+    return { ...state, mines: action.payload.value };
   }
   return state;
 };
