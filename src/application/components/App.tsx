@@ -33,3 +33,5 @@ export default App;
 
 // todo: remove recursion from 'find cells to open"
 // todo: add local storage  state saving
+// todo: difficulty should be stored in state on first click
+// todo: custom field should show difficulty in win overlay too
