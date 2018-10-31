@@ -1,23 +1,28 @@
 import { AnyAction } from "../actions/actions";
-import { IGameConfig } from "../logic/board/inferGameConfig";
+
+export interface IGameOptionsReducerState {
+  readonly widthInput: number;
+  readonly heightInput: number;
+  readonly minesInput: number;
+}
 
 export type GameOptionsReducer = (
-  state: IGameConfig,
+  state: IGameOptionsReducerState,
   action: AnyAction
-) => IGameConfig;
+) => IGameOptionsReducerState;
 
 export const gameOptionsReducer: GameOptionsReducer = (state, action) => {
   if (action.type !== "CHANGE_GAME_OPTIONS") {
     return state;
   }
   if (action.payload.type === "width") {
-    return { ...state, width: action.payload.value };
+    return { ...state, widthInput: action.payload.value };
   }
   if (action.payload.type === "height") {
-    return { ...state, height: action.payload.value };
+    return { ...state, heightInput: action.payload.value };
   }
   if (action.payload.type === "mines") {
-    return { ...state, mines: action.payload.value };
+    return { ...state, minesInput: action.payload.value };
   }
   return state;
 };

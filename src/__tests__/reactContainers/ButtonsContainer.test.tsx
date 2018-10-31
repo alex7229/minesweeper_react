@@ -22,7 +22,12 @@ it("should provide correct field width", () => {
 });
 
 it("should provide correct error messages", () => {
-  const state = { ...defaultState, width: 32, height: 12, mines: 4 };
+  const state = {
+    ...defaultState,
+    widthInput: 32,
+    heightInput: 12,
+    minesInput: 4
+  };
   const checkRange = jest.fn().mockReturnValue("no errors");
   const factory = mapStateToPropsFactory(checkRange);
   const nextState = factory(state);
@@ -31,17 +36,17 @@ it("should provide correct error messages", () => {
   expect(nextState.minesError).toBe("no errors");
 
   expect(checkRange.mock.calls.length).toBe(3);
-  expect(checkRange.mock.calls[0][0]).toBe(state.width);
+  expect(checkRange.mock.calls[0][0]).toBe(state.widthInput);
   expect(checkRange.mock.calls[0][1]).toBe(MIN_WIDTH);
   expect(checkRange.mock.calls[0][2]).toBe(MAX_WIDTH);
 
-  expect(checkRange.mock.calls[1][0]).toBe(state.height);
+  expect(checkRange.mock.calls[1][0]).toBe(state.heightInput);
   expect(checkRange.mock.calls[1][1]).toBe(MIN_HEIGHT);
   expect(checkRange.mock.calls[1][2]).toBe(MAX_HEIGHT);
 
-  expect(checkRange.mock.calls[2][0]).toBe(state.mines);
+  expect(checkRange.mock.calls[2][0]).toBe(state.minesInput);
   expect(checkRange.mock.calls[2][1]).toBe(MIN_MINES);
-  const maxMines = state.width * state.height - MIN_EMPTY_CELLS;
+  const maxMines = state.widthInput * state.heightInput - MIN_EMPTY_CELLS;
   expect(checkRange.mock.calls[2][2]).toBe(maxMines);
 });
 

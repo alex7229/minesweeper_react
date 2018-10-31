@@ -6,7 +6,7 @@ import {
   MIN_MINES,
   MIN_WIDTH
 } from "../../constants";
-import { IGameConfig } from "../board/inferGameConfig";
+import { IGameConfig } from "../board/generateMines";
 import { CheckNumberRange } from "./checkNumberRange";
 
 export type ValidateGameOptions = (

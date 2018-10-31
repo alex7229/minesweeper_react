@@ -2,13 +2,12 @@ import {
   IChangeGameOptionsAction,
   IToggleCellAction
 } from "../../application/actions/actions";
-import { IGameConfig } from "../../application/logic/board/inferGameConfig";
 import { gameOptionsReducer } from "../../application/reducers/gameOptionsReducer";
 
-const defaultState: IGameConfig = {
-  width: 22,
-  height: 22,
-  mines: 13
+const defaultState = {
+  widthInput: 22,
+  heightInput: 22,
+  minesInput: 13
 };
 
 it("should not change state if action is not change options", () => {
@@ -26,7 +25,7 @@ it("should change width properly", () => {
   };
   expect(gameOptionsReducer(defaultState, action)).toEqual({
     ...defaultState,
-    width: 117
+    widthInput: 117
   });
 });
 
@@ -37,7 +36,7 @@ it("should change height properly", () => {
   };
   expect(gameOptionsReducer(defaultState, action)).toEqual({
     ...defaultState,
-    height: 117
+    heightInput: 117
   });
 });
 
@@ -48,6 +47,6 @@ it("should change mines properly", () => {
   };
   expect(gameOptionsReducer(defaultState, action)).toEqual({
     ...defaultState,
-    mines: 117
+    minesInput: 117
   });
 });

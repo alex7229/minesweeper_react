@@ -1,4 +1,3 @@
-import { InferGameConfigContainer } from "../../DIContainers/logic/board/inferGameConfigContainer";
 import { ValidateGameOptionsContainer } from "../../DIContainers/logic/validators/validateGameOptionsContainer";
 import { AnyAction } from "../actions/actions";
 import { ADVANCED_CONFIG, BEGINNER_CONFIG, EXPERT_CONFIG } from "../constants";
@@ -9,6 +8,9 @@ export interface IStartGameReducerState {
   readonly width: number;
   readonly height: number;
   readonly mines: number;
+  readonly widthInput: number;
+  readonly heightInput: number;
+  readonly minesInput: number;
   readonly gameStartTimestamp: number;
   readonly field: Field;
   readonly isFinished: boolean;
@@ -21,7 +23,6 @@ export type StartGameReducer = (
     getTime: () => number;
     generateEmptyField: GenerateEmptyField;
     validateGameOptions: ValidateGameOptionsContainer;
-    inferGameConfig: InferGameConfigContainer;
   }
 ) => IStartGameReducerState;
 
@@ -38,7 +39,11 @@ export const startGameReducer: StartGameReducer = (
     height: state.height,
     mines: state.mines
   };
-
+  const inputsConfig = {
+    width: state.widthInput,
+    height: state.heightInput,
+    mines: state.minesInput
+  };
   if (action.payload === "beginner") {
     config = BEGINNER_CONFIG;
   }
@@ -48,13 +53,14 @@ export const startGameReducer: StartGameReducer = (
   if (action.payload === "expert") {
     config = EXPERT_CONFIG;
   }
-  if (action.payload === "restart") {
-    config = functions.inferGameConfig(state.field);
-  }
-  if (functions.validateGameOptions(config) === false) {
-    return state;
+  if (action.payload === "custom") {
+    if (functions.validateGameOptions(inputsConfig) === false) {
+      return state;
+    }
+    config = inputsConfig;
   }
   return {
+    ...state,
     ...config,
     isFinished: false,
     gameStartTimestamp: functions.getTime(),

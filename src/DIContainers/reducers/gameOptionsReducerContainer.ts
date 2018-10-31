@@ -1,11 +1,13 @@
 import { AnyAction } from "../../application/actions/actions";
-import { IGameConfig } from "../../application/logic/board/inferGameConfig";
-import { gameOptionsReducer } from "../../application/reducers/gameOptionsReducer";
+import {
+  gameOptionsReducer,
+  IGameOptionsReducerState
+} from "../../application/reducers/gameOptionsReducer";
 
 export type GameOptionsReducerContainer = (
-  state: IGameConfig,
+  state: IGameOptionsReducerState,
   action: AnyAction
-) => IGameConfig;
+) => IGameOptionsReducerState;
 
 export const gameOptionsReducerContainer: GameOptionsReducerContainer = (
   state,

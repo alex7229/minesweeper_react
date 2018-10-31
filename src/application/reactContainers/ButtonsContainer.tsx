@@ -27,12 +27,12 @@ type MapStateToPropsFactory = (
 
 export const mapStateToPropsFactory: MapStateToPropsFactory = checkNumber => state => ({
   currentFieldWidth: state.field[0].length,
-  widthError: checkNumber(state.width, MIN_WIDTH, MAX_WIDTH),
-  heightError: checkNumber(state.height, MIN_HEIGHT, MAX_HEIGHT),
+  widthError: checkNumber(state.widthInput, MIN_WIDTH, MAX_WIDTH),
+  heightError: checkNumber(state.heightInput, MIN_HEIGHT, MAX_HEIGHT),
   minesError: checkNumber(
-    state.mines,
+    state.minesInput,
     MIN_MINES,
-    state.width * state.height - MIN_EMPTY_CELLS
+    state.widthInput * state.heightInput - MIN_EMPTY_CELLS
   )
 });
 

@@ -12,6 +12,9 @@ const defaultState: IStartGameReducerState = {
   width: 7,
   height: 9,
   mines: 5,
+  widthInput: 33,
+  heightInput: 17,
+  minesInput: 22,
   gameStartTimestamp: 0,
   field: [[]],
   isFinished: true
@@ -25,8 +28,7 @@ const defaultAction: IStartGameAction = {
 const helperFunctions = {
   getTime: jest.fn().mockReturnValue(10000),
   generateEmptyField,
-  validateGameOptions: jest.fn().mockReturnValue(true),
-  inferGameConfig: jest.fn()
+  validateGameOptions: jest.fn().mockReturnValue(true)
 };
 
 it("should not change state if action is not start game", () => {
@@ -37,16 +39,6 @@ it("should not change state if action is not start game", () => {
   expect(startGameReducer(defaultState, action, helperFunctions)).toEqual(
     defaultState
   );
-});
-
-it("should not start game if options are not valid", () => {
-  const validate = jest.fn().mockReturnValue(false);
-  expect(
-    startGameReducer(defaultState, defaultAction, {
-      ...helperFunctions,
-      validateGameOptions: validate
-    })
-  ).toEqual(defaultState);
 });
 
 it("should set correct start time", () => {
@@ -64,6 +56,7 @@ it("should set 9 by 9 field and 10 mines for beginner", () => {
   expect(
     startGameReducer(defaultState, defaultAction, helperFunctions)
   ).toEqual({
+    ...defaultState,
     width: 9,
     height: 9,
     mines: 10,
@@ -82,6 +75,7 @@ it("should set 16 by 16 field and 40 mines for advanced", () => {
       helperFunctions
     )
   ).toEqual({
+    ...defaultState,
     width: 16,
     height: 16,
     mines: 40,
@@ -100,6 +94,7 @@ it("should set 30 by 16 field and 99 mines for expert", () => {
       helperFunctions
     )
   ).toEqual({
+    ...defaultState,
     width: 30,
     height: 16,
     mines: 99,
@@ -109,42 +104,55 @@ it("should set 30 by 16 field and 99 mines for expert", () => {
   });
 });
 
-it("should set current field size mines for custom", () => {
-  const { width, height } = defaultState;
-  const field = generateEmptyField(width, height);
+it("should set state from inputs for custom if inputs are valid", () => {
+  const validateGameOptions = jest.fn().mockReturnValue(true);
   expect(
     startGameReducer(
       defaultState,
       { ...defaultAction, payload: "custom" },
-      helperFunctions
+      {
+        ...helperFunctions,
+        validateGameOptions
+      }
     )
   ).toEqual({
-    width,
-    height,
-    mines: defaultState.mines,
-    gameStartTimestamp: 10000,
-    field,
-    isFinished: false
+    ...defaultState,
+    width: defaultState.widthInput,
+    height: defaultState.heightInput,
+    mines: defaultState.minesInput,
+    field: generateEmptyField(
+      defaultState.widthInput,
+      defaultState.heightInput
+    ),
+    isFinished: false,
+    gameStartTimestamp: 10000
   });
 });
 
-it("should set inferred field size and mines on restart", () => {
-  const inferConfigMock = jest.fn().mockReturnValue({
-    mines: 17,
-    width: 33,
-    height: 32
-  });
+it("should not change state for custom if inputs are invalid", () => {
+  const validateGameOptions = jest.fn().mockReturnValue(false);
+  expect(
+    startGameReducer(
+      defaultState,
+      { ...defaultAction, payload: "custom" },
+      {
+        ...helperFunctions,
+        validateGameOptions
+      }
+    )
+  ).toEqual(defaultState);
+});
+
+it("should not change field size and mines on restart", () => {
   expect(
     startGameReducer(
       defaultState,
       { ...defaultAction, payload: "restart" },
-      { ...helperFunctions, inferGameConfig: inferConfigMock }
+      helperFunctions
     )
   ).toEqual({
-    mines: 17,
-    width: 33,
-    height: 32,
-    field: generateEmptyField(33, 32),
+    ...defaultState,
+    field: generateEmptyField(defaultState.width, defaultState.height),
     isFinished: false,
     gameStartTimestamp: 10000
   });

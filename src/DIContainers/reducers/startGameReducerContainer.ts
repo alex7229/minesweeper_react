@@ -4,7 +4,6 @@ import {
   IStartGameReducerState,
   startGameReducer
 } from "../../application/reducers/startGameReducer";
-import { inferGameConfigContainer } from "../logic/board/inferGameConfigContainer";
 import { validateGameOptionsContainer } from "../logic/validators/validateGameOptionsContainer";
 
 export type StartGameReducerContainer = (
@@ -15,8 +14,7 @@ export type StartGameReducerContainer = (
 const helperFunctions = {
   getTime: () => new Date().getTime(),
   generateEmptyField,
-  validateGameOptions: validateGameOptionsContainer,
-  inferGameConfig: inferGameConfigContainer
+  validateGameOptions: validateGameOptionsContainer
 };
 
 export const startGameReducerContainer: StartGameReducerContainer = (

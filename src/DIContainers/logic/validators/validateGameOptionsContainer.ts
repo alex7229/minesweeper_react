@@ -1,4 +1,4 @@
-import { IGameConfig } from "../../../application/logic/board/inferGameConfig";
+import { IGameConfig } from "../../../application/logic/board/generateMines";
 import { checkNumberRange } from "../../../application/logic/validators/checkNumberRange";
 import { validateGameOptions } from "../../../application/logic/validators/validateGameOptions";
 

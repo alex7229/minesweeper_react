@@ -1,7 +1,9 @@
 import * as seedRandom from "seedrandom";
 import { ICellPosition } from "../../../application/actions/actions";
-import { generateMines } from "../../../application/logic/board/generateMines";
-import { IGameConfig } from "../../../application/logic/board/inferGameConfig";
+import {
+  generateMines,
+  IGameConfig
+} from "../../../application/logic/board/generateMines";
 
 export type GenerateMinesContainer = (
   gameOptions: IGameConfig,

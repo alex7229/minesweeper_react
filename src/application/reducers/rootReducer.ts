@@ -3,6 +3,9 @@ import { Field } from "./toggleCellReducer";
 
 export interface IGlobalState {
   readonly gameTimeMs: number;
+  readonly widthInput: number;
+  readonly heightInput: number;
+  readonly minesInput: number;
   readonly width: number;
   readonly height: number;
   readonly mines: number;
@@ -27,6 +30,9 @@ export type RootReducer = (
 const defaultState: IGlobalState = {
   gameTimeMs: 0,
   gameStartTimestamp: 0,
+  widthInput: 44,
+  heightInput: 33,
+  minesInput: 12,
   width: 30,
   height: 16,
   mines: 99,

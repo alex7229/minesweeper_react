@@ -1,5 +1,10 @@
 import { ICellPosition } from "../../actions/actions";
-import { IGameConfig } from "./inferGameConfig";
+
+export interface IGameConfig {
+  readonly width: number;
+  readonly height: number;
+  readonly mines: number;
+}
 
 type RNG = () => number;
 type SeedRandom = (seed: string) => RNG;
