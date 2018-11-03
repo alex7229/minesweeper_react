@@ -7,6 +7,7 @@
   z-index: 1;
   left: 0;
   top: 0;
+  cursor: pointer;
 }
 #overlay > div {
   width: 11em;
@@ -18,6 +19,7 @@
   font-weight: bold;
   font-size: 0.9rem;
   border-radius: 0.8rem;
+  cursor: default;
 }
 #overlay span {
   float: right;
